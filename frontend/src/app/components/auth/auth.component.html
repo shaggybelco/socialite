@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div >
+    <img class="logo"
+      src="https://res.cloudinary.com/dadevelopers/image/upload/v1656314804/profile/rc2ubumybq3fwyxwuv34.png"
+      alt=""
+    />
+  </div>
+  <div class="center">
+    <form class="form-group">
+      <h6>Let's Get You Registered</h6>
+
+      <div class="mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputText1"
+          placeholder="Name"
+          required
+        />
+        <i class="fa fa-user" aria-hidden="true"></i>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputText1"
+          placeholder="Email"
+          required
+        />
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputText1"
+          placeholder="Password"
+          required
+        />
+        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+      </div>
+
+      <div class="mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputText1"
+          placeholder="Comfirm Password"
+          required
+        />
+        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+      </div>
+    </form>
+
+    <button type="button" class="btn">REGISTER</button>
+  </div>
+
+  <p class="pr">Already have an account? <a [routerLink]="['/login']"  class="goLogin">Login</a></p>
+</div>

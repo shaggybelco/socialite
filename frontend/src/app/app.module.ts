@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthComponent,
+    LoginComponent,
+    LandingPageComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
