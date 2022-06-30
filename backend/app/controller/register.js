@@ -3,8 +3,8 @@ const bcrypt = require("bcrypt");
 const client = require("../config/database");
 
 const jwt = require("jsonwebtoken");
-//Register Function
 
+//Register Function
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
   try {

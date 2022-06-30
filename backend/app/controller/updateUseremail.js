@@ -7,7 +7,7 @@ exports.updateUseremail = (req, res) => {
   const id = parseInt(req.params.id);
   const { email } = req.body;
 
-  con.query(
+  client.query(
     "UPDATE users SET email = $1 WHERE id = $2",
     [email, id],
     (err, results) => {

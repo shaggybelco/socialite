@@ -14,7 +14,7 @@ exports.updateUser = (req, res) => {
         if (error) {
           throw error;
         }
-        res.status(200).send(`User modified with ID: ${id}`);
+        res.status(200).send(`User ${name} modified with ID: ${id}`);
       }
     );
   };

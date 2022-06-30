@@ -9,6 +9,7 @@ exports.updateUserName = (req, res) => {
 
   client.query(
     'UPDATE users SET name = $1 WHERE id = $2',
+    // "UPDATE users SET name = $1 WHERE id = $2",
     [name, id],
     (err, results) => {
       if (err) {
