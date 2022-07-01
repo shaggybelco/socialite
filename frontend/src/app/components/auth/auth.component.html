@@ -6,7 +6,7 @@
     />
   </div>
   <div class="center">
-    <form class="form-group">
+    <form class="form-group" formGroup="form" onsubmit="createUser()">
       <h6>Let's Get You Registered</h6>
 
       <div class="mb-3">
@@ -14,10 +14,16 @@
           type="text"
           class="form-control"
           id="exampleInputText1"
+          formControlName="name"
           placeholder="Name"
           required
         />
         <i class="fa fa-user" aria-hidden="true"></i>
+        
+        <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+          <div *ngIf="f['name'].errors && f['name'].errors['required']">Email is required.</div>
+          <div *ngIf="f['name'].errors && f['name'].errors['name']">Please, enter valid email address.</div>
+        </div>
       </div>
 
       <div class="mb-3">
@@ -25,10 +31,17 @@
           type="email"
           class="form-control"
           id="exampleInputText1"
+          formControlName="email"
           placeholder="Email"
           required
         />
         <i class="fa fa-envelope" aria-hidden="true"></i>
+
+        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">password is required.</div>
+          <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid password.</div>
+      </div>
+  
       </div>
 
       <div class="mb-3">
@@ -37,9 +50,15 @@
           class="form-control"
           id="exampleInputText1"
           placeholder="Password"
+          formControlName="password"
           required
         />
         <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+
+        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+          <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
+          <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
+      </div>
       </div>
 
       <div class="mb-3">
@@ -48,13 +67,19 @@
           class="form-control"
           id="exampleInputText1"
           placeholder="Comfirm Password"
+          formControlName="conpassword"
           required
         />
         <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+
+        <div *ngIf="f['conpassword'].touched && f['conpassword'].invalid" class="alert alert-danger">
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['required']">password is required.</div>
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['conpassword']">Please, enter valid password.</div>
+      </div>
       </div>
     </form>
 
-    <button type="button" class="btn">REGISTER</button>
+    <input type="submit" class="btn" value="REGISTER">
   </div>
 
   <p class="pr">Already have an account? <a [routerLink]="['/login']"  class="goLogin">Login</a></p>
