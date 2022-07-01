@@ -1,29 +1,29 @@
 const express = require("express");
 const app = express();
-const bodyparser = require('body-parser')
+const bodyparser = require("body-parser");
 
-const {register} = require("../controller/register");
-const {login} = require("../controller/login");
+const { register } = require("../Controller/users/register");
+const { login } = require("../Controller/users/login");
 
-const{getAllUsers} = require("../controller/getAllUsers");
-const{getOneUser} = require("../controller/getOneUser");
-const{updateUser} = require("../controller/updateUsers");
-const{updatePassword} = require("../controller/updatePassword");
-const{updateUseremail} = require("../controller/updateUseremail");
-// const{updateUsername} = require("../controller/updateUsername");
-const{deleteUser} = require("../controller/deleteUser");
+const { getAllUsers } = require("../Controller/users/getAllUsers");
+const { getOneUser } = require("../Controller/users/getOneUser");
+const { updateUser } = require("../Controller/users/updateUsers");
+const { updatePassword } = require("../Controller/users/updatePassword");
+const { deleteUser } = require("../Controller/users/deleteUser");
+const { updateEmail } = require("../Controller/users/updateEmail");
+const { updateName } = require("../Controller/users/updateName");
 
-app.post("/register", register);  // Post request to register the users
+app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get('/users',getAllUsers) // get all existing users
-app.get('/users/:id',getOneUser); //get single user
+app.get("/get", getAllUsers); // get all existing users
+app.get("/getone/:id", getOneUser); //get single user
 
-app.put('/users/:id',updateUser) 
-app.put('/users/:id', updatePassword);
-app.put('/users/:id', updateUseremail);
-// app.put('/users/:id', updateUsername);
+app.put("/updateUser/:id", updateUser); // update all details of user
+app.put("/updateName/:id", updateName); //update the name of user
+app.put("/updatePassword/:id", updatePassword); // update user password for login
+app.put("/updateEmail/:id", updateEmail); // update user email for login
 
-app.delete('/users/:id',deleteUser) // delete a user
+app.delete("/deleteUser/:id", deleteUser); // delete a user
 
 module.exports = app;

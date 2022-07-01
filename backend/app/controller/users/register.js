@@ -1,14 +1,14 @@
 const bcrypt = require("bcrypt");
 
-const client = require("../config/database");
+const pool = require("../../config/database");
 
 const jwt = require("jsonwebtoken");
-
 //Register Function
+
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
   try {
-    const data = await client.query(`SELECT * FROM users WHERE email= $1;`, [
+    const data = await pool.query(`SELECT * FROM users WHERE email= $1;`, [
       email,
     ]); //Check if user exist
     const arr = data.rows;
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
         var flag = 1;
 
         //Inserting data into the database
-        client.query(
+        pool.query(
           `INSERT INTO users (name, email, password) VALUES ($1,$2,$3);`,
           [user.name, user.email, user.password],
           (err) => {
@@ -44,7 +44,7 @@ exports.register = async (req, res) => {
               flag = 1;
               res
                 .status(200)
-                .send({ message: "User added to database" });
+                .send({ message: `User called ${name} have been added to the database` });
             }
           }
         );
