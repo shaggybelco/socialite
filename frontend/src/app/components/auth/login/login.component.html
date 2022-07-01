@@ -6,7 +6,7 @@
       />
     </div>
     <div class="center">
-      <form class="form-group">
+      <form class="form-group" [formGroup]="form">
         <h6>Let's Log You In</h6>
   
         <div class="mb-3">
@@ -15,9 +15,16 @@
             class="form-control"
             id="exampleInputText1"
             placeholder="Email"
+            formControlName="email"
             required
           />
           <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
+
+          <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+            <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+            <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</div>
+        </div>
+  
         </div>
   
         <div class="mb-3">
@@ -26,12 +33,21 @@
             class="form-control"
             id="exampleInputText1"
             placeholder="Password"
+            formControlName="password"
             required
           />
           <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
+
+          <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+            <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
+            <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
+    
+            <div *ngIf="f['password'].dirty && f['password'].errors">Please, password should be 8 characters and more.</div>
+        </div>
+    
         </div>
       </form>
-      <button type="button" class="btn">LOGIN</button>
+      <button type="submit" class="btn" (click)="log()">LOGIN</button>
   
     <p class="pr">Already have an account? <a [routerLink]="['/register']"  class="goLogin">Register</a></p>
   </div>
