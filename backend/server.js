@@ -3,7 +3,10 @@ const cors = require("cors"); //import cors module
 const app = express(); //Initialize express
 
 require("./app/config/dotevn"); //Import your environmental configs
+
 const user = require("./app/routes/users");
+const news = require("./app/routes/newsfeed");
+
 const client = require("./app/config/database");
 
 
@@ -27,7 +30,8 @@ app.get("/", (request, response) =>{
     response.status(200).send("Sever Initialized and Online. Ready to take OFF!");
 });
 
-app.use("/user", user) // User endpoint API
+app.use("/user", user); // User endpoint API
+app.use('/news', news);
 
 app.listen(port, process.env.baseURL , () =>{  
    console.log(`Here we go, All Engines started at ${port}.`) 
