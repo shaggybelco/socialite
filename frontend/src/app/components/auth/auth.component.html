@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div >
+  <div class="logo2">
     <img class="logo"
       src="https://res.cloudinary.com/dadevelopers/image/upload/v1656314804/profile/rc2ubumybq3fwyxwuv34.png"
       alt=""
@@ -9,7 +9,7 @@
     <form class="form-group" [formGroup]="form" onsubmit="createUser()">
       <h6>Let's Get You Registered</h6>
 
-      <div class="mb-3">
+      <div class="in">
         <input
           type="text"
           class="form-control"
@@ -18,7 +18,7 @@
           placeholder="Name"
           required
         />
-        <i class="fa fa-user" aria-hidden="true"></i>
+        <i class="fa fa-user fa-lg" aria-hidden="true"></i>
         
         <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
           <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="mb-3">
+      <div class="in">
         <input
           type="email"
           class="form-control"
@@ -35,7 +35,7 @@
           placeholder="Email"
           required
         />
-        <i class="fa fa-envelope" aria-hidden="true"></i>
+        <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
 
         <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
           <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
@@ -44,7 +44,7 @@
   
       </div>
 
-      <div class="mb-3">
+      <div class="in">
         <input
           type="password"
           class="form-control"
@@ -64,7 +64,7 @@
 
       </div>
 
-      <div class="mb-3">
+      <div class="in">
         <input
           type="password"
           class="form-control"
