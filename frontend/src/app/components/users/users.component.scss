@@ -1,0 +1,101 @@
+ 
+.center {
+    margin-left: 20%;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  
+  .mb-3 input {
+    padding-left: 40px;
+    border: 1px solid #36cdaf;
+    border-radius: 20px;
+    background: rgba(216, 236, 204, 0.2);
+  }
+  
+  .mb-3 {
+    position: relative;
+    width: 60%;
+    
+  }
+  
+  .mb-3 i {
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    padding: 9px 8px;
+    color: #0d382f;
+  }
+
+
+  h6{
+      padding-bottom: 3%;
+  }
+  
+//   .btn{
+//       margin-left: 30%;
+//       background-color: #36cdaf;
+//       width:40px;
+//       height: 20%;
+//       border-radius: 50px;
+//       font-weight: bold;
+//   }
+  
+
+  
+#storyholder{
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+#postholder{
+
+  height: 5000px;
+  width: 70%;
+  margin-left: 20%;
+  padding: 10px;
+  text-align: center;
+}
+
+
+#cardbody{
+    border-radius: 2%;
+    background-color: rgb(233, 248, 224);
+    width: 100%;
+}
+
+
+// USER PROFILE CARDS
+
+.userprofilecard{
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+}
+
+.profilepicture{
+    background-color: #36cdaf;
+    width: 20%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.imag{
+        margin-bottom: 70%;
+}
+
+.userdetail{
+
+    width: 100%;
+}
+
+.followbtn{
+        
+        background-color: #36cdaf;
+        border-radius: 10%;
+        border: none;
+        width: 20%;
+}
