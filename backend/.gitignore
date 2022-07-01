@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 node_modules
+=======
+node_modules
+package-lock.json
+.evn
+>>>>>>> 03aff3a38e00b651a11397699dc14b6bbd0aa337

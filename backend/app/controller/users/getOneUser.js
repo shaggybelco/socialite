@@ -1,4 +1,4 @@
-const client = require("../config/database");
+const pool = require("../../config/database");
 const express = require("express");
 const app = express();
 const bodyparser = require('body-parser')
@@ -9,7 +9,7 @@ exports.getOneUser = (req, res) => {
   //declare function & get params
   const id = parseInt(req.params.id); // declare a variable that will use to locate each user
 
-  client.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any
