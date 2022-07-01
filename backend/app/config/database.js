@@ -1,5 +1,10 @@
-const {Client} = require("pg"); // DECLARATION OF THE VARIABLE THAT WILL CONTAIN THE POSTGRES.
+const Pool = require("pg").Pool;
+const pool = new Pool({
+  user: "oratile",
+  host: "localhost",
+  database: "socials",
+  password: "oratile16",
+  port: 5432,
+}); // connect to the database
 
-const client = new Client(process.env.DB_URL); // Configuring for PostgreSQL Database connection;
-
-module.exports = client;
+module.exports = pool;
