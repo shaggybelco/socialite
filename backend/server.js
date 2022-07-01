@@ -5,6 +5,7 @@ const app = express(); //Initialize express
 require("./app/config/dotevn"); //Import your environmental configs
 const client = require("./app/config/database");
 
+
 app.use(express.json());
 app.use(cors());
 
