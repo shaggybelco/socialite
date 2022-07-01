@@ -1,4 +1,4 @@
-const client = require("../config/database");
+const pool = require("../../config/database");
 const express = require("express");
 const app = express();
 const bodyparser = require('body-parser');
@@ -7,7 +7,7 @@ const bodyparser = require('body-parser');
 exports.deleteUser = (req, res) => {
     const id = parseInt(req.params.id);
   
-    client.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
       if (error) {
         throw error;
       }

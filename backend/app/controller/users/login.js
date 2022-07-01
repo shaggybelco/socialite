@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 
-const client = require("../config/database");
+const pool = require("../../config/database");
 
 const jwt = require("jsonwebtoken");
 
@@ -10,13 +10,13 @@ exports.login = async (req, res) => {
      const { email, password } = req.body;
     
      try{
-      const data = await client.query(`SELECT * FROM users WHERE email= $1;` , [email]); //Veryfying if the user exists in the database
+      const data = await pool.query(`SELECT * FROM users WHERE email= $1;` , [email]); //Veryfying if the user exists in the database
       
       const user = data.rows;
      
      if(user.length == 0){
        res.status(400).json({
-          error: "User is not registerd, Sign Up",
+          error: "User is not registerd, Please Sign Up",
      });
 
  }else {
@@ -45,7 +45,7 @@ res.status(200).json({
      //Declaring the errors
      if (results != true){
       res.status(400).json({
-      error: "Enter correct password",
+      error: "Enter the correct password",
       
    });
 }}

@@ -4,19 +4,62 @@
   color: #36cdaf;
 }
 
-.follow2{
-    float: right;
+.form-group {
+  padding-left: 40px;
+  border: 1px solid #36cdaf;
+  border-radius: 20px;
+  background: rgba(216, 236, 204, 0.2);
+}
+.ppm{
+  background-color: #b33535;
+}
+
+.ppm input{
+  border: 1px solid #36cdaf;
+  background-color: rgba(216, 236, 204, 0.2);
+  padding-left: 20px;
+  width: 70%;
+}
+
+.mb-3 input {
+    padding-left: 40px;
+    border: 1px solid #36cdaf;
+    border-radius: 20px;
+    background: rgba(216, 236, 204, 0.2);
+    width: 60%;
+  }
+  
+  #mb-3 {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 3%;
+  }
+  
+  .mb-3 i {
+    position: absolute;
+    left: 7%;
+    top: 51.5%;
+    padding: 9px 8px;
+    color: #0d382f;
+  }
+  
+  .mb-3 input:focus + i {
+    color: #36cdaf;
+  }
+
+.follow2 {
+  float: right;
   padding-right: 10px;
 }
 
 .btn {
-    margin-top: 3%;
-    background-color: #36cdaf;
-    width: 100%;
-    border-radius: 20px;
-    margin-left: 10%;
-    font-weight: bold;
-    margin-top: 26%;
+  margin-top: 3%;
+  background-color: #36cdaf;
+  width: 100%;
+  border-radius: 20px;
+  margin-left: 10%;
+  font-weight: bold;
+  margin-top: 26%;
 }
 
 .follow {
@@ -56,18 +99,6 @@
   height: 30%;
   border-radius: 100%;
   margin: 15px 15px 15px;
-}
-
-.nav-link {
-  color: black;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: arial;
-  text-align: center;
-}
-
-.navbar-nav {
-  text-align: center;
 }
 
 .hea {
@@ -140,5 +171,25 @@
 @media (min-width: 768px) {
   #icon {
     visibility: hidden;
+  }
+}
+
+@media (min-width: 250px) and (max-width: 400px) {
+  .follow1 {
+    padding-right: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  .btn {
+    margin-top: 9%;
+    height: 10%;
+    background-color: #36cdaf;
+    width: 100%;
+    border-radius: 20px;
+    margin-left: 10%;
+    font-weight: bold;
+    margin-top: 18%;
   }
 }
