@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 
 
@@ -31,6 +31,10 @@ export class AuthComponent implements OnInit {
     this.auth.createUser(users);
   }
 
+  register(){
+    this.createuser();
+  }
+
   ngOnInit(): void {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.minLength(3)]),
@@ -38,7 +42,7 @@ export class AuthComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       conpassword: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
-
+    
   }
 
 }

@@ -26,7 +26,7 @@ app.put("/updateEmail/:id", updateEmail); // update user email for login
 
 app.delete("/deleteUser/:id", deleteUser); // delete a user
 
-onst cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 // import multer from 'multer';
 // import { UploadApiResponse, v2 as cloudinary } from "cloudinary";
