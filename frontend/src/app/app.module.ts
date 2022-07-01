@@ -10,6 +10,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { UsersComponent } from './components/users/users.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UsersComponent } from './components/users/users.component';
     LandingPageComponent,
     UsersComponent,
     NavbarComponent,
-    NewsfeedComponent
+    NewsfeedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
