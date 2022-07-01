@@ -11,6 +11,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { UsersComponent } from './components/users/users.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UsersComponent,
     NavbarComponent,
     NewsfeedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
