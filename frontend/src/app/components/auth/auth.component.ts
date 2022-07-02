@@ -1,37 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthorizeService } from 'src/app/services/authorize.service';
-
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-
-  constructor(private auth: AuthorizeService) { }
+  constructor(private auth: AuthorizeService, private route: Router) {}
 
   form!: FormGroup;
 
-
-  get f(){
+  get f() {
     return this.form.controls;
   }
 
-  createuser(){
+  createuser() {
     let users = {
-      name: this.form.value.name,
-      email: this.form.value.email,
-      password: this.form.value.password,
-      conpassword: this.form.value.conpassword
-    }
-    console.log(users);
+      data: {
+        name: this.form.value.name,
+        email: this.form.value.email,
+        password: this.form.value.password,
+        conpassword: this.form.value.conpassword,
+      },
+    };
+    console.log(users.data);
 
-    this.auth.createUser(users);
+    if (users.data.password != users.data.conpassword) {
+      alert('Password does not match');
+    } else {
+      alert('registered succesfully');
+      this.auth.createUser(users.data);
+      this.route.navigate(['/newsfeed']);
+    }
   }
 
-  register(){
+  register() {
     this.createuser();
   }
 
@@ -39,10 +49,14 @@ export class AuthComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.minLength(3)]),
       email: new FormControl('', [Validators.email, Validators.minLength(10)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      conpassword: new FormControl('', [Validators.required, Validators.minLength(8)])
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      conpassword: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
-    
   }
-
 }

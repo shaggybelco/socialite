@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
-  constructor(private auth: AuthorizeService) { }
+  constructor(private auth: AuthorizeService, private route: Router) { }
 
   get f(){
     return this.form.controls;
@@ -24,7 +25,17 @@ export class LoginComponent implements OnInit {
     };
     console.log(userlogin);
 
-    this.auth.loguser(userlogin.data);
+
+    this.auth.loguser(userlogin.data).subscribe({
+      next: data =>{
+        this.route.navigate(['/newsfeed']);
+        alert("Logged in successfully");
+      },
+      error: err =>{
+        alert("Something is wrong");
+      }
+
+    });
   }
 
 
