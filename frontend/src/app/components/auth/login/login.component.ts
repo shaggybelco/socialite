@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         alert("Logged in successfully");
       },
       error: err =>{
-        alert("Something is wrong");
+        alert("Something is wrong, Enter correct credentials, if not register got registration page below");
       }
 
     });

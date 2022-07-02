@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
+  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -13,9 +15,14 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private auth: AuthorizeService, private route: Router) {}
+  constructor(private auth: AuthorizeService, private route: Router, private formbuilder: FormBuilder) {}
 
-  form!: FormGroup;
+  form: FormGroup = new FormGroup({
+        name: new FormControl(''),
+        email: new FormControl(''),
+        password: new FormControl(''),
+        conpassword: new FormControl(''),
+  });
 
   get f() {
     return this.form.controls;
@@ -34,10 +41,23 @@ export class AuthComponent implements OnInit {
 
     if (users.data.password != users.data.conpassword) {
       alert('Password does not match');
-    } else {
-      alert('registered succesfully');
-      this.auth.createUser(users.data);
-      this.route.navigate(['/newsfeed']);
+    } else if(this.form.invalid){
+        return;
+    }else {
+      // alert('registered succesfully');
+      // this.auth.createUser(users.data);
+      // this.route.navigate(['/newsfeed']);
+
+      this.auth.loguser(users.data).subscribe({
+        next: data =>{
+          this.route.navigate(['/newsfeed']);
+          alert("Logged in successfully");
+        },
+        error: err =>{
+          alert("Something is wrong , You are registered!!");
+        }
+  
+      });
     }
   }
 
@@ -46,17 +66,19 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl('', [Validators.minLength(3)]),
-      email: new FormControl('', [Validators.email, Validators.minLength(10)]),
-      password: new FormControl('', [
+    this.form = this.formbuilder.group({
+      name: ['',[Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.email, Validators.minLength(10), Validators.required]],
+      password: ['', [
         Validators.required,
         Validators.minLength(8),
-      ]),
-      conpassword: new FormControl('', [
+      ]],
+      conpassword: ['', [
         Validators.required,
         Validators.minLength(8),
-      ]),
+      ]]
+    },{
+     
     });
   }
 }
