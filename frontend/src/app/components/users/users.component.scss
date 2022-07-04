@@ -8,8 +8,8 @@
     padding-top: 20px;
   }
   .pp2 {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 100%;
     // margin-left: 40px;
   }
@@ -22,13 +22,13 @@
   #btn{
     background-color: #36cdaf;
     color: white;
-    width: 150px;
-    height: 50px;
-    margin-top: -50px;
+    width: 100px;
+    height: 40px;
+    margin-top: -37px;
     border-radius: 50px;
     font-weight: bold;
-    margin-left: 120px;
-    margin-left: 40%;
+    // margin-left: 120px;
+    margin-left: 43%;
 }
 
   .uname {
@@ -70,70 +70,6 @@
       padding-bottom: 3%;
   }
   
-
-  
-#storyholder{
-    width: 100%;
-    padding: 10px;
-    text-align: center;
-}
-
-#postholder{
-
-  height: 5000px;
-  width: 70%;
-  margin: auto;
-  padding: 10px;
-  text-align: center;
-}
-
-
-#cardbody{
-    border-radius: 2%;
-    background-color: rgb(233, 248, 224);
-    width: 100%;
-}
-
-
-// USER PROFILE CARDS
-
-.userprofilecard{
-    width: 100%;
-    margin: auto;
-    padding: 10px;
-}
-
-.profilepicture{
-    background-color: #0d382f;
-    margin: auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: #36cdaf;
-    flex-direction: row;
-}
-
-.displaypic{
-    border-radius: 50%;
-}
-
-.imag{
-        margin-bottom: 70%;
-}
-
-.userdetail{
-
-    width: 100%;
-}
-
-.followbtn{
-        
-        background-color: #36cdaf;
-        border-radius: 10%;
-        border: none;
-        width: 100px;
-        height: 10%;
-}
 
 
 
