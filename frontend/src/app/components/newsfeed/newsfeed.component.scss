@@ -1,83 +1,102 @@
-// .logo{
-//     margin-left: 37%;
-//     width: 25%;
-//     padding: 10px;
-//     margin-top: -5%;
-//   }
-  
-  
-  
-  
-  .mb-3 input {
-    padding-left: 40px;
-    border: 1px solid #36cdaf;
-    border-radius: 20px;
-    background: rgba(216, 236, 204, 0.2);
-  }
-  
-  .mb-3 {
-    position: relative;
-    width: 60%;
-    
-  }
-  
-  .mb-3 i {
-    position: absolute;
-    left: 5px;
-    top: 8px;
-    padding: 9px 8px;
-    color: #0d382f;
-  }
-  
-  // .mb-3 input:focus + i {
-  //   color: #36cdaf;
-  // }
-  
-  h6{
-      padding-bottom: 3%;
-  }
-  
-  .btn{
-      margin-left: 30%;
-      background-color: #36cdaf;
-      width:40px;
-      height: 20%;
-      border-radius: 50px;
-      font-weight: bold;
-  }
-  
-  
-  // .pr{
-  //     text-align: center;
-  //     padding-top: 3%;
-  // }
-
-  
-#storyholder{
-    width: 100%;
-    padding: 10px;
-    text-align: center;
+ 
+.center {
+  width: 100%;
+  padding: 20px;
 }
 
-#postholder{
 
-  height: 5000px;
-  width: 70%;
-  margin-left: 20%;
-  padding: 10px;
+.uname{
+  margin-top: 32px;
+
+}
+.mb-3 input {
+  padding-left: 40px;
+  border: 1px solid #36cdaf;
+  border-radius: 20px;
+  background: rgba(216, 236, 204, 0.2);
+}
+
+.mb-3 {
+  position: relative;
+  text-align: center;
+  width: 100%;
+ 
+
+  
+}
+
+.mb-3 i {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  padding: 9px 8px;
+  color: #0d382f;
+}
+
+
+h6{
+    padding-bottom: 3%;
+}
+
+.btn{
+    background-color: #36cdaf;
+    width:50%;
+    height: 20%;
+    border-radius: 50px;
+    font-weight: bold;
+}
+.btn i{
+  margin: auto;
+}
+
+
+#storyholder{
+  width: 100%;
+  padding: 20px;
   text-align: center;
 }
 
 
-#cardbody{
-    border-radius: 2%;
-    background-color: rgb(233, 248, 224);
-    width: 100%;
-
+.postcard{
+      margin: auto;
+      width: 100%;
+      padding: 20px;
 }
 
-.card-footer{
-    border-radius: 2%;
-    background-color: rgb(233, 248, 224);
-    width: 100%;
+.mat-elevation-z4{
+  margin: auto;
+  padding: 10px;
+  background-color: #E8F4E1;
+}
+
+.matpp{
+    border-radius: 50%;
+    width: 100px;
+   
+    margin-left: 10px ;
+}
+
+.profilepicture{
+  background-color: #0d382f;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: #36cdaf;
+  flex-direction: row;
+}
+
+
+// USER PROFILE CARDS
+
+
+.pp2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  // margin-left: 40px;
+}
+
+.col-8{
+  font-size: large;
 }
