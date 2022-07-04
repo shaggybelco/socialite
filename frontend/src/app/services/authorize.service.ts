@@ -11,7 +11,7 @@ export class AuthorizeService {
 
   baseurl:string = "http://localhost:5050";
 
-  createUser(body: any): Observable<any>{
+  createUser(body: any){
     return this.http.post(`${this.baseurl}/user/register/`, body);
 
   }

@@ -39,17 +39,17 @@ export class AuthComponent implements OnInit {
     };
 
     if (users.data.password != users.data.conpassword) {
-     
+     alert("Password don't match")
     } else if(this.form.invalid){
       return;
     }else {
-      this.auth.loguser(users.data).subscribe({
+      this.auth.createUser(users.data).subscribe({
         next: data =>{
           this.route.navigate(['/newsfeed']);
-          alert("Logged in successfully");
+          alert("Registered in successfully");
         },
         error: err =>{
-          
+          alert("You are already registered");
         }
   
       });

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       }
     };
     
-    if(this.form.untouched){
+    if(this.form.invalid){
       return;
     }else{
       this.auth.loguser(userlogin.data).subscribe({
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           alert("Logged in successfully");
         },
         error: err =>{
-          
+          alert("Login Failed");
         }
       });
     }
