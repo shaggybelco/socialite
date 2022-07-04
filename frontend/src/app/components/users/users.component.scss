@@ -73,17 +73,23 @@
 // USER PROFILE CARDS
 
 .userprofilecard{
-    width: 80%;
+    width: 100%;
     margin: auto;
     padding: 10px;
 }
 
 .profilepicture{
-    background-color: #36cdaf;
-    width: 20%;
+    background-color: #0d382f;
+    margin: auto;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    display: flex;
+    border: #36cdaf;
     flex-direction: row;
+}
+
+.displaypic{
+    border-radius: 50%;
 }
 
 .imag{
