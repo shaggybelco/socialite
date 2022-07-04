@@ -5,6 +5,10 @@
   margin-top: -5%;
 }
 
+.logo{
+  background-color: aquamarine;
+}
+
 .center {
   margin: auto;
   width: 90%;
@@ -26,7 +30,7 @@
 .mb-3 i {
   position: absolute;
   left: 5px;
-  top: 1px;
+  top: 7px;
   padding: 9px 8px;
   color: #0d382f;
 }
@@ -58,53 +62,53 @@ h6 {
   padding-top: 3%;
 }
 
-// @media screen and (max-width: 450px) {
-//   .btn {
-//     margin-top: 30%;
-//     background-color: #36cdaf;
-//     width: 326px;
-//     height: 67px;
-//     border-radius: 20px;
-//     margin-left: -5%;
-//     font-weight: bold;
-//   }
+@media (min-width: 2300px) and (max-width: 450px) {
+  .btn {
+    margin-top: 30%;
+    background-color: #36cdaf;
+    width: 326px;
+    height: 67px;
+    border-radius: 20px;
+    margin-left: -5%;
+    font-weight: bold;
+  }
 
-//   .center {
-//     margin: auto;
-//     width: 90%;
-//     margin-top: 40%;
-//     padding: 10px;
-//     text-align: center;
-//   }
+  .center {
+    margin: auto;
+    width: 90%;
+    margin-top: 40%;
+    padding: 10px;
+    text-align: center;
+  }
 
-//   .logo img {
-//     margin-left: 15%;
-//     width: 70%;
-//     height: 10%;
-//     padding: 10px;
-//     margin-top: 1%;
-//   }
+  .logo img {
+    margin-left: 15%;
+    width: 70%;
+    height: 10%;
+    padding: 10px;
+    margin-top: 1%;
+  }
 
-//   .mb-3 input {
-//     padding-left: 40px;
-//     border: 1px solid #36cdaf;
-//     border-radius: 20px;
-//     background: rgba(216, 236, 204, 0.2);
-//     width: 325px;
-//     height: 58px;
-//     margin-left: -5%;
-//   }
+  .mb-3 input {
+    padding-left: 40px;
+    border: 1px solid #36cdaf;
+    border-radius: 20px;
+    background: rgba(216, 236, 204, 0.2);
+    width: 325px;
+    height: 58px;
+    margin-left: -5%;
+  }
 
-//   .mb-3 i {
-//     position: absolute;
-//     left: -15%;
-//     right: 79.21%;
-//     top: 20%;
-//     bottom: 39.31%;
-//     color: #0d382f;
-//   }
+  .mb-3 i {
+    position: absolute;
+    left: -15%;
+    right: 79.21%;
+    top: 30%;
+    bottom: 39.31%;
+    color: #0d382f;
+  }
 
-//   h6{
-//     margin-top: -30%;
-//   }
-// }
+  h6{
+    margin-top: -30%;
+  }
+}
