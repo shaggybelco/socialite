@@ -12,9 +12,7 @@ export class AuthorizeService {
 
   createUser(body: any){
     console.log("form data service : ", body);
-    return this.http.post(`${this.baseurl}/user/register/`, body).subscribe((res) =>{
-      console.log("data is " + res);
-    });
+    return this.http.post(`${this.baseurl}/user/register/`, body);
 
   }
 
