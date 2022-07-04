@@ -15,6 +15,7 @@
     border: 1px solid #36cdaf;
     background-color: rgba(216, 236, 204, 0.2);
     padding-left: 60px;
+    padding-right: 60px;
     width: 100%;
     border-radius: 100px;
     height: 50px;
@@ -23,6 +24,7 @@
 
   .ppm i{
     margin-left: -97%;
+    padding: 10px;
 
   }
   
@@ -58,14 +60,32 @@
     padding-right: 10px;
   }
   
-  .btn {
-    margin-top: 3%;
+  #btn {
+    margin-top: 6px;
     background-color: #36cdaf;
     width: 100%;
     border-radius: 20px;
     margin-left: 15%;
     font-weight: bold;
     margin-top: 26%;
+    margin-bottom: 7px;
+  }
+
+  #btnpost{
+    background-color: #36cdaf;
+    width: 100%;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  #btnpost1{
+    background-color: #36cdaf;
+    width: 100%;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
   }
   
   .follow {
