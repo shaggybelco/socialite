@@ -16,67 +16,69 @@
     </div>
   </div>
 
-<div class="center">
-   <!-- THIS IS AN POST TAB BLOCK -->
-    <form class="form-group">
-      <div class="mb-3">
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputText1"
-          placeholder="Post"
-          required
 
+  <!-- THIS IS WHERE YOU WRITE A POST -->
+
+  <div class="center">
+     <form class="form-group">
+       <div class="mb-3">
+         <input
+           type="email"
+           class="form-control"
+           id="exampleInputText1"
+           placeholder="Post"
+           required
+ 
+           
+         />
+         <i class="fa-solid fa-pencil fa-lg" aria-hidden="true"></i>
+       </div> 
+ 
+       
+       <!-- THIS IS A POST BUTTON -->
+         <div class="col-12">
+              <button type="button" class="btn">
+                 <i class="fa-solid fa-location-arrow fa-2x" aria-hidden="true"></i>
+             </button>
+     
+               <button type="button" class="btn">
+                 <i class="fa-solid fa-image fa-2x" aria-hidden="true"></i>
           
-        />
-        <i class="fa-solid fa-pencil fa-lg" aria-hidden="true"></i>
-      </div> 
+              </button>
+ 
+         </div>
+         
+       
+     </form>
+ </div>
+ 
 
-      <!-- THIS IS A POST BUTTON -->
-      <button type="button" class="btn">
-        <i class="fa-solid fa-paper-plane fa-lg" aria-hidden="true"></i>
-      </button>
-    </form>
-</div>
+
+
+
+
 
  <!-- THIS HERE DOWNWARD IS A CARD THAT WILL HOLD ALL POSTS -->
 
- <div class="card bg-light mb-3" style="max-width: 50rem;" id="postholder">
-  <!-- <div class="card-header">Header</div> -->
-  <div class="card-body">
-    <h5 class="card-title"></h5>
-    <p class="card-text"></p>
 
-
-
-<div class="POST">
-  <div class="card-body"  id="cardbody">
-    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> Hace 40 min</div>
-    <a class="card-link" href="#">
-        <h5 class="card-title">Totam non adipisci hic! Possimus ducimus amet, dolores illo ipsum quos
-            cum.</h5>
-    </a>
-
-    <p class="card-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt fugit reprehenderit consectetur exercitationem odio,
-        quam nobis? Officiis, similique, harum voluptate, facilis voluptas pariatur dolorum tempora sapiente
-        eius maxime quaerat.
-        <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU" target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
-    </p>
+<!-- POST CARD -->
+<div class="content">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title>Himalayan Peaks</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="./../assets/images/mountains.jpg">
+    <mat-card-content>
+      <p>
+        The Himalayas is a mountain range in Asia.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
-<div class="card-footer">
-    <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-</div>
-
-  
-</div>
-
-  </div>
-</div>
-
-
 
 
 

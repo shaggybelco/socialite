@@ -6,7 +6,6 @@
 }
 
 .logo2{
-  background-color: aquamarine;
   height: 40%;
 }
 
@@ -50,8 +49,9 @@
 }
 
 h6{
-    margin-bottom: 6%;
-    margin-top: -5%;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
 .btn{
@@ -61,6 +61,7 @@ h6{
     height: 70px;
     border-radius: 20px;
     font-weight: bold;
+    color: white;
 
 }
 
@@ -73,6 +74,14 @@ h6{
 .pr{
     text-align: center;
     padding-top: 3%;
+}
+
+@media (min-width: 1200px) {
+  .logo{
+    width: 300px;
+    margin-left: 37%;
+  }
+  
 }
 
 // @media (mi) and (max-width: 450px) {
