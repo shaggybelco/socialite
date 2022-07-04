@@ -1,4 +1,4 @@
-const client = require("../config/database");
+const pool = require("../../config/database");
 const express = require("express");
 const app = express();
 const bodyparser = require('body-parser')
@@ -7,7 +7,7 @@ const bodyparser = require('body-parser')
 //Get all users in database
 exports.getAllUsers = (req, res) => {
   //declare function & get params
-  client.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+  pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

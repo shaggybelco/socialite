@@ -4,7 +4,7 @@ import { HttpClient} from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthComponent{
+export class AuthorizeService {
 
   constructor(private http: HttpClient) { }
 
