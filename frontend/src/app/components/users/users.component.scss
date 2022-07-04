@@ -1,9 +1,7 @@
  
 .center {
-    margin-left: 20%;
-    width: 90%;
+    width: 100%;
     padding: 10px;
-    text-align: center;
   }
   
   
@@ -16,7 +14,10 @@
   
   .mb-3 {
     position: relative;
-    width: 60%;
+    text-align: center;
+    width: 100%;
+   
+
     
   }
   
@@ -33,14 +34,16 @@
       padding-bottom: 3%;
   }
   
-//   .btn{
-//       margin-left: 30%;
-//       background-color: #36cdaf;
-//       width:40px;
-//       height: 20%;
-//       border-radius: 50px;
-//       font-weight: bold;
-//   }
+  .btn{
+      background-color: #36cdaf;
+      width:50%;
+      height: 20%;
+      border-radius: 50px;
+      font-weight: bold;
+  }
+  .btn i{
+    margin: auto;
+  }
   
 
   
@@ -54,7 +57,7 @@
 
   height: 5000px;
   width: 70%;
-  margin-left: 20%;
+  margin: auto;
   padding: 10px;
   text-align: center;
 }
@@ -97,5 +100,6 @@
         background-color: #36cdaf;
         border-radius: 10%;
         border: none;
-        width: 20%;
+        width: 100px;
+        height: 10%;
 }
