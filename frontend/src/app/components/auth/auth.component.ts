@@ -37,12 +37,11 @@ export class AuthComponent implements OnInit {
         conpassword: this.form.value.conpassword,
       },
     };
-    console.log(users.data);
 
     if (users.data.password != users.data.conpassword) {
       alert('Password does not match');
     } else if(this.form.invalid){
-        return;
+      return;
     }else {
       // alert('registered succesfully');
       // this.auth.createUser(users.data);
