@@ -68,3 +68,34 @@
     </div>
   </div>
 </div>
+
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+>
+
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7,8]">
+      <mat-card>
+        <mat-card-header>
+          <div class="row">
+            <div class="col">
+              <mat-card-title>
+              <p class="caption">Belco Sambo</p>
+            </mat-card-title>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <img
+          mat-card-md-image
+            class="profpost"
+            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656053803/cld-sample.jpg"
+            alt="posts"
+          />
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
