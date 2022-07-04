@@ -1,13 +1,11 @@
 .logo img {
-  margin-left: 37%;
-  width: 25%;
+  margin-left: 25%;
+  width: 50%;
   padding: 10px;
   margin-top: -5%;
 }
 
-.logo{
-  background-color: aquamarine;
-}
+
 
 .center {
   margin: auto;
@@ -18,6 +16,8 @@
 
 .mb-3 input {
   padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 1px solid #36cdaf;
   border-radius: 20px;
   background: rgba(216, 236, 204, 0.2);
@@ -30,7 +30,7 @@
 .mb-3 i {
   position: absolute;
   left: 5px;
-  top: 7px;
+  top: 22px;
   padding: 9px 8px;
   color: #0d382f;
 }
@@ -40,15 +40,20 @@
 }
 
 h6 {
-  padding-bottom: 5%;
+  padding-bottom: 90px;
+  font-size: 20px;
+  padding-top: 50px;
 }
 
 .btn {
-  margin-top: 5%;
+  margin-top: 90px;
   background-color: #36cdaf;
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
+  height: 70px;
+  color: white;
+  margin-bottom: 20px;
 }
 
 .goLogin {
@@ -61,54 +66,10 @@ h6 {
   text-align: center;
   padding-top: 3%;
 }
-
-@media (min-width: 2300px) and (max-width: 450px) {
-  .btn {
-    margin-top: 30%;
-    background-color: #36cdaf;
-    width: 326px;
-    height: 67px;
-    border-radius: 20px;
-    margin-left: -5%;
-    font-weight: bold;
+@media (min-width: 1200px) {
+  .logo{
+    width: 500px;
+    margin-left: 27%;
   }
-
-  .center {
-    margin: auto;
-    width: 90%;
-    margin-top: 40%;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .logo img {
-    margin-left: 15%;
-    width: 70%;
-    height: 10%;
-    padding: 10px;
-    margin-top: 1%;
-  }
-
-  .mb-3 input {
-    padding-left: 40px;
-    border: 1px solid #36cdaf;
-    border-radius: 20px;
-    background: rgba(216, 236, 204, 0.2);
-    width: 325px;
-    height: 58px;
-    margin-left: -5%;
-  }
-
-  .mb-3 i {
-    position: absolute;
-    left: -15%;
-    right: 79.21%;
-    top: 30%;
-    bottom: 39.31%;
-    color: #0d382f;
-  }
-
-  h6{
-    margin-top: -30%;
-  }
+  
 }
