@@ -38,8 +38,7 @@ cloudinary.config({
 });
 
 require("dotenv").config();
-const bodyparser = require("body-parser");
-const client = require("../configs/database");
+const pool = require("../config/database");
 const { unlinkSync } = require("fs");
 
 app.use(bodyparser.urlencoded({ extended: false }));
@@ -64,18 +63,18 @@ var upload = multer({ dest: "upload/" });
 
 var type = upload.single("myfile");
 
-router.post("/upload", type, async (req, res) => {
+app.post("/upload", type, async (req, res) => {
   const results = await cloudinary.uploader.upload(req.file.path,{folder:"/profile/"});
 
   console.log(req.file);
-  res.status(200).json({ success: "uploaded" });
+  res.status(200).json({ success: "Picture have been uploaded" });
 
   var { userid, image, caption } = req.body;
   image = results.secure_url;
 
   console.log(results);
 
-  client.query(
+  pool.query(
     "INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)",
     [userid, image, caption]);
   });

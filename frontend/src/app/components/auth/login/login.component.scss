@@ -5,6 +5,10 @@
   margin-top: -5%;
 }
 
+.logo{
+  background-color: aquamarine;
+}
+
 .center {
   margin: auto;
   width: 90%;
@@ -58,7 +62,7 @@ h6 {
   padding-top: 3%;
 }
 
-@media screen and (max-width: 450px) {
+@media (min-width: 2300px) and (max-width: 450px) {
   .btn {
     margin-top: 30%;
     background-color: #36cdaf;
