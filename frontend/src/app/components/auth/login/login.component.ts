@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     };
     
     if(this.form.untouched){
-      alert("The filled can't be empty")
       return;
     }else{
       this.auth.loguser(userlogin.data).subscribe({
@@ -34,7 +33,7 @@ export class LoginComponent implements OnInit {
           alert("Logged in successfully");
         },
         error: err =>{
-          alert("Something is wrong, Enter correct credentials, if not register got registration page below");
+          
         }
       });
     }
