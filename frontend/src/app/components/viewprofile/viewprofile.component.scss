@@ -72,16 +72,13 @@
   }
 
   #btnpost{
-    color: white;
-  }
-
-  #btnpost{
     background-color: #36cdaf;
     width: 100%;
     border-radius: 20px;
     font-weight: bold;
     text-align: center;
-    margin-top: 10px;
+    margin-top: -7px;
+    color:white ;
   }
 
   #btnpost1{
@@ -128,6 +125,7 @@
 
   .send{
     margin-top: 10px;
+    padding: 0;
   }
 
   .profpost{

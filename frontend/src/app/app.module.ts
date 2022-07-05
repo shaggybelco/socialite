@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
+import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatCardModule} from '@angular/material/card';
     UsersComponent,
     NavbarComponent,
     NewsfeedComponent,
-    ProfileComponent
+    ProfileComponent,
+ ViewprofileComponent
   ],
   imports: [
     BrowserModule,

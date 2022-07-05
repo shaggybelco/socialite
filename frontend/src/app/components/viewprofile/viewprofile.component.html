@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
+>
+  <h2 class="hea">User Profile</h2>
+  <div class="profile">
+    <div
+      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
+    >
+      <div class="row">
+        <div class="col-4">
+          <img
+            class="pp2"
+            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
+            alt="none"
+          />
+        </div>
+        <div class="col-4">
+          <p class="uname">Belco Sambo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
+>
+  <div
+    class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
+  >
+    <div class="follow">
+      <p class="follow1">Followers <a class="number">123</a></p>
+    </div>
+    <div class="follow">
+      <p class="follow1">Following <a class="number">132</a></p>
+    </div>
+    <!-- <div class="follow2">
+      <button type="button" class="btn" id="btn">
+        <i class="fa fa-file-pen"></i>
+      </button>
+    </div> -->
+  </div>
+</div>
+
+ <div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppm"
+><!--
+  <input type="text" name="post" id="post" placeholder="Post" />
+  <i class="fa-solid fa-pen"></i>
+
+  <i class="fa-solid fa-paper-plane-top"></i>
+</div> -->
+
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn" id="btnpost">
+         Follow
+      </button>
+    </div>
+    <div class="col-6">
+      <button class="btn" id="btnpost">
+        Message
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+>
+
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7,8]">
+      <mat-card>
+        <mat-card-header>
+          <div class="row">
+            <div class="col">
+              <mat-card-title>
+              <p class="caption">Belco Sambo</p>
+            </mat-card-title>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <img
+          mat-card-md-image
+            class="profpost"
+            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656053803/cld-sample.jpg"
+            alt="posts"
+          />
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+</div>
+

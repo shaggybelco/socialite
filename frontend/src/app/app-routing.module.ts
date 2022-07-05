@@ -6,6 +6,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { NewsfeedComponent } from './components/newsfeed/newsfeed.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersComponent } from './components/users/users.component';
+import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'register', component: AuthComponent},
   {path: 'newsfeed', component: NewsfeedComponent},
   {path: 'users', component: UsersComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'viewprofile', component: ViewprofileComponent}
 ];
 
 @NgModule({
