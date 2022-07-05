@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,13 @@ export class AuthorizeService {
   baseurl:string = "http://localhost:5050";
 
   createUser(body: any){
-    console.log("form data service : ", body);
-    return this.http.post(`${this.baseurl}/user/register/`, body).subscribe((res) =>{
-      console.log("data is " + res);
-    });
+    return this.http.post(`${this.baseurl}/user/register/`, body);
 
   }
 
-  loguser(body: any){
-    console.log("form data service : ", body);
+  loguser(body: any):Observable<any>{
     return this.http.post(`${this.baseurl}/user/login/`, body);
   }
+
+  
 }

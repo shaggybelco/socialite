@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 import { Router } from '@angular/router';
 
@@ -23,19 +23,23 @@ export class LoginComponent implements OnInit {
         password: this.form.value.password
       }
     };
-    console.log(userlogin);
+    
+    if(this.form.invalid){
+      return;
+    }else{
+      this.auth.loguser(userlogin.data).subscribe({
+        next: data =>{
+          this.route.navigate(['/newsfeed']);
+          alert("Logged in successfully");
+        },
+        error: err =>{
+          alert("Login Failed");
+        }
+      });
+    }
 
 
-    this.auth.loguser(userlogin.data).subscribe({
-      next: data =>{
-        this.route.navigate(['/newsfeed']);
-        alert("Logged in successfully");
-      },
-      error: err =>{
-        alert("Something is wrong, Enter correct credentials, if not register got registration page below");
-      }
-
-    });
+    
   }
 
 

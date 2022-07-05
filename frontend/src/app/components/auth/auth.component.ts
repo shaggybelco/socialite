@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit {
     return this.form.controls;
   }
 
-  createuser() {
+  createuser(): void {
     let users = {
       data: {
         name: this.form.value.name,
@@ -37,24 +37,19 @@ export class AuthComponent implements OnInit {
         conpassword: this.form.value.conpassword,
       },
     };
-    console.log(users.data);
 
     if (users.data.password != users.data.conpassword) {
-      alert('Password does not match');
+     alert("Password don't match")
     } else if(this.form.invalid){
-        return;
+      return;
     }else {
-      // alert('registered succesfully');
-      // this.auth.createUser(users.data);
-      // this.route.navigate(['/newsfeed']);
-
-      this.auth.loguser(users.data).subscribe({
+      this.auth.createUser(users.data).subscribe({
         next: data =>{
           this.route.navigate(['/newsfeed']);
-          alert("Logged in successfully");
+          alert("Registered in successfully");
         },
         error: err =>{
-          alert("Something is wrong , You are registered!!");
+          alert("You are already registered");
         }
   
       });

@@ -15,8 +15,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
     NavbarComponent,
     NewsfeedComponent,
     ProfileComponent,
- ViewprofileComponent
+    ViewprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
 
   ],
   providers: [],
