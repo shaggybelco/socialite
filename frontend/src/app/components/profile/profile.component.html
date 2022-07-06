@@ -16,7 +16,7 @@
           />
         </div>
         <div class="col-4">
-          <p class="uname">Belco Sambo</p>
+          <p class="uname">{{name}}</p>
         </div>
       </div>
     </div>
@@ -45,11 +45,13 @@
 
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppm"
->
-  <input type="text" name="post" id="post" placeholder="Post" />
+> <form [formGroup]="form" >
+  <input type="text" name="post" id="post" placeholder="Post" formControlName="message"/>
   <i class="fa-solid fa-pen"></i>
-
-  <i class="fa-solid fa-paper-plane-top"></i>
+</form>
+ 
+<!-- 
+  <i class="fa-solid fa-paper-plane-top"></i> -->
 </div>
 
 <div
@@ -57,7 +59,7 @@
 >
   <div class="row">
     <div class="col-6">
-      <button class="btn" id="btnpost">
+      <button class="btn" id="btnpost" (click)="post()">
         <i class="fa-solid fa-location-arrow fa-2x"></i>
       </button>
     </div>
@@ -108,11 +110,11 @@
 <!-- POST CARD -->
 <div class="postcard">
   <mat-card class="mat-elevation-z4" *ngFor="let posts of posting">
-    <div class="row" >
-              <div class="col-8">
+    <mat-header>
+              <mat-title>
                 <h3 class="uname">{{posts.name}}</h3>
-              </div>
-            </div>
+              </mat-title>
+            </mat-header>
     <mat-card-content>
     
        {{posts.message}}
