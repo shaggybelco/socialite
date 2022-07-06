@@ -71,6 +71,7 @@
   </div>
 </div>
 
+<h2>Text status</h2>
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center send"
 >
@@ -107,14 +108,15 @@
   </div>
 </div>
 
+<h2>Text status</h2>
 <!-- POST CARD -->
 <div class="postcard">
   <mat-card class="mat-elevation-z4" *ngFor="let posts of posting">
-    <div class="row" >
-              <div class="col-8">
+  <mat-card-header>
+              <mat-card-title>
                 <h3 class="uname">{{posts.name}}</h3>
-              </div>
-            </div>
+              </mat-card-title>
+            </mat-card-header>
     <mat-card-content>
     
        {{posts.message}}
@@ -125,4 +127,6 @@
       <button mat-button>SHARE</button>
     </mat-card-actions>
   </mat-card>
+  <hr>
 </div>
+
