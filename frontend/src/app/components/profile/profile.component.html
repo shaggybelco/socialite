@@ -106,29 +106,17 @@
 </div>
 
 <!-- POST CARD -->
-<div class="postcard" >
-  <mat-card class="mat-elevation-z4">
-    <div class="col-12">
-      
-    </div>
-   
-     
+<div class="postcard">
+  <mat-card class="mat-elevation-z4" *ngFor="let posts of posting">
     <div class="row" >
-              <!-- <div class="col-4">
-                <img
-                  class="pp2"
-                  src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-                  alt="none"
-                />
-              </div> -->
               <div class="col-8">
-                <h3 class="uname">Bleco Sambo</h3>
+                <h3 class="uname">{{posts.name}}</h3>
               </div>
             </div>
     <mat-card-content>
-      <p>
-        User status or post will be written here. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat, fuga? Culpa pariatur possimus qui voluptatem nam modi fugiat laboriosam a quos nemo sequi, ipsum adipisci autem facilis aperiam blanditiis minima.
-      </p>
+    
+       {{posts.message}}
+    
     </mat-card-content>
     <mat-card-actions>
       <button mat-button>LIKE</button>
