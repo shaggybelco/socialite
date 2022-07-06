@@ -35,11 +35,12 @@ exports.login = async (req, res) => {
 
  process.env.SECRET_KEY
    );
-      
-res.status(200).json({
-  message: "User signed in!",
-  token: token,
-});
+   data.rows.token = token
+   res.status(200).json({
+     message: "User signed in!",
+     user,
+     token:token,
+ });
      }
    else {
      //Declaring the errors

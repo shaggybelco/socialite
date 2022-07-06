@@ -11,6 +11,8 @@ export class NewsfeedComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    console.log("this is from NewsfeedComponent" , localStorage.getItem("user_id"))
   }
 
 }

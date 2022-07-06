@@ -165,15 +165,25 @@
   }
   
   .uname {
-    text-align: center;
+    text-align: left;
     // padding: 0px;
     margin-top: 30px;
     font-size:20px;
-    // font-weight: bold;
-    margin-left: 36%;
+    font-weight: bold;
+    // margin-left: 36%;
     // margin-bottom: 10%;
   }
-  
+  .postcard{
+margin-top: 15px;
+    width: 100%;
+    // padding: 15px;
+}
+mat-card{
+  background-color: #E8F4E1;
+}
+
+
+
   // @media (max-width: 470px) {
   //   .uname {
   //     text-align: center;
