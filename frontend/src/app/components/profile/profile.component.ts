@@ -9,6 +9,7 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
+import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,17 +17,23 @@ import {
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private profile: ProfileService,
+    private uploadingPic: UploadService
+  ) {}
+  
   form: FormGroup = new FormGroup({
     userid: new FormControl(''),
     message: new FormControl(''),
   });
 
+  uploadform!: FormGroup;
+
   msgto: string = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private profile: ProfileService
-  ) {}
+  
 
   name: any = {};
   messages: any = {};
@@ -55,39 +62,45 @@ export class ProfileComponent implements OnInit {
   }
 
   post() {
-    let postdata = {
-      data: {
-        userid: localStorage.getItem('user_id'),
-        message: this.form.value.message,
-      },
-    };
-
-    if(this.form.invalid){
-      alert("can not post empty text");
-      return;
-    }else if(postdata.data.userid != '' && postdata.data.message != ''){
-      console.log('it does nothing', postdata.data);
-      this.profile.post(postdata.data).subscribe(
-      (data: any) =>{
-        alert('posted');
-        window.location.reload();
-       },
-       (err)=>{
-        alert("failed to post");
-       });
-      }
-    }
-  
+    
+  }
+  files: any = {};
 
   addImage() {
     let input = document.createElement('input');
+    const formdata = new FormData();
     input.type = 'file';
     input.onchange = (_) => {
-      let files = input.files;
-      console.log(files);
-    };
-    input.click();
-  }
+      this.files = input.files;
+      let postdata = {
+        data: {
+          userid: localStorage.getItem('user_id'),
+          image: this.files,
+          caption: this.form.value.message,
+        },
+      };
+      console.log('it does nothing', postdata.data);
 
+
+      this.uploadingPic.uploading(postdata.data).subscribe(
+        (data: any) => {
+          alert('posted');
+          console.log(data);
+          window.location.reload();
+        },
+        (err) => {
+          alert('failed to post');
+        }
+      );
+
+      console.log(this.files);
+    };
+    
+
+
+    
+    
+    input.click();
  
+  }
 }

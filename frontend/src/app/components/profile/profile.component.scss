@@ -182,6 +182,14 @@ mat-card{
   background-color: #E8F4E1;
 }
 
+.stat{
+  margin-left: 18px;
+}
+
+#file{
+  visibility: hidden;
+  flex-direction: column;
+}
 h2{
   text-align: center;
   font-weight: bold;

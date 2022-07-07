@@ -59,6 +59,10 @@ app.use(bodyparser.json());
 //     })
 // }
 /****************************************** */
+const cors = require("cors");
+app.use(cors());
+
+
 var upload = multer({ dest: "upload/" });
 
 var type = upload.single("myfile");
@@ -78,6 +82,5 @@ app.post("/upload", type, async (req, res) => {
     "INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)",
     [userid, image, caption]);
   });
-
 
 module.exports = app;

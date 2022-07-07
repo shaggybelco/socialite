@@ -25,11 +25,27 @@ export class NewsfeedComponent implements OnInit {
     private profile: ProfileService
   ) {}
 
+  name: any = {};
+  messages: any = {};
+  posting: any = {};
+
   ngOnInit(): void {
+    console.log(localStorage.getItem('user_id'));
+    this.profile
+      .viewPost(localStorage.getItem('user_id'))
+      .subscribe((prof: any) => {
+        this.posting = prof;
+        const j = prof.length;
+        console.log(this.posting);
 
-    console.log("this is from NewsfeedComponent" , localStorage.getItem("user_id"))
+        for (let i = 0; i < prof.length; i++) {
+          console.log(
+            (this.name = prof[i].name),
+            (this.messages = prof[i].message)
+          );
+        }
+      });
   }
-
   form: FormGroup = new FormGroup({
     userid: new FormControl(''),
     message: new FormControl(''),
