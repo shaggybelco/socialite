@@ -9,7 +9,7 @@ exports.getUserPosts = (req, res) => {
   //declare function & get params
   const id = parseInt(req.params.id); // declare a variable that will use to locate each user
 
-  pool.query('SELECT * FROM status s, users u WHERE s.userid = $1 AND u.id = s.userid', [id], (error, results) => {
+  pool.query('SELECT * FROM status s, users u WHERE s.userid = $1 AND u.id = s.userid ORDER BY date ', [id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

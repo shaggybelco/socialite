@@ -20,7 +20,7 @@
   <!-- THIS IS WHERE YOU WRITE A POST -->
 
   <div class="center">
-     <form class="form-group">
+     <form class="form-group"[formGroup]="form">
        <div class="mb-3">
          <input
            type="email"
@@ -28,7 +28,7 @@
            id="exampleInputText1"
            placeholder="Post"
            required
- 
+           formControlName="message"
            
          />
          <i class="fa-solid fa-pencil fa-lg" aria-hidden="true"></i>
@@ -38,7 +38,7 @@
        <!-- THIS IS A POST BUTTON -->
        <div class="row">
         <div class="col-6">
-          <button class="btn" id="btnpost">
+          <button class="btn" id="btnpost" (click)="post()">
             <i class="fa-solid fa-location-arrow fa-2x"></i>
           </button>
         </div>
