@@ -7,7 +7,11 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
+export interface DialogData{
+  post: string;
+}
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
@@ -15,6 +19,7 @@ import {
 })
 export class NewsfeedComponent implements OnInit {
 
+  
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService

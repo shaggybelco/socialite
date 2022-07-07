@@ -18,7 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
-
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
 
   ],
   providers: [],
