@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        console.log(this.posting);
+        console.log(imgstat);
 
         for (let i = 0; i < imgstat.length; i++) {
           console.log(
@@ -80,8 +80,28 @@ export class ProfileComponent implements OnInit {
   }
 
   post() {
-    
-  }
+    let postdata = {
+      data: {
+        userid: localStorage.getItem('user_id'),
+        message: this.form.value.message,
+      },
+    };
+
+    if(this.form.invalid){
+      alert("can not post empty text");
+      return;
+    }else if(postdata.data.userid != '' && postdata.data.message != ''){
+      console.log('it does nothing', postdata.data);
+      this.profile.post(postdata.data).subscribe(
+      (data: any) =>{
+        alert('posted');
+        window.location.reload();
+       },
+       (err)=>{
+        alert("failed to post");
+       });
+      }
+    }
   files: any = {};
 
   addImage() {
