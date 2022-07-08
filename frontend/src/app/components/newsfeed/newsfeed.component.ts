@@ -8,6 +8,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UploadService } from 'src/app/services/upload.service';
 
 export interface DialogData{
   post: string;
@@ -22,12 +23,15 @@ export class NewsfeedComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private profile: ProfileService
+    private profile: ProfileService,
+    private uploadingPic: UploadService
   ) {}
 
   name: any = {};
   messages: any = {};
   posting: any = {};
+  imgurl: any = {};
+  imgpost: any={};
 
   ngOnInit(): void {
     console.log(localStorage.getItem('user_id'));
@@ -42,6 +46,22 @@ export class NewsfeedComponent implements OnInit {
           console.log(
             (this.name = prof[i].name),
             (this.messages = prof[i].message)
+          );
+        }
+      });
+
+      this.profile
+      .getPic(localStorage.getItem('user_id'))
+      .subscribe((imgstat: any) => {
+        this.imgpost = imgstat;
+        const j = imgstat.length;
+        console.log(imgstat);
+
+        for (let i = 0; i < imgstat.length; i++) {
+          console.log(
+            (this.name = imgstat[i].name),
+            (this.messages =imgstat[i].caption),
+            (this.imgurl = imgstat[i].image)
           );
         }
       });
@@ -75,14 +95,38 @@ export class NewsfeedComponent implements OnInit {
       }
     }
   
-
-  addImage() {
-    let input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = (_) => {
-      let files = input.files;
-      console.log(files);
-    };
-    input.click();
-  }
+    files: any = {};
+    addImage() {
+    
+      let input = document.createElement('input');
+      const formdata = new FormData();
+      input.type = 'file';
+      input.onchange = (_) => {
+        this.files = input.files?.item(0);
+        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+  
+        formdata.append('userid', this.form.value.userid);
+        formdata.append('caption', this.form.value.message)
+        formdata.append('myfile',this.files);
+  
+       
+        console.log('it does nothing', formdata);
+  
+        this.uploadingPic.uploading(formdata).subscribe(
+          (data: any) => {
+            alert('posted');
+            console.log(data);
+            window.location.reload();
+          },
+          (err) => {
+            alert('failed to post');
+          }
+        );
+  
+        console.log(this.files);
+      };
+  
+      input.click();
+   
+    }
 }

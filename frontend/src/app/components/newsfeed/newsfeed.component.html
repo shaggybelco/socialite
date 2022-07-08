@@ -7,12 +7,6 @@
     <div class="card-body">
       <h5 class="card-title"></h5>
       <p class="card-text"></p>
-
-
-      
-
-
-
     </div>
   </div>
 
@@ -43,7 +37,7 @@
           </button>
         </div>
         <div class="col-6">
-          <button class="btn" id="btnpost">
+          <button class="btn" id="btnpost" (click)="addImage()">
             <i class="fa-solid fa-image fa-2x"></i>
           </button>
         </div>
@@ -67,6 +61,7 @@
  <h1>RECENT FEEDS </h1>
 <!-- POST CARD -->
 <div class="postcard">
+  <h2>Text status</h2>
   <mat-card class="mat-elevation-z4" *ngFor="let posts of posting">
   <mat-card-header>
               <mat-card-title>
@@ -89,37 +84,41 @@
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center send"
 >
-
-  <div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
-      <mat-card>
-        <mat-card-header>
-          <div class="row">
-            <div class="col">
-              <mat-card-title>
-              <p class="caption">Belco Sambo</p>
-            </mat-card-title>
-            </div>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <img
-          mat-card-md-image
-            class="profpost"
-            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656053803/cld-sample.jpg"
-            alt="posts"
-          />
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card-content>
-      </mat-card>
+<h2>Pictures status</h2>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <mat-card  *ngFor="let posts of imgpost" class="dev">
+      <mat-card-header>
+            <mat-card-title>
+            {{posts.name}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{posts.date}}
+            <hr>
+            {{posts.caption}}
+          </mat-card-subtitle>
+          
+      </mat-card-header>
+      <mat-card-content>
+        
+        <img
       
-    </div>
-
+          class="profpost"
+          src= '{{posts.image}}'
+          alt="pictures"
+        />
+      </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      
+    </mat-card>
+    <hr>
   </div>
+
+</div>
 </div>
 
 
