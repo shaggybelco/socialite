@@ -44,12 +44,13 @@ export class LoginComponent implements OnInit {
           this.route.navigate(['/newsfeed']);
           console.log(this.user);
          
+          alert("Login successfully");
           localStorage.setItem('user_id', this.user);
           
           this.id = this.user;
         },
-        (err) => {
-          return err.error.errorMessage;
+        error => {
+          alert("You are not registered or email or password is wrong");
         }
       );
     }

@@ -22,4 +22,9 @@ export class ProfileService {
     return this.view.get(`${this.baseurl}/user/getimage/${id}`)
   }
 
+  getAll(id:any){
+    return this.view.get(`${this.baseurl}/user/getone/${id}`)
+
+  }
+
 }

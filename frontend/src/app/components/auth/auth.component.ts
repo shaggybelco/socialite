@@ -17,6 +17,8 @@ import { AuthorizeService } from 'src/app/services/authorize.service';
 export class AuthComponent implements OnInit {
   constructor(private auth: AuthorizeService, private route: Router, private formbuilder: FormBuilder) {}
 
+  id: any;
+
   form: FormGroup = new FormGroup({
         name: new FormControl(''),
         email: new FormControl(''),
@@ -45,7 +47,8 @@ export class AuthComponent implements OnInit {
     }else {
       this.auth.createUser(users.data).subscribe({
         next: data =>{
-          this.route.navigate(['/newsfeed']);
+          
+          this.route.navigate(['/login']);
           alert("Registered in successfully");
         },
         error: err =>{

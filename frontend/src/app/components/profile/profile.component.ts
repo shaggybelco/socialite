@@ -17,13 +17,12 @@ import { UploadService } from 'src/app/services/upload.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService,
     private uploadingPic: UploadService
   ) {}
-  
+
   form: FormGroup = new FormGroup({
     userid: new FormControl(''),
     message: new FormControl(''),
@@ -33,21 +32,25 @@ export class ProfileComponent implements OnInit {
 
   msgto: string = '';
 
-  
-
   name: any = {};
   messages: any = {};
   posting: any = {};
   imgurl: any = {};
-  imgpost: any={};
+  imgpost: any = {};
 
   ngOnInit(): void {
     console.log(localStorage.getItem('user_id'));
     this.profile
+      .getAll(localStorage.getItem('user_id'))
+      .subscribe((prof: any) => {
+        this.name = prof[0].name;
+        console.log(this.name);
+      });
+
+    this.profile
       .viewPost(localStorage.getItem('user_id'))
       .subscribe((prof: any) => {
         this.posting = prof;
-        const j = prof.length;
         console.log(this.posting);
 
         for (let i = 0; i < prof.length; i++) {
@@ -58,17 +61,17 @@ export class ProfileComponent implements OnInit {
         }
       });
 
-      this.profile
+    this.profile
       .getPic(localStorage.getItem('user_id'))
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
-        const j = imgstat.length;
+
         console.log(imgstat);
 
         for (let i = 0; i < imgstat.length; i++) {
           console.log(
             (this.name = imgstat[i].name),
-            (this.messages =imgstat[i].caption),
+            (this.messages = imgstat[i].caption),
             (this.imgurl = imgstat[i].image)
           );
         }
@@ -87,25 +90,25 @@ export class ProfileComponent implements OnInit {
       },
     };
 
-    if(this.form.invalid){
-      alert("can not post empty text");
+    if (this.form.invalid) {
+      alert('can not post empty text');
       return;
-    }else if(postdata.data.userid != '' && postdata.data.message != ''){
+    } else if (postdata.data.userid != '' && postdata.data.message != '') {
       console.log('it does nothing', postdata.data);
       this.profile.post(postdata.data).subscribe(
-      (data: any) =>{
-        alert('posted');
-        window.location.reload();
-       },
-       (err)=>{
-        alert("failed to post");
-       });
-      }
+        (data: any) => {
+          alert('posted');
+          window.location.reload();
+        },
+        (err) => {
+          alert('failed to post');
+        }
+      );
     }
+  }
   files: any = {};
 
   addImage() {
-    
     let input = document.createElement('input');
     const formdata = new FormData();
     input.type = 'file';
@@ -114,10 +117,9 @@ export class ProfileComponent implements OnInit {
       this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
 
       formdata.append('userid', this.form.value.userid);
-      formdata.append('caption', this.form.value.message)
-      formdata.append('myfile',this.files);
+      formdata.append('caption', this.form.value.message);
+      formdata.append('myfile', this.files);
 
-     
       console.log('it does nothing', formdata);
 
       this.uploadingPic.uploading(formdata).subscribe(
@@ -135,6 +137,5 @@ export class ProfileComponent implements OnInit {
     };
 
     input.click();
- 
   }
 }

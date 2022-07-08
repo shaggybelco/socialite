@@ -131,6 +131,9 @@
 
   }
 
+  .cap{
+    text-align: left;
+  }
   .send{
     margin-top: 10px;
   }
@@ -174,7 +177,7 @@
     // margin-bottom: 10%;
   }
   .dev{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   .postcard mat-card{
     margin-top: 30px;
@@ -189,6 +192,10 @@ mat-card{
   margin-left: 18px;
 }
 
+#cardpost{
+  margin-bottom: 20px;
+}
+
 #file{
   visibility: hidden;
   flex-direction: column;
@@ -198,6 +205,10 @@ h2{
   font-weight: bold;
   margin-top: 40px;
   font-size: 30px;
+}
+
+.b{
+  width: 5px;
 }
 
 
