@@ -79,23 +79,25 @@
   <div class="content">
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
-      <mat-card  *ngFor="let posts of imgpost">
+      <mat-card  *ngFor="let posts of imgpost" class="dev">
         <mat-card-header>
               <mat-card-title>
               {{posts.name}}
             </mat-card-title>
             <mat-card-subtitle>
               {{posts.date}}
+              <hr>
+              {{posts.caption}}
             </mat-card-subtitle>
-            {{posts.caption}}
+            
         </mat-card-header>
         <mat-card-content>
           
           <img
         
             class="profpost"
-            [src]= 'posts.imgurl'
-            alt="posts"
+            [src]= "posts.imgurl"
+            alt="pictures"
           />
         </mat-card-content>
           <mat-card-actions>
@@ -104,7 +106,7 @@
           </mat-card-actions>
         
       </mat-card>
-      
+      <hr>
     </div>
 
   </div>
