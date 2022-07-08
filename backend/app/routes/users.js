@@ -12,6 +12,7 @@ const { updatePassword } = require("../Controller/users/updatePassword");
 const { deleteUser } = require("../Controller/users/deleteUser");
 const { updateEmail } = require("../Controller/users/updateEmail");
 const { updateName } = require("../Controller/users/updateName");
+const { getUserImage} = require("../controller/image/getImages")
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
@@ -25,6 +26,7 @@ app.put("/updatePassword/:id", updatePassword); // update user password for logi
 app.put("/updateEmail/:id", updateEmail); // update user email for login
 
 app.delete("/deleteUser/:id", deleteUser); // delete a user
+app.get("/getimage/:id", getUserImage);
 
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
@@ -59,8 +61,6 @@ app.use(bodyparser.json());
 //     })
 // }
 /****************************************** */
-const cors = require("cors");
-app.use(cors());
 
 
 var upload = multer({ dest: "upload/" });
@@ -73,8 +73,8 @@ app.post("/upload", type, async (req, res) => {
   console.log(req.file);
   res.status(200).json({ success: "Picture have been uploaded" });
 
-  var { userid, image, caption } = req.body;
-  image = results.secure_url;
+  const { userid, caption } = req.body;
+  const image = results.url;
 
   console.log(results);
 

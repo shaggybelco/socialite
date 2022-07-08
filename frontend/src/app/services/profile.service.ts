@@ -19,7 +19,7 @@ export class ProfileService {
   }
 
   getPic(id: any){
-    return this.view.get(`${this.baseurl}/user/`)
+    return this.view.get(`${this.baseurl}/user/getimage/${id}`)
   }
 
 }

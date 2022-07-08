@@ -38,6 +38,8 @@ export class ProfileComponent implements OnInit {
   name: any = {};
   messages: any = {};
   posting: any = {};
+  imgurl: any = {};
+  imgpost: any={};
 
   ngOnInit(): void {
     console.log(localStorage.getItem('user_id'));
@@ -55,6 +57,22 @@ export class ProfileComponent implements OnInit {
           );
         }
       });
+
+      this.profile
+      .getPic(localStorage.getItem('user_id'))
+      .subscribe((imgstat: any) => {
+        this.imgpost = imgstat;
+        const j = imgstat.length;
+        console.log(this.posting);
+
+        for (let i = 0; i < imgstat.length; i++) {
+          console.log(
+            (this.name = imgstat[i].name),
+            (this.messages =imgstat[i].caption),
+            (this.imgurl = imgstat[i].image)
+          );
+        }
+      });
   }
 
   get f() {
@@ -67,22 +85,22 @@ export class ProfileComponent implements OnInit {
   files: any = {};
 
   addImage() {
+    
     let input = document.createElement('input');
     const formdata = new FormData();
     input.type = 'file';
     input.onchange = (_) => {
-      this.files = input.files;
-      let postdata = {
-        data: {
-          userid: localStorage.getItem('user_id'),
-          image: this.files,
-          caption: this.form.value.message,
-        },
-      };
-      console.log('it does nothing', postdata.data);
+      this.files = input.files?.item(0);
+      this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
 
+      formdata.append('userid', this.form.value.userid);
+      formdata.append('caption', this.form.value.message)
+      formdata.append('myfile',this.files);
 
-      this.uploadingPic.uploading(postdata.data).subscribe(
+     
+      console.log('it does nothing', formdata);
+
+      this.uploadingPic.uploading(formdata).subscribe(
         (data: any) => {
           alert('posted');
           console.log(data);
@@ -95,11 +113,7 @@ export class ProfileComponent implements OnInit {
 
       console.log(this.files);
     };
-    
 
-
-    
-    
     input.click();
  
   }

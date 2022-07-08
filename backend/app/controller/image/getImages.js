@@ -5,11 +5,11 @@ const bodyparser = require('body-parser')
 
 
 //Get a single user by ID
-exports.getUserPosts = (req, res) => {
+exports.getUserImage = (req, res) => {
   //declare function & get params
   const id = parseInt(req.params.id); // declare a variable that will use to locate each user
 
-  pool.query('SELECT u.name,u.id, s.userid, s.message, s.date FROM status s, users u WHERE s.userid = $1 AND u.id = s.userid ORDER BY s.id DESC ', [id], (error, results) => {
+  pool.query('SELECT u.name,u.id, i.userid,i.image, i.caption, i.date FROM images i, users u WHERE i.userid = $1 AND u.id = i.userid ORDER BY date ', [id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any
