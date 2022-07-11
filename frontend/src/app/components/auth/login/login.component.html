@@ -56,42 +56,60 @@
   <div class="hero-content flex-col lg:flex-row-reverse">
     <div class="text-center lg:text-left">
       <h1 class="text-5xl font-bold">Login now!</h1>
-      <p class="py-6">
-        Let's communicate and have fun inside Socialite
-      </p>
+      <p class="py-6">Let's communicate and have fun inside Socialite</p>
     </div>
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div class="card-body">
-       
-          <label class="label">
-            <span class="label-text">Email</span>
-          </label>
-          <input type="text" placeholder="email" class="input input-bordered" />
-  
-        
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <input
-            type="text"
-            placeholder="password"
-            class="input input-bordered"
-          />
-          <label class="label">
-            <a href="#" class="label-text-alt link link-hover"
-              >Forgot password?</a
-            >
-          </label>
-   
-  
-          <button class="btn btn-primary" id="btn">Login</button>
- 
+      <div class="card-body" [formGroup]="form">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
 
-     
-          <p class="text">
-            Do not have an account,<a class="link link-hover" routerLink="/register" id="txtLogin"> Register</a>
-          </p>
-    
+        <input
+          type="text"
+          placeholder="email"
+          class="input input-bordered"
+          formControlName="email"
+        />
+
+        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+          <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</div>
+      </div>
+
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input
+          type="text"
+          placeholder="password"
+          class="input input-bordered"
+          formControlName="password"
+        />
+
+        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
+          <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
+          <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
+  
+          <div *ngIf="f['password'].dirty && f['password'].errors">Please, password should be 8 characters and more.</div>
+      </div>
+
+        <label class="label">
+          <a href="#" class="label-text-alt link link-hover"
+            >Forgot password?</a
+          >
+        </label>
+
+        <button class="btn btn-primary" id="btn" (click)="log()">Login</button>
+
+        <p class="text">
+          Do not have an account,<a
+            class="link link-hover"
+            routerLink="/register"
+            id="txtLogin"
+          >
+            Register</a
+          >
+        </p>
       </div>
     </div>
   </div>
