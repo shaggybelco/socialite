@@ -1,6 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css";
 
+<<<<<<< HEAD
 // Font Awesome
 
 // MDB SCSS
@@ -14,3 +13,9 @@ body {
 
 //   background: linear-gradient(90deg, rgba(172,58,172,0.279171043417367) 76%, rgba(44,124,124,0.5480786064425771) 84%, rgba(86,81,167,1) 89%, rgba(111,55,193,0.3604035364145658) 92%, rgba(60,111,147,1) 97%, rgba(53,133,149,1) 100%);
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+>>>>>>> ded5c7023c6f12715f17aebf03430518b329b2c1
