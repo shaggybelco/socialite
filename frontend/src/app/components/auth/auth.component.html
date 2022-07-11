@@ -1,93 +1,41 @@
-<div class="container-fluid">
-  <div class="logo2">
-    <img class="logo"
-      src="https://res.cloudinary.com/dadevelopers/image/upload/v1656314804/profile/rc2ubumybq3fwyxwuv34.png"
-      alt=""
-    />
-  </div>
-  <div class="center">
-    <form class="form-group" [formGroup]="form" onsubmit="createUser()">
-      <h6>Let's Get You Registered</h6>
+<div class="hero min-h-screen bg-base-200">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold">Register now!</h1>
+      <p class="py-6">Let's communicate and have fun inside Socialite</p>
+    </div>
+    <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+      <div class="card-body">
+        <label class="label">
+          <span class="label-text">Name</span>
+        </label>
+        <input type="text" placeholder="name" class="input input-bordered" />
 
-      <div class="in">
+        <label class="label">
+          <span class="label-text">Email</span>
+        </label>
+        <input type="text" placeholder="email" class="input input-bordered" />
+
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
         <input
           type="text"
-          class="form-control"
-          id="exampleInputText1"
-          formControlName="name"
-          placeholder="Name"
-          required
+          placeholder="password"
+          class="input input-bordered"
         />
-        <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-        
-        <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
-          <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
-          <div *ngIf="f['name'].errors && f['name'].errors['name']">Please, enter Name.</div>
-          <div *ngIf="f['name'].dirty && f['name'].errors">Please, name should be 3 letters and more.</div>
-        </div>
+        <label class="label">
+          <a href="#" class="label-text-alt link link-hover"
+            >Forgot password?</a
+          >
+        </label>
+
+        <button class="btn btn-primary" id="btn">Login</button>
+
+        <p class="text">
+          Already have an account,<a class="link link-hover" routerLink="/login">Login</a>
+        </p>
       </div>
-
-      <div class="in">
-        <input
-          type="email"
-          class="form-control"
-          id="exampleInputText1"
-          formControlName="email"
-          placeholder="Email"
-          required
-        />
-        <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
-
-        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
-          <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
-          <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter email address.</div>
-      </div>
-  
-      </div>
-
-      <div class="in">
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputText1"
-          placeholder="Password"
-          formControlName="password"
-          required
-        />
-        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-
-        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
-          <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
-          <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
-  
-          <div *ngIf="f['password'].dirty && f['password'].errors">Please, password should be 8 characters and more.</div>
-      </div>
-
-      </div>
-
-      <div class="in">
-        <input
-          type="password"
-          class="form-control"
-          id="exampleInputText1"
-          placeholder="Comfirm Password"
-          formControlName="conpassword"
-          required
-        />
-        <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-
-        <div *ngIf="f['conpassword'].touched && f['conpassword'].invalid" class="alert alert-danger">
-          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['required']">password is required.</div>
-          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['conpassword']">Please, enter valid password.</div>
-  
-          <div *ngIf="f['conpassword'].dirty && f['conpassword'].errors">Please, password should be 8 characters and more.</div>
-      </div>
-  
-      </div>
-    </form>
-
-    <button type="submit" class="btn" (click)="register()">REGISTER</button>
+    </div>
   </div>
-
-  <p class="pr">Already have an account? <a [routerLink]="['/login']"  class="goLogin">Login</a></p>
 </div>
