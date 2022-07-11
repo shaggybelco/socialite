@@ -19,9 +19,9 @@
 
 
 .in input {
-  border: 1px solid #36cdaf;
+  border: 1px solid #301848;
   border-radius: 20px;
-  background: rgba(216, 236, 204, 0.2);
+  background: #f4f3f000;
   width: 100%;
   margin-top: 20px;
   padding-left: 40px;
@@ -40,12 +40,12 @@
   left: 5px;
   top: 21px;
   padding: 9px 8px;
-  color: #0d382f;
+  color: #301848;
   height: 100%;
 }
 
-.ininput:focus + i {
-  color: #36cdaf;
+.in input:focus + i {
+  color: #a84890;
 }
 
 h6{
@@ -56,17 +56,17 @@ h6{
 
 .btn{
     margin-top: 50px;
-    background-color: #36cdaf;
+    background-color: #301848;
     width: 100%;
     height: 70px;
     border-radius: 20px;
     font-weight: bold;
-    color: white;
+    color: rgb(255, 255, 255);
 
 }
 
 .goLogin{
-    color: #36cdaf;
+    color: #301848;
     text-decoration: none;
     font-weight: bold;
 }
