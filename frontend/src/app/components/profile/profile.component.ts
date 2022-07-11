@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
   msgto: string = '';
 
   name: any = {};
+  email:any ={};
   messages: any = {};
   posting: any = {};
   imgurl: any = {};
@@ -45,6 +46,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((prof: any) => {
         this.name = prof[0].name;
         console.log(this.name);
+        console.log(this.email);
       });
 
     this.profile
@@ -57,6 +59,7 @@ export class ProfileComponent implements OnInit {
           console.log(
             (this.name = prof[i].name),
             (this.messages = prof[i].message)
+            (this.email = prof[i].email)
           );
         }
       });
