@@ -32,35 +32,81 @@
           <span class="label-text">Email</span>
         </label>
         <input
-          type="text"
+          type="email"
           placeholder="email"
           class="input input-bordered"
           formControlName="email"
         />
 
-        <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
-          <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
-          <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</div>
-      </div>
+        <div
+          *ngIf="f['email'].touched && f['email'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">
+            Email is required.
+          </div>
+          <div *ngIf="f['email'].errors && f['email'].errors['email']">
+            Please, enter valid email address.
+          </div>
+        </div>
 
         <label class="label">
           <span class="label-text">Password</span>
         </label>
         <input
-          type="text"
+          type="password"
           placeholder="password"
           class="input input-bordered"
           formControlName="password"
         />
 
-        <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
-          <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
-          <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
-  
-          <div *ngIf="f['password'].dirty && f['password'].errors">Please, password should be 8 characters and more.</div>
-      </div>
+        <div
+          *ngIf="f['password'].touched && f['password'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['password'].errors && f['password'].errors['required']">
+            password is required.
+          </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['password']">
+            Please, enter valid password.
+          </div>
 
-        <button class="btn btn-primary" id="btn" (click)="createuser()">Register</button>
+          <div *ngIf="f['password'].dirty && f['password'].errors">
+            Please, password should be 8 characters and more.
+          </div>
+        </div>
+
+        <label class="label">
+          <span class="label-text">Confirm Password</span>
+        </label>
+        <input
+          type="password"
+          placeholder="password"
+          class="input input-bordered"
+          formControlName="conpassword"
+        />
+
+        <div
+          *ngIf="f['conpassword'].touched && f['conpassword'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['required']">
+            password is required.
+          </div>
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['conpassword']">
+            Please, enter valid password.
+          </div>
+
+          <div *ngIf="f['conpassword'].dirty && f['conpassword'].errors">
+            Please, password should be 8 characters and more.
+          </div>
+        </div>
+
+
+    
+        <button class="btn btn-primary" id="btn" (click)="createuser()">
+          Register
+        </button>
 
         <p class="text">
           Already have an account,<a
