@@ -1,4 +1,5 @@
-const Pool = require("pg").Pool;
+const {Client} = require("pg");
+
 // const pool = new Pool({
 //   user: "oratile",
 //   host: "localhost",
@@ -9,9 +10,11 @@ const Pool = require("pg").Pool;
 
 //const {pool} = require("pg");
 
-//const client = new Client(process.env.DB_URL); // Configuring for PostgreSQL Database connection;
+const client = new Client(process.env.DB_URL); // Configuring for PostgreSQL Database connection;
+
+
 
 //Connecting to heroku database
-const pool = new Pool({ connectionString: process.env.DB_URL, ssl:{rejectUnauthorized:false} })
+//const pool = new Pool({ connectionString: process.env.DB_URL, ssl:{rejectUnauthorized:false} })
 
-module.exports = pool;
+module.exports = client;

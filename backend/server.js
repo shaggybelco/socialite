@@ -13,7 +13,7 @@ const client = require("./app/config/database");
 app.use(express.json());
 app.use(cors());
 
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 5051;
 
 const hostURL = '0.0.0.0'; //Fault-Tolerant listening port for Backend. Picks available dynamic IPv4 and IPv6 addresses of the local host
 
