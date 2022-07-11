@@ -12,7 +12,7 @@ const { updatePassword } = require("../Controller/users/updatePassword");
 const { deleteUser } = require("../Controller/users/deleteUser");
 const { updateEmail } = require("../Controller/users/updateEmail");
 const { updateName } = require("../Controller/users/updateName");
-const { getUserImage} = require("../controller/image/getImages")
+const { getUserImage } = require("../controller/image/getImages");
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
@@ -62,25 +62,38 @@ app.use(bodyparser.json());
 // }
 /****************************************** */
 
-
 var upload = multer({ dest: "upload/" });
 
 var type = upload.single("myfile");
 
 app.post("/upload", type, async (req, res) => {
-  const results = await cloudinary.uploader.upload(req.file.path,{folder:"/profile/"});
+
+  const { userid, caption } = req.body;
+
+  if (req.file) {
+    const results = await cloudinary.uploader.upload(req.file.path, {
+      folder: "/profile/",
+    });
+    const image = results.url;
+    console.log(results);
+
+   
+
+    pool.query("INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)", [
+      userid,
+      image,
+      caption,
+    ]);
+  }
 
   console.log(req.file);
   res.status(200).json({ success: "Picture have been uploaded" });
+  
 
-  const { userid, caption } = req.body;
-  const image = results.url;
-
-  console.log(results);
-
-  pool.query(
-    "INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)",
-    [userid, image, caption]);
-  });
+  pool.query("INSERT INTO images(userid, caption) VALUES ($1,$2)", [
+    userid,
+    caption,
+  ]);
+});
 
 module.exports = app;
