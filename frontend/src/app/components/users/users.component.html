@@ -64,27 +64,34 @@
     </mat-card>
 
     <h2 class="sug">Suggested users</h2>
-    <mat-card id="row">
-      <mat-card-header> </mat-card-header>
-      <mat-card-content>
-        <div class="row justify-content-center">
-          <div class="col-4">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
+    <div *ngFor="let user of suggested_Users ; let index = index">
+ <br>
+      <mat-card id="row">
+        <mat-card-header> </mat-card-header>
+        <mat-card-content>
+          <div class="row justify-content-center">
+            <div class="col-4">
+              <img
+                class="pp2"
+                src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
+                alt="none"
+              />
+            </div>
+    
+            <div class="col-8">
+              <p class="uname">{{user.name}}</p>
+            </div>
+    
+            <div class="row">
+              <button class="btn" id="btn" (click)="followUsers(index)">Follow</button>
+            </div>
           </div>
-
-          <div class="col-8">
-            <p class="uname">Oratile Minie</p>
-          </div>
-
-          <div class="row">
-            <button class="btn" id="btn">Follow</button>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>
+
+
+
+

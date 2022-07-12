@@ -7,7 +7,7 @@ const bodyparser = require('body-parser')
 //Get all users in database
 exports.suggestedUsers = (req, res) => {
   //declare function & get params
-  pool.query('SELECT * FROM users INNER JOIN follow  ON users.userid=follow.userid WHERE follow.followStatus != $1',["Following"], (error, results) => {
+  pool.query('SELECT * FROM users ', (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any
