@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthorizeService } from 'src/app/services/authorize.service';
+import { UsersComponent } from '../users/users.component';
 
 @Component({
   selector: 'app-auth',
@@ -30,6 +31,8 @@ export class AuthComponent implements OnInit {
     return this.form.controls;
   }
 
+  isMatch: boolean = false;
+
   createuser(): void {
     let users = {
       data: {
@@ -40,7 +43,9 @@ export class AuthComponent implements OnInit {
       },
     };
 
+
     if (users.data.password != users.data.conpassword) {
+      
      alert("Password don't match")
     } else if(this.form.invalid){
       return;
@@ -75,8 +80,13 @@ export class AuthComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
       ]]
-    },{
      
     });
+
+    if(this.form.value.password != this.form.value.conpassword){
+      this.isMatch = false;
+    }else  if(this.form.value.password == this.form.value.conpassword && this.form.value.password != '' && this.form.value != ''){
+      this.isMatch = true;
+    }
   }
 }

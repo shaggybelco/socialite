@@ -5,35 +5,117 @@
       <p class="py-6">Let's communicate and have fun inside Socialite</p>
     </div>
     <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <div class="card-body">
+      <div class="card-body" [formGroup]="form">
         <label class="label">
           <span class="label-text">Name</span>
         </label>
-        <input type="text" placeholder="name" class="input input-bordered" />
+        <input
+          type="text"
+          placeholder="name"
+          class="input input-bordered"
+          formControlName="name"
+        />
+
+        <div
+          *ngIf="f['name'].touched && f['name'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['name'].errors && f['name'].errors['required']">
+            name is required.
+          </div>
+          <div *ngIf="f['name'].errors && f['name'].errors['name']">
+            Please, enter valid name.
+          </div>
+        </div>
 
         <label class="label">
           <span class="label-text">Email</span>
         </label>
-        <input type="text" placeholder="email" class="input input-bordered" />
+        <input
+          type="email"
+          placeholder="email"
+          class="input input-bordered"
+          formControlName="email"
+        />
+
+        <div
+          *ngIf="f['email'].touched && f['email'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['email'].errors && f['email'].errors['required']">
+            Email is required.
+          </div>
+          <div *ngIf="f['email'].errors && f['email'].errors['email']">
+            Please, enter valid email address.
+          </div>
+        </div>
 
         <label class="label">
           <span class="label-text">Password</span>
         </label>
         <input
-          type="text"
+          type="password"
           placeholder="password"
           class="input input-bordered"
+          formControlName="password"
         />
-        <label class="label">
-          <a href="#" class="label-text-alt link link-hover"
-            >Forgot password?</a
-          >
-        </label>
 
-        <button class="btn btn-primary" id="btn">Register</button>
+        <div
+          *ngIf="f['password'].touched && f['password'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['password'].errors && f['password'].errors['required']">
+            password is required.
+          </div>
+          <div *ngIf="f['password'].errors && f['password'].errors['password']">
+            Please, enter valid password.
+          </div>
+
+          <div *ngIf="f['password'].dirty && f['password'].errors">
+            Please, password should be 8 characters and more.
+          </div>
+        </div>
+
+        <label class="label">
+          <span class="label-text">Confirm Password</span>
+        </label>
+        <input
+          type="password"
+          placeholder="password"
+          class="input input-bordered"
+          formControlName="conpassword"
+        />
+
+        <div
+          *ngIf="f['conpassword'].touched && f['conpassword'].invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['required']">
+            password is required.
+          </div>
+          <div *ngIf="f['conpassword'].errors && f['conpassword'].errors['conpassword']">
+            Please, enter valid password.
+          </div>
+
+          <div *ngIf="f['conpassword'].dirty && f['conpassword'].errors">
+            Please, password should be 8 characters and more.
+          </div>
+        </div>
+
+
+    
+        <button class="btn btn-primary" id="btn" (click)="createuser()">
+          Register
+        </button>
 
         <p class="text">
-          Already have an account,<a class="link link-hover" routerLink="/login" id="txtLogin"> Login</a>
+          Already have an account,<a
+            class="link link-hover"
+            routerLink="/login"
+            id="txtLogin"
+          >
+            Login</a
+          >
         </p>
       </div>
     </div>
