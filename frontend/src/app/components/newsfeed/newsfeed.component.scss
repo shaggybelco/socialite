@@ -17,7 +17,7 @@
   padding-left: 40px;
   border: 1px solid #36cdaf;
   border-radius: 20px;
-  background: rgba(216, 236, 204, 0.2);
+  background:white;
 }
 
 .mb-3 {
@@ -44,7 +44,7 @@
   left: 5px;
   top: 8px;
   padding: 9px 8px;
-  color: #0d382f;
+  color: #71d5c1;
 }
 
 
@@ -137,8 +137,8 @@ h6{
 
 
 .pp2 {
-  width: 100px;
-  height: 100px;
+  
+  
   border-radius: 100%;
   // margin-left: 40px;
 }
@@ -164,29 +164,46 @@ h6{
   text-align: center;
 }
 
-h1{
+h1
+{
   text-align:left;
   font-weight: bold;
   color: grey;
 }
 
-.send{
+.send
+{
   margin: 0px;
  // background-color: #36cdaf;
 }
 
-mat-card{
+mat-card
+{
   background-color: #E8F4E1;
 }
 
-.dev{
+.dev 
+{
   margin-bottom: 20px;
 }
 
-.cardpost{
+.cardpost 
+{
   margin-bottom: 20px;
 }
 
 h2{
   text-align: center;
+}
+.col-4
+{
+  background-color: #51cdd6;
+}
+.card
+{
+  background-color: white;
+}
+.w-15 rounded-full
+{
+background-color: palevioletred;
 }
