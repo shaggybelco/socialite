@@ -18,7 +18,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
-import { MatDialogModule } from '@angular/material/dialog'
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog'
     NavbarComponent,
     NewsfeedComponent,
     ProfileComponent,
-    ViewprofileComponent
+    ViewprofileComponent,
+
   ],
   imports: [
     BrowserModule,

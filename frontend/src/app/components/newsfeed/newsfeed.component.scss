@@ -53,7 +53,7 @@ h6{
 }
 
 .btn1{
-    background-color: #36cdaf;
+    background-color: #51aad3;
     margin:auto;
     border: none;
     width:40%;
@@ -62,7 +62,7 @@ h6{
     font-weight: bold;
 }
 .btn2{
-  background-color: #36cdaf;
+  background-color: #51aad3;
   border: none;
   margin:auto;
   width:40%;
@@ -95,12 +95,24 @@ h6{
       margin: auto;
       width: 100%;
       padding: 20px;
+      background-color: white;
+}
+.card
+{
+  background-color: white;
+}
+.inside{
+  background-color: white;
+}
+.container
+{
+  background-color: white;
 }
 
 .mat-elevation-z4{
   margin: auto;
   padding: 10px;
-  background-color: #E8F4E1;
+  background-color: white;
 }
 
 .matpp{
@@ -111,7 +123,7 @@ h6{
 }
 
 .profilepicture{
-  background-color: #0d382f;
+  background-color: white;
   margin: auto;
   width: 100px;
   height: 100px;
@@ -136,7 +148,7 @@ h6{
 }
 
 #btnpost{
-  background-color: #36cdaf;
+  background-color: #62d1c4;
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
@@ -145,7 +157,7 @@ h6{
 }
 
 #btnpost1{
-  background-color: #36cdaf;
+  background-color: #51cdd6;
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
@@ -153,8 +165,9 @@ h6{
 }
 
 h1{
-  text-align: center;
+  text-align:left;
   font-weight: bold;
+  color: grey;
 }
 
 .send{
