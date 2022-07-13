@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCard } from '@angular/material/card';
+import { empty } from 'rxjs';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 
 @Component({
@@ -9,15 +10,27 @@ import { SuggestedUsersService } from 'src/app/services/suggested-users.service'
 })
 export class UsersComponent implements OnInit {
 
+
+  current_id = localStorage.getItem('user_id')
   suggested_Users!: any;
+  suggested_User!: any;
   follow_body: any
-  status: any = "Following"
+  status: any = "follow"
+  follow: boolean = false;
+  users: any = [];
   constructor(private userservice: SuggestedUsersService) { }
 
 
 
-
   followUsers(index: any) {
+
+    if (this.follow == false) {
+      this.follow = true;
+      this.status = 'pending'
+
+    }
+
+    this.users[index] = [];
     const follower = {
       userid: localStorage.getItem('user_id'),
       followid: this.suggested_Users[index].id,
@@ -26,39 +39,46 @@ export class UsersComponent implements OnInit {
     }
 
     this.userservice.followUsers(follower).subscribe(
-      (data: any) => {
-        alert("Successful folloed ")
-      },
-      (err) => {
-        alert("Failed to follow")
+      (data) => {
+        alert("Success");
+
+        
       }
     );
 
-    console.log(this.suggested_Users[index].id, "followed with ", localStorage.getItem('user_id'));
+    console.log(this.users[index].id, "followed by ", localStorage.getItem('user_id'));
 
-    return console.log(this.suggested_Users[index]);
+    
+    window.location.reload();
+
+
+    return console.log(this.users[index]);
 
   }
+
 
   ngOnInit(): void {
+    
+    this.userservice.getSuggestedUsers(this.current_id).subscribe((suggested) => {
+      console.log("all users ", suggested);
 
-    this.userservice.getSuggestedUsers().subscribe((suggested) => {
-      console.log(suggested);
       this.suggested_Users = suggested;
 
-    })
-    // let user ={
-    //   data:{
-    //      userid: this.suggested_Users[index].user_id,
-    //      followid: this.suggested_Users[index].user_id,
-    //     followstatus: this.status
-    //   }      
-    // }
-    // this.userservice.followUsers(this.follow_body).subscribe((followData)=>{
-    //   console.log(followData, "Posted from Frontend");
-    // })
+      for (let i = 0; i < this.suggested_Users.length; i++) {
+        if (this.suggested_Users[i].followstatus == 'pending') {
+          console.log(this.suggested_Users[i].id)
+        } else {
 
+          console.log("users not pending ", this.suggested_Users[i].name)
+          this.users.push(this.suggested_Users[i]);
+
+        }
+
+
+      }
+
+      console.log("show pushed ", this.users)
+    })
 
   }
-
 }

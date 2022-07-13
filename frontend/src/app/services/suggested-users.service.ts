@@ -6,13 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class SuggestedUsersService {
 
+  
+
   baseurl:string = "http://localhost:5050";
 
   constructor(private http:HttpClient) { }
 
-  getSuggestedUsers()
+  getSuggestedUsers(id: any)
   {
-     return this.http.get(`${this.baseurl}/user/suggestedUsers`);
+     return this.http.get(`${this.baseurl}/user/suggestedUsers/${id}`);
   }
 
 

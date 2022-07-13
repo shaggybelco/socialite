@@ -75,7 +75,7 @@
           </div>
 
     <h2 class="sug">Suggested users</h2>
-    <div *ngFor="let user of suggested_Users ; let index = index">
+    <div  *ngFor="let user of users; let index = index">
  <br>
       <mat-card id="row">
         <mat-card-header> </mat-card-header>
@@ -90,9 +90,10 @@
             </div>
     
             <div class="col-8">
-              <p class="uname">{{user.name}}</p>
+           
+              <p class="uname">{{user.name+" "+" "+index}}</p> 
             </div>
-    
+            
             <div class="row">
               <button class="btn" id="btn" (click)="followUsers(index)">Follow</button>
             </div>

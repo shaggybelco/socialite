@@ -6,8 +6,13 @@ const bodyparser = require('body-parser')
 
 //Get all users in database
 exports.suggestedUsers = (req, res) => {
+  //declare variable to store form data
+  const id = parseInt(req.params.id);
+
   //declare function & get params
-  pool.query('SELECT * FROM users ', (error, results) => {
+  pool.query('SELECT users.id, users.name, follow.userid, follow.followid, follow.followstatus FROM users Full outer JOIN follow ON users.id=follow.followid AND follow.followStatus = $1 WHERE users.id <> $2',
+  ['pending',id],
+  (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

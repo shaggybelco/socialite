@@ -31,7 +31,7 @@ app.delete("/deleteUser/:id", deleteUser); // delete a user
 app.get("/getimage/:id", getUserImage);
 
 app.post("/toFollow", toFollow);     //follow users
-app.get("/suggestedUsers", suggestedUsers);     //follow users
+app.get("/suggestedUsers/:id", suggestedUsers);     //follow users
 
 
 const cloudinary = require("cloudinary").v2;
