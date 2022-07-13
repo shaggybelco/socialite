@@ -1,18 +1,18 @@
 .number {
     padding-left: 20px;
     text-decoration: none;
-    color: #36cdaf;
+    color: #cda736;
   }
  
   .form-group {
     padding-left: 40px;
-    border: 1px solid #36cdaf;
+    border: 1px solid #cd363d;
     border-radius: 20px;
     background: rgba(216, 236, 204, 0.2);
   }
   
   .ppm input{
-    border: 1px solid #36cdaf;
+    border: 1px solid #4d36cd;
     background-color: rgba(216, 236, 204, 0.2);
     padding-left: 60px;
     padding-right: 60px;
@@ -52,15 +52,19 @@
     }
     
     .mb-3 input:focus + i {
-      color: #36cdaf;
+      color: #59cd36;
     }
   .col-4{
-    background-color: #36cdaf;
+    background-color: #cd7f36;
   }
   .follow2 {
     float: right;
     padding-right: 10px;
     color: white;
+  }
+  .s{
+    margin-left: 25;
+    margin-right: 25%;
   }
   #btn {
     color: white;

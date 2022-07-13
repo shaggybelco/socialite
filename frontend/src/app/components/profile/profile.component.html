@@ -1,26 +1,36 @@
 <app-navbar></app-navbar>
+<!---->
 <div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc" data-theme="night"
 >
   <h2 class="hea">My Profile</h2>
+  <div class="card w-13 glass  s">
+    <figure class="w-96 bg-base-100 rounded-full"><img src="https://placeimg.com/400/225/arch" alt="car!"></figure>
+    <div class="card-body">
+      <h2 class="card-title">Life hack</h2>
+      <p>How to park your car at your garage?</p>
+      <div class="card-actions justify-end">
+        <button class="btn">Learn now!</button>
+      </div>
+    </div>
+  </div>
   <div class="profile">
     <div
-      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
-    >
-      <div class="row">
-        <div class="col-4">
-          <img
-            class="pp2"
-            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-            alt="none"
-          /><div class="col-9 b">
+      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp" >
+      <div class="row s">
+      
+          <label tabindex="0" class="btn btn-circle avatar">
+            <div class="w-96 bg-base-100 rounded-full">
+              <img src="https://placeimg.com/80/80/people" />
+            </div>
+          </label>
+         <!--<div class="col-9 b">
             <p class="uname">Belco Sambo</p>
-          </div>
-
+          </div>--> 
         </div>
+
         <div class="col-4">
           <p class="uname">{{ name }}</p>
-        </div>
       </div>
     </div>
   </div>

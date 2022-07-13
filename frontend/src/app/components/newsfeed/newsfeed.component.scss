@@ -15,7 +15,7 @@
 }
 .mb-3 input {
   padding-left: 40px;
-  border: 1px solid #36cdaf;
+  //border: 1px solid #36cdaf;
   border-radius: 20px;
   background:white;
 }
@@ -44,7 +44,7 @@
   left: 5px;
   top: 8px;
   padding: 9px 8px;
-  color: #71d5c1;
+  color:  #b843c3;
 }
 
 
@@ -53,7 +53,7 @@ h6{
 }
 
 .btn1{
-    background-color: #51aad3;
+  background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
     margin:auto;
     border: none;
     width:40%;
@@ -62,7 +62,7 @@ h6{
     font-weight: bold;
 }
 .btn2{
-  background-color: #51aad3;
+  background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
   border: none;
   margin:auto;
   width:40%;
@@ -95,24 +95,24 @@ h6{
       margin: auto;
       width: 100%;
       padding: 20px;
-      background-color: white;
+//      background-color: white;
 }
 .card
 {
-  background-color: white;
+//  background-color: white;
 }
 .inside{
-  background-color: white;
+ // background-color: white;
 }
 .container
 {
-  background-color: white;
+  //background-color: white;
 }
 
 .mat-elevation-z4{
   margin: auto;
   padding: 10px;
-  background-color: white;
+ // background-color: white;
 }
 
 .matpp{
@@ -123,19 +123,21 @@ h6{
 }
 
 .profilepicture{
-  background-color: white;
+ // background-color: white;
   margin: auto;
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: #36cdaf;
+//  border: #36cdaf;
   flex-direction: row;
 }
 
 
 // USER PROFILE CARDS
 
-
+.x{
+  background-color:152238;
+}
 .pp2 {
   
   
@@ -144,11 +146,14 @@ h6{
 }
 
 #btnpost{
-  color: rgb(255, 255, 255);
+  //color: white;
+}
+.container py-5{
+  background-color: navy;
 }
 
 #btnpost{
-  background-color: #62d1c4;
+  background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
@@ -157,7 +162,7 @@ h6{
 }
 
 #btnpost1{
-  background-color: #51cdd6;
+  background-color: #b3d146;
   width: 100%;
   border-radius: 20px;
   font-weight: bold;
@@ -168,7 +173,7 @@ h1
 {
   text-align:left;
   font-weight: bold;
-  color: grey;
+  color: #b843c3;
 }
 
 .send
@@ -179,7 +184,7 @@ h1
 
 mat-card
 {
-  background-color: #E8F4E1;
+ // background-color: #E8F4E1;
 }
 
 .dev 
@@ -197,13 +202,13 @@ h2{
 }
 .col-4
 {
-  background-color: #51cdd6;
+  //background-color: #51cdd6;
 }
 .card
 {
-  background-color: white;
+ // background-color: white;
 }
 .w-15 rounded-full
 {
-background-color: palevioletred;
+//ackground-color: palevioletred;
 }
