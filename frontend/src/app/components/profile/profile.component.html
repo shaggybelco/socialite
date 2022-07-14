@@ -67,77 +67,6 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
->
-  <h2>Pictures status</h2>
-
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div
-      fxFlex="25%"
-      fxFlex.xs="100%"
-      fxFlex.sm="33%"
-      *ngFor="let posts of imgpost"
-    >
-      <mat-card class="mat-elevation-z4" id="cardpost">
-        <mat-card-header>
-          <mat-card-title>
-            {{ posts.name }}
-          </mat-card-title>
-          <mat-card-subtitle>
-            {{ posts.date }}
-            <hr />
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          {{ posts.caption }}
-
-          <img class="profpost" src="{{ posts.image }}" alt="pictures" />
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button class="b">
-            <i class="fa-regular fa-heart"></i>
-          </button>
-          <button mat-button class="b">
-            <i class="fa-regular fa-message"></i>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-      <hr />
-    </div>
-  </div>
-
-  <h2>Text status</h2>
-  <!-- POST CARD -->
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div
-      fxFlex="25%"
-      fxFlex.xs="100%"
-      fxFlex.sm="100%"
-      fxFlex.lg="100%"
-      *ngFor="let posts of posting"
-    >
-      <mat-card class="mat-elevation-z4" id="cardpost">
-        <mat-card-header>
-          <mat-card-title>
-            <h3 class="uname">{{ posts.name }}</h3>
-          </mat-card-title>
-          <mat-card-subtitle>{{ posts.date }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="stat">
-          {{ posts.message }}
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button class="b">
-            <i class="fa-regular fa-heart"></i>
-          </button>
-          <button mat-button class="b">
-            <i class="fa-regular fa-message"></i>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-=======
 <div class="container py-5">
   <div class="inside">
     <div class="center">
@@ -221,7 +150,6 @@
           </div>
         </div>
       </div>
->>>>>>> 6a5260c8d168c342916fadd7c5e27ac3321d051b
       <hr />
     </div>
   </div>
