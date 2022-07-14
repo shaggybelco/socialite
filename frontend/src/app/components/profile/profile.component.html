@@ -29,17 +29,21 @@
       </div>
     </div>
   </div> -->
+  <div class="profile">
+    <div
+      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
+    >
+      <div class="card w-96 bg-base-100 shadow-xl" id="cards">
+        <div class="avatar justify-center" id="avatar">
+          <div class="w-24 rounded-full">
+            <img src="https://placeimg.com/192/192/people" />
+          </div>
+        </div>
 
-  <div class="card w-96 bg-base-100 " id="avatar">
-
-    <div class="avatar justify-center">
-      <div class="bg-neutral-focus text-neutral-content rounded-full w-20">
-        <img src="https://placeimg.com/192/192/people" />
+        <div class="card-body">
+          <h2 class="card-title justify-center">{{ name }}</h2>
+        </div>
       </div>
-    </div> 
-
-    <div class="card-body">
-      <p class="uname justify-center" id="hea">{{ name }}</p>
     </div>
   </div>
 </div>
@@ -53,10 +57,10 @@
 
     <div class="flex justify-between ...">
       <div>
-        <p class="follow1 justify-center" id="cent">Followers <a class="number">123</a></p>
+        <p class="follow1 col-start-3 col-end-5" id="cents">Followers <a class="number">123</a></p>
       </div>
       <div>
-        <p class="follow1 justify-center"  id="cent">Following <a class="number">132</a></p>
+        <p class="follow1 col-start-5 col-end-7"  id="cent">Following <a class="number">132</a></p>
       </div>
       <div>
         <button type="button" class="btn" id="btn">
@@ -77,7 +81,7 @@
           class="input input-bordered"
           formControlName="message"
         />
-        <button class="btn btn-square" (click)="post()">
+        <button class="btn1 btn-square" (click)="post()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-send"
@@ -97,7 +101,7 @@
             ></path>
           </svg>
         </button>
-        <button class="btn btn-square" (click)="addImage()">
+        <button class="btn1 btn-square" (click)="addImage()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-photo"
