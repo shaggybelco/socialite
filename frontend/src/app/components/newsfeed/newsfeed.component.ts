@@ -39,7 +39,7 @@ export class NewsfeedComponent implements OnInit {
 
 
       this.profile
-      .getPic(localStorage.getItem('user_id'))
+      .viewPost(localStorage.getItem('user_id'))
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
