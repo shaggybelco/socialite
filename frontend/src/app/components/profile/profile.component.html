@@ -1,38 +1,39 @@
 <app-navbar></app-navbar>
 <!---->
 <div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc" data-theme="night"
->
-  <h2 class="hea">My Profile</h2>
-  <div class="card w-13 glass  s">
-    <div class="w-150 bg-base-100 rounded-full"> <figure ><img src="https://placeimg.com/400/225/arch" alt="car!"></figure></div>
-   
-    <div class="card-body">
-      <h2 class="card-title">Life hack</h2>
-      <p>How to park your car at your garage?</p>
-      <div class="card-actions justify-end">
-        <button class="btn">Learn now!</button>
-      </div>
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
+  data-theme="night"
+> 
+<h2 class="hea">My Profile</h2> 
+  
+
+  <!-- <div class="avatar justify-center" id="avatar">
+    <div class="rounded-full s">
+      <img src="https://placeimg.com/192/192/people" />
     </div>
   </div>
   <div class="profile">
     <div
-      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp" >
-      <div class="row s">
-      
-          <label tabindex="0" class="btn btn-circle avatar">
-            <div class="w-96 bg-base-100 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
-            </div>
-          </label>
-         <!--<div class="col-9 b">
-            <p class="uname">Belco Sambo</p>
-          </div>--> 
-        </div>
+      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
+    >
+     
 
-        <div class="col-4">
-          <p class="uname">{{ name }}</p>
+      <div class="card-body">
+        <p class="uname justify-center">{{ name }}</p>
       </div>
+    </div>
+  </div> -->
+
+  <div class="card w-96 bg-base-100 " id="avatar">
+
+    <div class="avatar justify-center">
+      <div class="bg-neutral-focus text-neutral-content rounded-full w-20">
+        <img src="https://placeimg.com/192/192/people" />
+      </div>
+    </div> 
+
+    <div class="card-body">
+      <p class="uname justify-center" id="hea">{{ name }}</p>
     </div>
   </div>
 </div>
@@ -95,62 +96,73 @@
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center send"
 >
-<h2>Pictures status</h2>
+  <h2>Pictures status</h2>
 
-<div fxLayout="row wrap" fxLayoutGap="16px grid">
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let posts of imgpost">
-    <mat-card
-      class="mat-elevation-z4"
-     
-      id="cardpost"
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div
+      fxFlex="25%"
+      fxFlex.xs="100%"
+      fxFlex.sm="33%"
+      *ngFor="let posts of imgpost"
     >
-      <mat-card-header>
-        <mat-card-title>
-          {{ posts.name }}
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{ posts.date }}
-          <hr />
-          
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-      {{ posts.caption }}
-        
-        <img class="profpost" src="{{ posts.image }}" alt="pictures" />
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-        <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-      </mat-card-actions>
-    </mat-card>
-    <hr />
+      <mat-card class="mat-elevation-z4" id="cardpost">
+        <mat-card-header>
+          <mat-card-title>
+            {{ posts.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ posts.date }}
+            <hr />
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          {{ posts.caption }}
+
+          <img class="profpost" src="{{ posts.image }}" alt="pictures" />
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="b">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button mat-button class="b">
+            <i class="fa-regular fa-message"></i>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <hr />
+    </div>
   </div>
-</div>
 
   <h2>Text status</h2>
   <!-- POST CARD -->
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="100%" *ngFor="let posts of posting">
-    <mat-card
-      class="mat-elevation-z4"
-      
-      id="cardpost"
+    <div
+      fxFlex="25%"
+      fxFlex.xs="100%"
+      fxFlex.sm="100%"
+      fxFlex.lg="100%"
+      *ngFor="let posts of posting"
     >
-      <mat-card-header>
-        <mat-card-title>
-          <h3 class="uname">{{ posts.name }}</h3>
-        </mat-card-title>
-        <mat-card-subtitle>{{ posts.date }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="stat">
-        {{ posts.message }}
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-        <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-      </mat-card-actions>
-    </mat-card>
-    <hr />
+      <mat-card class="mat-elevation-z4" id="cardpost">
+        <mat-card-header>
+          <mat-card-title>
+            <h3 class="uname">{{ posts.name }}</h3>
+          </mat-card-title>
+          <mat-card-subtitle>{{ posts.date }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="stat">
+          {{ posts.message }}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="b">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <button mat-button class="b">
+            <i class="fa-regular fa-message"></i>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <hr />
+    </div>
   </div>
 </div>
