@@ -3,6 +3,7 @@
 }
 #post{
   justify-content: center;
+  
 }
 
 #post1{
@@ -10,8 +11,17 @@
   margin-bottom: 10px;
   justify-content: center;
   width: 87%;
+  background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
+  
 }
-
+.btn
+{
+  background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
+}
+#btn
+{
+ // background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
+}
 h1{
   text-align: center;
   font-weight: bold;
@@ -48,7 +58,13 @@ h1{
 
   #cent{
     margin-top: 14px;
+    text-align: center;
   }
+  #cents{
+    margin-top: 14px;
+    text-align: center;
+  }
+  
   
   .hea {
     text-align: center;
