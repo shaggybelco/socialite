@@ -68,19 +68,27 @@ var upload = multer({ dest: "upload/" });
 var type = upload.single("myfile");
 
 app.post("/upload", type, async (req, res) => {
-  const results = await cloudinary.uploader.upload(req.file.path,{folder:"/profile/"});
+  const { userid, caption, date } = req.body;
 
-  console.log(req.file);
-  res.status(200).json({ success: "Picture have been uploaded" });
+  if(!req.file){
+    const results = await cloudinary.uploader.upload(req.file.path,{folder:"/profile/"});
+    const image = results.url;
+    res.status(200).json({ success: "Picture have been uploaded" });
 
-  const { userid, caption } = req.body;
-  const image = results.url;
 
-  console.log(results);
+    pool.query(
+      "INSERT INTO images(userid, image, caption, date) VALUES ($1,$2,$3, s4)",
+      [userid, image, caption, date]);
+
+    console.log(req.file);
+    console.log(results);
+  }
+  
 
   pool.query(
     "INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)",
-    [userid, image, caption]);
+    [userid, caption, date]);
   });
+
 
 module.exports = app;
