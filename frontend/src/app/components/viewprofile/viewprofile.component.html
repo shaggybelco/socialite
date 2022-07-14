@@ -2,45 +2,49 @@
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc" data-theme="night"
 >
-  <h2 class="hea">User Profile</h2>
-  <div class="profile">
-    <div
-      class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
-    >
-      <div class="row">
-        <div class="col-4">
-          <img
-            class="pp2"
-            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-            alt="none"
-          />
+  
+ 
+
+
+    <div class="card w-96 bg-base-100 shadow-xl" id="cards">
+      <div class="avatar justify-center" id="avatar">
+        <div class="w-24 rounded-full">
+          <img src="https://placeimg.com/192/192/people" />
         </div>
-        <div class="col-4">
-          <p class="uname">Bonolo Solomon</p>
-        </div>
+      </div>
+
+      <div class="card-body">
+        <h2 class="card-title justify-center">kgomotso</h2>
       </div>
     </div>
   </div>
-</div>
+
+
+
+
+
 
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
 >
-  <div
-    class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
-  >
-    <div class="follow">
-      <p class="follow1">Followers <a class="number">123</a></p>
-    </div>
-    <div class="follow">
-      <p class="follow1">Following <a class="number">132</a></p>
-    </div>
-    <!-- <div class="follow2">
-      <button type="button" class="btn" id="btn">
-        <i class="fa fa-file-pen"></i>
-      </button>
-    </div> -->
+<div
+class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
+>
+
+<div class="flex justify-between ...">
+  <div>
+    <p class="follow1 col-start-3 col-end-5" id="cents">Followers <a class="number">123</a></p>
   </div>
+  <div>
+    <p class="follow1 col-start-5 col-end-7"  id="cent">Following <a class="number">132</a></p>
+  </div>
+  <div>
+    <button type="button" class="btn" id="btn">
+      <i class="fa fa-file-pen"></i>
+    </button>
+  </div>
+</div>
+</div>
 </div>
 
  <div
@@ -57,11 +61,11 @@
 >
   <div class="row">
     <div class="col-6">
-      <button class="btn" id="btnpost">Follow
+      <button class="btn btn-sm col-start-3 col-end-4" id="btnpost">Follow
       </button>
     </div>
     <div class="col-6">
-      <button class="btn" id="btnpost">Message
+      <button class="btn btn-sm col-start-6  col-end-7" id="btnpost">Message
       </button>
     </div>
   </div>
@@ -72,15 +76,14 @@
 >
 
   <div class="content">
+    <h2 >Posts</h2>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7,8]">
       <mat-card>
         <mat-card-header>
           <div class="row">
             <div class="col">
-              <mat-card-title>
-              <p class="caption">Bonolo Solomon</p>
-            </mat-card-title>
+             
             </div>
           </div>
         </mat-card-header>
