@@ -1,129 +1,90 @@
-
 <app-navbar></app-navbar>
-  <!-- THIS IS WHERE YOU WRITE A POST -->
-<div class="container py-5 x" data-theme="night">
+
+<!-- THIS IS WHERE YOU WRITE A POST -->
+<div class="container py-5">
   <div class="inside">
-  <div class="center">
-     <form class="form-group"[formGroup]="form">
-       <div class="mb-3">
-         <input
-           type="email"
-           class="form-control"
-           id="exampleInputText1"
-           placeholder="Post"
-           required
-           formControlName="message"
-           
-         />
-         <i class="fa-solid fa-pencil fa-lg" aria-hidden="true"></i>
-       </div> 
- 
-       
-       <!-- THIS IS A POST BUTTON -->
-       <div class="row">
-        <div class="col-6">
-          <button class="btn justify-end" id="btnpost" (click)="post()">
-            <i class="fa-solid fa-location-arrow fa-2x"></i>
-          </button>
-        </div>
-        <div class="col-6">
-          <button class="btn" id="btnpost" (click)="addImage()">
-            <i class="fa-solid fa-image fa-2x"></i>
-          </button>
-        </div>
-        <!---->
-       </div>
-       
-     </form>
-     <div class="d-flex flex-column mb-4"></div>
- <h1>RECENT FEEDS </h1>
- <div class="d-flex flex-column mb-4"></div>
- <!-- POST CARD -->
- <div class="card">
-  <div class="row sm-4">
-    <div class="col-2">
-      <label tabindex="0" class="btn btn-circle avatar">
-        <div class="w-15 rounded-full">
-          <img src="https://placeimg.com/80/80/people" />
-        </div>
-      </label>
-    </div>
-    <div class="col-9 b">
-      <p class="uname">Belco Sambo</p>
-    </div>
+    <div class="center">
 
+
+      <div class="input-group" id="post" [formGroup]="form">
+        <input
+          type="text"
+          placeholder="Say what is on your mind"
+          class="input input-bordered"
+          formControlName="message"
+        />
+        <button class="btn btn-square" (click)="post()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-send"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+            <path
+              d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"
+            ></path>
+          </svg>
+        </button>
+        <button class="btn btn-square" (click)="addImage()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-photo"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="15" y1="8" x2="15.01" y2="8"></line>
+            <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+            <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+            <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="d-flex flex-column mb-4"></div>
+      <h1>RECENT FEEDS</h1>
+      <div class="d-flex flex-column py-2"></div>
+      
+      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost">
+        <figure>
+          <img src= '{{posts.image}}' width="100%"/>
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{posts.name}}</h2>
+          <div class="badge badge-secondary">{{posts.date| date:'medium'}}</div>
+          <p id="caption">{{posts.caption}}</p>
+          <div class="card-actions justify-end pb-1">
+            <!-- <button class="btn btn-primary">Listen</button>
+       -->
+            <div class="badge badge-outline">
+              <label class="swap">
+                <input type="checkbox" />
+                <div class="swap-off">Like</div>
+                <div class="swap-on">Unlike</div>
+              </label>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      
+    </div>
   </div>
- 
- <div class="postcard">
-  
-  <div class ="row"></div>
-   <h2>Text status</h2>
-   <mat-card class="mat-elevation-z4" *ngFor="let posts of posting" class="cardpost">
-   <mat-card-header>
-               <mat-card-title>
-                 <h3 class="uname">{{posts.name}}</h3>
-               </mat-card-title>
-               <mat-card-subtitle>{{posts.date}}</mat-card-subtitle>
-             </mat-card-header>
-     <mat-card-content class="stat">
-     
-        {{posts.message}}
-     
-     </mat-card-content>
-     <mat-card-actions>
-       <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-       <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-     </mat-card-actions>
-   </mat-card>
-   <hr>
- </div>
- 
- <h2>Pictures status</h2>
- <div class="content">
-   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
-     <mat-card class="mat-elevation-z4"  *ngFor="let posts of imgpost" class="dev">
-       <mat-card-header>
-             <mat-card-title>
-             {{posts.name}}
-           </mat-card-title>
-           <mat-card-subtitle>
-             {{posts.date}}
-             <hr>
-             {{posts.caption}}
-           </mat-card-subtitle>
-           
-       </mat-card-header>
-       <mat-card-content>
-         
-         <img
-       
-           class="profpost"
-           src= '{{posts.image}}'
-           alt="pictures"
-         />
-       </mat-card-content>
-         <mat-card-actions>
-           <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-           <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-         </mat-card-actions>
-       
-     </mat-card>
-     <hr>
-   </div>
-   </div>
- </div>
- </div>
- </div>
- </div>
- 
- <!-- THIS HERE DOWNWARD IS A CARD THAT WILL HOLD ALL POSTS -->
 
-
-
- 
-
-
-</div>  
-
-
+</div>
