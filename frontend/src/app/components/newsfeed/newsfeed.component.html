@@ -126,32 +126,27 @@
 
       <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost">
         <figure>
-          <img src= '{{posts.image}}' alt="Album" />
+          <img src= '{{posts.image}}' width="100%"/>
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{posts.name}}</h2>
-          <div class="badge badge-secondary">{{todayDate | date: 'fullDate'}}</div>
-          <p>{{posts.caption}}</p>
+          <div class="badge badge-secondary">{{posts.date| date:'medium'}}</div>
+          <p id="caption">{{posts.caption}}</p>
           <div class="card-actions justify-end pb-1">
             <!-- <button class="btn btn-primary">Listen</button>
        -->
             <div class="badge badge-outline">
               <label class="swap">
                 <input type="checkbox" />
-                <div class="swap-on">Like</div>
-                <div class="swap-off">Unlike</div>
+                <div class="swap-off">Like</div>
+                <div class="swap-on">Unlike</div>
               </label>
             </div>
-            <div class="badge badge-outline">
-              <label class="swap">
-                <input type="checkbox" />
-                <div class="swap-on">Follow</div>
-                <div class="swap-off">Unfollow</div>
-              </label>
-            </div>
+            
           </div>
         </div>
       </div>
+      <hr>
 
       <!-- <h2>Pictures status</h2> -->
       <!-- <div class="content">

@@ -70,6 +70,12 @@ app.post("/upload", type, async (req, res) => {
 
   const { userid, caption } = req.body;
 
+    var date = new Date().toDateString() 
+    +' ' + new Date().getHours()
+    + ':' + new Date().getMinutes() +':' 
+    + new Date().getSeconds();
+
+    console.log(date);
   if (req.file) {
     const results = await cloudinary.uploader.upload(req.file.path, {
       folder: "/profile/",
@@ -77,23 +83,31 @@ app.post("/upload", type, async (req, res) => {
     const image = results.url;
     console.log(results);
 
-   
+    console.log(req.file);
 
-    pool.query("INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)", [
+    pool.query("INSERT INTO images(userid, image, caption, date) VALUES ($1,$2,$3,$4)", [
       userid,
       image,
       caption,
+      date
     ]);
+
+    res.status(200).json({ success: "Picture have been uploaded" });
+  }else {
+    pool.query("INSERT INTO images(userid, caption, date) VALUES ($1,$2,$3)", [
+      userid,
+      caption,
+      date
+    ]);
+
+    res.status(200).json({ success: "Text have been uploaded" });
   }
 
-  console.log(req.file);
-  res.status(200).json({ success: "Picture have been uploaded" });
+
+  
   
 
-  pool.query("INSERT INTO images(userid, caption) VALUES ($1,$2)", [
-    userid,
-    caption,
-  ]);
+  
 });
 
 

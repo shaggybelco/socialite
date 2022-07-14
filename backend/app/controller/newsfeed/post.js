@@ -4,11 +4,11 @@ const app = express();
 const bodyparser = require("body-parser");
 
 exports.createStatus = (req, res) => {
-  var { userid, message, date} = req.body;
-    // var date = new Date().toDateString() 
-    // +' ' + new Date().getHours()
-    // + ':' + new Date().getMinutes() +':' 
-    // + new Date().getSeconds();
+  var { userid, message} = req.body;
+    var date = new Date().toDateString() 
+    +' ' + new Date().getHours()
+    + ':' + new Date().getMinutes() +':' 
+    + new Date().getSeconds();
 
   pool.query(
     `INSERT INTO status (userid, message, date) VALUES ($1,$2,$3);`,

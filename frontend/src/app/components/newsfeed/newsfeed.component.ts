@@ -34,22 +34,9 @@ export class NewsfeedComponent implements OnInit {
   imgpost: any={};
   imgdate: any={};
 
-  ngOnInit(): void {
-    console.log(localStorage.getItem('user_id'));
-    this.profile
-      .viewPost(localStorage.getItem('user_id'))
-      .subscribe((prof: any) => {
-        this.posting = prof;
-        const j = prof.length;
-        console.log(this.posting);
 
-        for (let i = 0; i < prof.length; i++) {
-          console.log(
-            (this.name = prof[i].name),
-            (this.messages = prof[i].message)
-          );
-        }
-      });
+  ngOnInit(): void {
+
 
       this.profile
       .getPic(localStorage.getItem('user_id'))
@@ -59,14 +46,14 @@ export class NewsfeedComponent implements OnInit {
         console.log(imgstat);
 
         for (let i = 0; i < imgstat.length; i++) {
-          console.log(
+          console.log( "pic posting ",
             (this.name = imgstat[i].name),
             (this.messages =imgstat[i].caption),
-            (this.imgurl = imgstat[i].image),
-            (this.imgdate = imgstat[i].date)
+            (this.imgurl = imgstat[i].image)
           );
         }
       });
+
   }
 
   
@@ -77,37 +64,13 @@ export class NewsfeedComponent implements OnInit {
   });
 
   post() {
-    // let postdata = {
-    //   data: {
-    //     userid: localStorage.getItem('user_id'),
-    //     message: this.form.value.message,
-    //   },
-    // };
-
-    // if(this.form.invalid){
-    //   alert("can not post empty text");
-    //   return;
-    // }else if(postdata.data.userid != '' && postdata.data.message != ''){
-    //   console.log('it does nothing', postdata.data);
-    //   this.profile.post(postdata.data).subscribe(
-    //   (data: any) =>{
-    //     alert('posted');
-    //     window.location.reload();
-    //    },
-    //    (err)=>{
-    //     alert("failed to post");
-    //    });
-    //   }
-
         const formdata = new FormData();
    
         this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
         
-        this.form.value.date = this.todayDate;
         formdata.append('userid', this.form.value.userid);
         formdata.append('caption', this.form.value.message)
         formdata.append('myfile',this.files);
-        formdata.append('date',this.form.value.date);
   
        
         console.log('it does nothing', formdata);
@@ -125,8 +88,8 @@ export class NewsfeedComponent implements OnInit {
 
     }
   
-    todayDate : Date = new Date();
-
+    
+    
     files: any = {};
     addImage() {
     
@@ -138,7 +101,6 @@ export class NewsfeedComponent implements OnInit {
         this.files = input.files?.item(0);
         this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
         
-        this.form.value.date = this.todayDate;
         formdata.append('userid', this.form.value.userid);
         formdata.append('caption', this.form.value.message)
         formdata.append('myfile',this.files);
