@@ -33,6 +33,8 @@ export class ProfileComponent implements OnInit {
   msgto: string = '';
 
   name: any = {};
+  userID: any = {};
+  email:any ={};
   messages: any = {};
   posting: any = {};
   imgurl: any = {};
@@ -40,11 +42,15 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(localStorage.getItem('user_id'));
+
+    this.userID = localStorage.getItem('user_id')
     this.profile
       .getAll(localStorage.getItem('user_id'))
       .subscribe((prof: any) => {
         this.name = prof[0].name;
+        this.email= prof[0].email;
         console.log(this.name);
+        console.log(this.userID);
       });
 
     this.profile
@@ -57,6 +63,7 @@ export class ProfileComponent implements OnInit {
           console.log(
             (this.name = prof[i].name),
             (this.messages = prof[i].message)
+            (this.email = prof[i].email)
           );
         }
       });
