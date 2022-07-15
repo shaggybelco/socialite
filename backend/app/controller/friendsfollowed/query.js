@@ -6,6 +6,7 @@ const bodyparser = require('body-parser')
 
 //Get all friends in database 
 exports.getAllfollow = (req, res) => {
+
    pool.query('SELECT * FROM users INNER JOIN follow ON users.id=follow.followid WHERE follow.followStatus=$1;',["pending"],(error, results)=>{
 
     if (error) {
