@@ -45,24 +45,26 @@
       <mat-card-header></mat-card-header>
      
       <mat-card-content>
-        <div  class="row justify-content-center ">
+        <div  class="alert ">
           
-          <div class="col-4">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
+            <label tabindex="0" class="btn btn-circle avatar">
+              <div class="w-15 rounded-full">
+                <img src="https://placeimg.com/80/80/people" />
+              </div>
+            </label>
+             <div >
+            <p >{{Friends.name}}</p>
           </div>
 
-          <div class="col-8">
-            <p class="uname">{{Friends.name}}</p>
+          <div class="flex-none">
+            <button class="btn ">unfollow</button>
           </div>
-
-          <div class="row">
-            <button class="btn" id="btn">unfollow</button>
           </div>
-        </div>
+          
+  
+         
+    
+      
       </mat-card-content>
     </mat-card>
 
@@ -72,18 +74,19 @@
       <mat-card id="row">
         <mat-card-header> </mat-card-header>
         <mat-card-content>
-          <div class="row justify-content-center">
-            <div class="col-4">
-              <img
-                class="pp2"
-                src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-                alt="none"
-              />
+          <div >
+            <div >
+              <label tabindex="0" class="btn btn-circle avatar">
+                <div class="w-15 rounded-full">
+                  <img src="https://placeimg.com/80/80/people" />
+                </div>
+              </label>
+            
             </div>
     
-            <div class="col-8">
+            <div >
            
-              <p class="uname">{{user.name+" "+" "+index}}</p> 
+              <p class="uname">{{user.name}}</p> 
             </div>
             
             <div class="row">
