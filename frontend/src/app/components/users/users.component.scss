@@ -3,9 +3,13 @@
   width: 100%;
   padding: 10px;
 }
-
+h1{
+  text-align: center;
+}
 .sug{
   padding-top: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 .pp2 {
   width: 70px;
@@ -15,8 +19,10 @@
 }
 
 #row{
-  // background-color: rgb(115, 42, 42);
+  background-color: rgb(2, 8, 34);
   border-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 #btn{
@@ -77,9 +83,7 @@ h6{
 .p{
 font-size: 20;
 }
-.pp{
-//background-color: #36cdaf;
-}
+
 
 
 

@@ -39,7 +39,7 @@
   <div
     class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
   >
-    <h2>Friends</h2>
+    <h2 class="sug">Friends</h2>
     <mat-card *ngFor="let Friends of dataGlobal"  id="row">
       <br>
       <mat-card-header></mat-card-header>
@@ -81,12 +81,12 @@
               />
             </div>
     
-            <div>
+            <div class="col-8">
            
               <p class="uname">{{user.name}}</p> 
             </div>
             
-            <div>
+            <div class="row">
               <button class="btn" id="btn" (click)="followUsers(index)">Follow</button>
             </div>
           </div>
