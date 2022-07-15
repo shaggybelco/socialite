@@ -17,6 +17,18 @@ exports.getAllfollow = (req, res) => {
   });
 };
 
+exports.Unfollow = (req, res) =>{
+  pool.query('Delete FROM users INNER JOIN follow ON users.id=follow.followid WHERE follow.followStatus=$1;',["pending"],(error, results)=>{
+
+    if (error) {
+        // if statement to catch errors if there's any
+        throw error; // if error found, throw it
+      }
+      res.status(200).json(results.rows); // the results of the sql statement
+
+  });
+}
+
 
 
 
