@@ -2,14 +2,14 @@
 
 <!-- THIS IS WHERE STORIES WOULD GO -->
 <div
-  class="align-content-center container-sm container-md container-lg container-xl  pp" data-theme="night"
+  class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
 >
-  <!-- <div class="card-header">Header</div> 
+  <!-- <div class="card-header">Header</div> -->
   <div class="card-body">
-    <h1 class="card-title"></h1>
+    <h1 class="card-title">Users</h1>
     <p class="card-text"></p>
   </div>
--->
+
   <!-- 
 <div class="userprofilecard">
 
@@ -39,68 +39,63 @@
   <div
     class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
   >
-  <div class="d-flex flex-column mb-4"></div>
-    <h1 id="text-2xl">Friends</h1> <div class="d-flex flex-column mb-4"></div>
-    
-      <mat-card-header> </mat-card-header>
-      
-    
-    <div class="alert ">
-      <div>
-        <label tabindex="0" class="btn btn-circle avatar">
-          <div class="w-15 rounded-full">
-            <img src="https://placeimg.com/80/80/people" />
-          </div>
-        </label>
-        <div>
-          <h3 class="font-bold">Belco</h3>
-          <!--<div class="text-xs">time</div>-->
-        </div>
-      </div>
-      <div class="flex-none">
-        <button class="btn ">following</button>
-      </div>
-    </div>
-    <div class="alert ">
-      <div>
-        <label tabindex="0" class="btn btn-circle avatar">
-          <div class="w-15 rounded-full">
-            <img src="https://placeimg.com/80/80/people" />
-          </div>
-        </label>
-        <div>
-          <h3 class="font-bold">Belco</h3>
-          <!--<div class="text-xs">time</div>-->
-        </div>
-      </div>
-      <div class="flex-none">
-        <button class="btn ">following</button>
-      </div>
-    </div>
-    <div class="d-flex flex-column mb-4"></div>
-    <h2 class="sug">Suggestions for you</h2>
-    <div class="d-flex flex-column mb-4"></div>
-    
-      <mat-card-header> </mat-card-header>
+    <h2>Friends</h2>
+    <mat-card *ngFor="let Friends of dataGlobal"  id="row">
+      <br>
+      <mat-card-header></mat-card-header>
+     
       <mat-card-content>
-        <div class="alert ">
-          <div>
-            <label tabindex="0" class="btn btn-circle avatar">
-              <div class="w-15 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
-              </div>
-            </label>
-            <div>
-              <h3 class="font-bold">Koketso</h3>
-             <!--<div class="text-xs">time</div>--> 
+        <div  class="row justify-content-center ">
+          
+          <div class="col-4">
+            <img
+              class="pp2"
+              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
+              alt="none"
+            />
+          </div>
+
+          <div class="col-8">
+            <p class="uname">{{Friends.name}}</p>
+          </div>
+
+          <div class="row">
+            <button class="btn" id="btn">unfollow</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <h2 class="sug">Suggested users</h2>
+    <div  *ngFor="let user of suggested_Users; let index = index">
+ <br>
+      <mat-card id="row">
+        <mat-card-header> </mat-card-header>
+        <mat-card-content>
+          <div class="row justify-content-center">
+            <div class="col-4">
+              <img
+                class="pp2"
+                src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
+                alt="none"
+              />
+            </div>
+    
+            <div class="col-8">
+           
+              <p class="uname">{{user.name+" "+" "+index}}</p> 
+            </div>
+            
+            <div class="row">
+              <button class="btn" id="btn" (click)="followUsers(index)">Follow</button>
             </div>
           </div>
-          <div class="flex-none">
-            <button class="btn "> follow </button>
-          </div>
-          </div>
-        
-      </mat-card-content>
-   
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-</div>
+
+
+
+
+
