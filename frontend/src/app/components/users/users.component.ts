@@ -68,15 +68,15 @@ export class UsersComponent implements OnInit {
 
       this.suggested_Users = suggested;
 
-      for (let i = 0; i < this.suggested_Users.length; i++) {
-        if (this.suggested_Users[i].followstatus == 'pending') {
-          console.log(this.suggested_Users[i].id)
-        } else {
-          console.log("users not pending ", this.suggested_Users[i].name)
-          this.users.push(this.suggested_Users[i]);
-        }
-      }
-      console.log("show pushed ", this.users)
+      // for (let i = 0; i < this.suggested_Users.length; i++) {
+      //   if (this.suggested_Users[i].followstatus == 'pending') {
+      //     console.log(this.suggested_Users[i].id)
+      //   } else {
+      //     console.log("users not pending ", this.suggested_Users[i].name)
+      //     this.users.push(this.suggested_Users[i]);
+      //   }
+      // }
+      // console.log("show pushed ", this.users)
     })
 
 

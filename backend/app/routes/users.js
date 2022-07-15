@@ -14,6 +14,8 @@ const { updateEmail } = require("../Controller/users/updateEmail");
 const { updateName } = require("../Controller/users/updateName");
 const { getUserImage } = require("../controller/image/getImages");
 
+const { toFollow} = require("../controller/users/toFollow");
+const { suggestedUsers} = require("../controller/users/suggestedUsers");
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
@@ -107,9 +109,6 @@ app.post("/upload", type, async (req, res) => {
     res.status(200).json({ success: "Text have been uploaded" });
   }
 
-
-  
-  
 
   
 });
