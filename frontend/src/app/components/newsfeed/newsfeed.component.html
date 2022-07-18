@@ -13,7 +13,7 @@
           class="input input-bordered"
           formControlName="message"
         />
-        <button class="btn btn-square" (click)="post()">
+        <button class="btn " (click)="post()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-send"
@@ -33,7 +33,7 @@
             ></path>
           </svg>
         </button>
-        <button class="btn btn-square" (click)="addImage()">
+        <button class="btn" (click)="addImage()">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-photo"
@@ -59,7 +59,7 @@
       <h1>RECENT FEEDS</h1>
       <div class="d-flex flex-column py-2"></div>
       
-      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost; let index = index">
+      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost;">
         <figure>
           <img src= '{{posts.image}}' width="100%"/>
         </figure>
