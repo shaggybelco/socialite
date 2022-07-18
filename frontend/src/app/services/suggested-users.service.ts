@@ -23,7 +23,6 @@ export class SuggestedUsersService {
       return this.http.post(`${this.baseurl}/user/toFollow/`,body)
   }
 
-
   getFriends()
   {
     
