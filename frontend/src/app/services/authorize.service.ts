@@ -15,7 +15,7 @@ export class AuthorizeService {
     return this.http.post(`${this.baseurl}/user/register/`, body);
 
   }
-
+ 
   loguser(body: any):Observable<any>{
     return this.http.post(`${this.baseurl}/user/login/`, body);
   }
