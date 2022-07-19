@@ -20,5 +20,7 @@ export class AuthorizeService {
     return this.http.post(`${this.baseurl}/user/login/`, body);
   }
 
-  
+  sendMail(body: any){
+    return this.http.post(`${this.baseurl}/user/login/`, body)
+  }
 }
