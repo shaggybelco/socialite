@@ -39,66 +39,59 @@
   <div
     class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
   >
-    <h2>Friends</h2>
-    <mat-card *ngFor="let Friends of dataGlobal"  id="row">
-      <br>
+    <h2 class="sug">Friends</h2>
+    <mat-card *ngFor="let Friends of dataGlobal" id="row">
+      <br />
       <mat-card-header></mat-card-header>
-     
+
       <mat-card-content>
-        <div  class="alert ">
-          
-            <label tabindex="0" class="btn btn-circle avatar">
-              <div class="w-15 rounded-full">
-                <img src="https://placeimg.com/80/80/people" />
-              </div>
-            </label>
-             <div >
-            <p >{{Friends.name}}</p>
+        <div class="alert">
+          <label tabindex="0" class="btn btn-circle avatar">
+            <div class="w-15 rounded-full">
+              <img src="https://placeimg.com/80/80/people" />
+            </div>
+          </label>
+          <div>
+            <p>{{ Friends.name }}</p>
           </div>
 
           <div class="flex-none">
-            <button class="btn ">unfollow</button>
+            <button class="btn">unfollow</button>
           </div>
-          </div>
-          
-  
-         
-    
-      
+        </div>
       </mat-card-content>
     </mat-card>
 
     <h2 class="sug">Suggested users</h2>
-    <div  *ngFor="let user of suggested_Users; let index = index">
- <br>
-      <mat-card id="row">
+    <div>
+      <br />
+      <mat-card
+        *ngFor="let user of suggested_Users; let index = index"
+        id="row"
+      >
         <mat-card-header> </mat-card-header>
         <mat-card-content>
-          <div >
+          <div class="alert">
             <div >
               <label tabindex="0" class="btn btn-circle avatar">
                 <div class="w-15 rounded-full">
                   <img src="https://placeimg.com/80/80/people" />
                 </div>
               </label>
-            
             </div>
-    
-            <div >
-           
-              <p class="uname">{{user.name}}</p> 
-            </div>
-            
+
             <div>
-              <button class="btn" id="btn" (click)="followUsers(index)">Follow</button>
+              <p class="uname">{{ user.name }}</p>
+            </div>
+
+            <div class="flex-none" >
+              <button class="btn" (click)="followUsers(index)">
+                Follow
+              </button>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-
-
-
-
-
+</div>
