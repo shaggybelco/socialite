@@ -5,7 +5,7 @@
 
 #lite{
     font-family:'Courier New', Courier, monospace;
-    text-align: center;
+    text-align:left;
     color: rgba(172,52,137,1);
 }
 .text-5xl font-bo{
@@ -20,18 +20,39 @@ color:#b731df;
   color:#a325c9;
     text-decoration: none;
   }
+.r
+{
+  background-color: aqua;
+}
+#vid
+{
+
+  height:100%;
+}
+
+	
+	.vid
+  {
+    max-height: 100vh;
+		max-width: 100vw;
+		width: 100%;
+  }
+		
+	
 
   #btn{
-    margin-top: 40px;
-    margin-bottom: 30px;
+  //  margin-top: 40px;
+   // margin-bottom: 30px;
     color: white;
   }
   .btn
   {
     background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
-    margin-left:43%;
-    margin-right:35%;
+   // margin-left:43%;
+   // margin-right:35%;
   }
 .landingtxt{
   color:#b731df;
+  text-align:left;
+  background-color: aquamarine;
 }
