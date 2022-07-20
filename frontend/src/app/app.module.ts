@@ -19,6 +19,8 @@ import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewprofileComponent } from './components/viewprofile/viewprofile.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AuthorizeService } from './services/authorize.service';
+import { AuthGuard } from './gaurds/auth.guard';
 
 
 @NgModule({
@@ -48,7 +50,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule
 
   ],
-  providers: [],
+  providers: [AuthorizeService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
