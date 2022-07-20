@@ -30,8 +30,12 @@ exports.toFollow = async (req, res) => {
     const { userid, followid,followStatus } = req.body;
 
     try {
-        const data = await pool.query(`SELECT * FROM follow WHERE userid=$1 AND followStatus !=$2;`,
-            [userid, "pending"]); //Check if already following
+        const data = await pool.query(`SELECT * FROM
+        (SELECT *,
+                generate_subscripts(follow, 1) AS s
+           FROM users) AS foo
+      WHERE follow[s] = $1 and id = $2;`,
+            [followid,userid]); //Check if already following
         const arr = data.rows;
         if (arr.length != 0) {
             return res.status(400).json({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
+import { UnfollowService } from 'src/app/services/unfollow.service';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,10 @@ export class UsersComponent implements OnInit {
   users: any = [];
 
   dataGlobal!: any; //! to prevent problems when accepting data
-  constructor(private userservice: SuggestedUsersService) {}
+  constructor(
+    private userservice: SuggestedUsersService,
+    private un: UnfollowService
+  ) {}
 
   followUsers(index: any) {
     if (this.follow == false) {
@@ -50,9 +54,31 @@ export class UsersComponent implements OnInit {
     return console.log(this.users[index]);
   }
 
-  unfollow(num: any){
-    console.log("this is an id ", this.followe[num].id, " and this is name ", this.followe[num].name);
+  unfollow(num: any):void {
+    console.log(
+      'this is an id ',
+      this.followe[num].id,
+      ' and this is name ',
+      this.followe[num].name
+    );
+
+    const data = {
+      id: this.current_id,
+      userid: this.followe[num].id,
+    };
+
+    // this.un.unfollow(data).subscribe((data) => {
+    //   console.log('Data to be passed', data);
+    // });
+
+    this.un.unfollow(data).subscribe(
+      (net)=>{
+        console.log(net);
+      }
+    )
+    window.location.reload();
   }
+
 
   followe: any = [];
 
@@ -80,13 +106,13 @@ export class UsersComponent implements OnInit {
       console.log(data[0].follow);
       for (let i = 0; i < data[0].follow.length; i++) {
         const element = data[0].follow[i];
-        console.log("element ",element);
+        console.log('element ', element);
         this.userservice.getOne(element).subscribe((followed: any) => {
-          console.log("just consoled ",followed);
+          console.log('just consoled ', followed);
           for (let i = 0; i < followed.length; i++) {
             this.followe.push(followed[i]);
           }
-          console.log("pushed ",this.followe);
+          console.log('pushed ', this.followe);
         });
       }
       this.dataGlobal = data;
