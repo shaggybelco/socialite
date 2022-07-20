@@ -7,7 +7,8 @@ const bodyparser = require('body-parser')
 //Get all users in database
 exports.getAllUsers = (req, res) => {
   //declare function & get params
-  pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+  const id = parseInt(req.params.id)
+  pool.query('SELECT * FROM users WHERE id <> $1 ORDER BY id ASC',[id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

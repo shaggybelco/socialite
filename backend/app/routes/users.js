@@ -19,7 +19,7 @@ const { suggestedUsers} = require("../controller/users/suggestedUsers");
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get", getAllUsers); // get all existing users
+app.get("/get/:id", getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user
