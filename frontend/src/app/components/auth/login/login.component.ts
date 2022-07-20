@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.user = myData.user[0].id;
           this.route.navigate(['/newsfeed']);
           console.log(this.user);
-         
+         this.auth.isLoggedIn = true;
           // alert("Login successfully");
           localStorage.setItem('user_id', this.user);
           
