@@ -40,7 +40,7 @@
     class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
   >
     <h2 class="sug">Friends</h2>
-    <mat-card *ngFor="let Friends of dataGlobal" id="row">
+    <mat-card *ngFor="let Friends of followe; let num = index" id="row">
       <br />
       <mat-card-header></mat-card-header>
 
@@ -56,7 +56,7 @@
           </div>
 
           <div class="flex-none">
-            <button class="btn">unfollow</button>
+            <button class="btn" (click)="unfollow(num)">unfollow</button>
           </div>
         </div>
       </mat-card-content>

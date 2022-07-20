@@ -1,5 +1,28 @@
 
 const pool = require("../../config/database");
+const express = require("express");
+const app = express();
+const bodyparser = require('body-parser')
+
+
+//Get all users in database
+exports.suggestedUsers = (req, res) => {
+  //declare variable to store form data
+  const id = parseInt(req.params.id);
+
+  //declare function & get params
+  pool.query('select users.id, users.name from users left join follow on users.id = follow.followid where follow.userid is null AND users.id <> $1',
+  [id],
+  (error, results) => {
+    // sequiliaze to get all userrs from the table
+    if (error) {
+      // if statement to catch errors if there's any
+      throw error; // if error found, throw it
+    }
+    res.status(200).json(results.rows); // the results of the sql statement
+  });
+};
+
 
 //toFollow Function
 
@@ -22,27 +45,40 @@ exports.toFollow = async (req, res) => {
             };
             var flag = 1;
 
-            //Inserting data into the database
-            pool.query(
-                `INSERT INTO follow (userid, followid,followStatus) VALUES ($1,$2,$3);`,
-                [user.userid, user.followid,user.followStatus],
-                (err) => {
-                    if (err) {
-                        flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
-                        console.error(err);
-                        return res.status(500).json({
-                            error: "Database error",
-                        });
-                    } else {
-                        flag = 1;
-                        res
-                            .status(200)
-                            .send({ message: `User called with ID  ${followid} has been followed by user with ID ${userid}` });
-                    }
+            pool.query('UPDATE users SET follow = array_append(follow, $2) where id = $1',[userid,followid],(error) =>{
+                if(error){
+                    res.status(400).json({
+                        error:"Database Error !!!!!"
+                    })
+                }else{
+                    res.status(200).send("Succesfully followed ")
                 }
-            );
-            if (flag) {
-            }
+            })
+
+            //Inserting data into the database
+            
+            // pool.query(
+            //     `INSERT INTO follow (userid, followid,followStatus) VALUES ($1,$2,$3);`,
+            //     [user.userid, user.followid,user.followStatus],
+            //     (err) => {
+            //         if (err) {
+            //             flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
+            //             console.error(err);
+            //             return res.status(500).json({
+            //                 error: "Database error",
+            //             });
+            //         } else {
+            //             flag = 1;
+            //             res
+            //                 .status(200)
+            //                 .send({ message: `User called with ID  ${followid} has been followed by user with ID ${userid}` });
+            //         }
+            //     }
+            // );
+            // if (flag) {
+            // }
+
+            
         }
     }
     catch (err) {

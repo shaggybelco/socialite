@@ -23,9 +23,11 @@ export class SuggestedUsersService {
       return this.http.post(`${this.baseurl}/user/toFollow/`,body)
   }
 
-  getFriends()
+  getFriends(id: any)
   {
-    
-    return this.http.get(`${this.baseurl}/friends/getfollow`);
+    return this.http.get(`${this.baseurl}/user/getall/${id}`);
+  }
+  getOne(id: any){
+    return this.http.get(`${this.baseurl}/user/getone/${id}`);
   }
 }
