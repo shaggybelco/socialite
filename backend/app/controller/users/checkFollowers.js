@@ -4,12 +4,11 @@ const app = express();
 const bodyparser = require('body-parser')
 
 
-//Get a single user by ID
-exports.getOneUser = (req, res) => {
+//Get all users in database
+exports.getAll = async (req, res) => {
   //declare function & get params
-  const id = parseInt(req.params.id); // declare a variable that will use to locate each user
-
-  pool.query('SELECT id, name FROM users WHERE id = $1', [id], (error, results) => {
+  const id = req.params.id
+  pool.query('SELECT follow FROM users WHERE id = $1',[id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

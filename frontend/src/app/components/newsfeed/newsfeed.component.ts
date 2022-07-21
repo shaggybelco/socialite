@@ -37,13 +37,13 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+      const id = localStorage.getItem('user_id');
       this.profile
-      .viewPost(localStorage.getItem('user_id'))
+      .viewPost(id)
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        console.log(imgstat);
+        console.log(this.imgpost);
 
         for (let i = 0; i < imgstat.length; i++) {
           console.log( "pic posting ",
