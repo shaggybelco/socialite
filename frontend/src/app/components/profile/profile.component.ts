@@ -6,6 +6,8 @@ import {
 } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import { SortUsersService } from 'src/app/services/sort-users.service';
+import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +16,10 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   constructor(
+    private userservice: SuggestedUsersService,
     private profile: ProfileService,
     private uploadingPic: UploadService,
+    private userSort: SortUsersService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -36,11 +40,21 @@ export class ProfileComponent implements OnInit {
   posting: any = {};
   imgurl: any = {};
   imgpost: any = {};
+  users: any = [];
+  pushAllUsers: any = [];
+  follo: any = [];
+  sortUserPush: any = [];
+  followe: any = [];
+  suggestedNameID: any = [];
+  numberOfFollowing: number = 0;
+  numberOfFollowers: number = 0;
 
   ngOnInit(): void {
+
     console.log(localStorage.getItem('user_id'));
 
     this.userID = localStorage.getItem('user_id')
+
     this.profile
       .getAll(localStorage.getItem('user_id'))
       .subscribe((prof: any) => {
@@ -80,6 +94,82 @@ export class ProfileComponent implements OnInit {
           );
         }
       });
+
+      this.getFollow();
+      this.getUsers();
+      this.getFollowers();
+  }
+  async getUsers(){
+    this.userSort.getall(this.userID).subscribe(
+      {
+        next: (user: any) =>{
+          this.pushAllUsers = user;
+          
+          console.log('this are all users got ', this.pushAllUsers);
+        },
+        error: (err: any) =>{
+          alert(err.message);
+        }
+      }
+    )
+    await this.pushAllUsers;
+  }
+
+  startSorting(pushed: any, pushUsers: any) {
+    // console.log('starting ', pushed);
+    const suggested: any = [];
+    
+    if(pushed.length != 0 && pushUsers.length === 0){
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/profile'], {relativeTo: this.route})
+    }
+    pushed.forEach((element: any) => {
+      console.log("from foreach ",pushed[0].follow, " all userss inside", pushUsers)
+      pushUsers.forEach((newUser: any) => {
+        const isNotFollow = pushed[0].follow.includes(newUser.id);
+        console.log("new users ", newUser.id," name ", newUser.name, isNotFollow)
+        
+        if(isNotFollow){
+          this.numberOfFollowing++;
+          console.log("followed by me: ",isNotFollow, " number: ",this.numberOfFollowing)
+          
+        }else{
+          console.log("Not followed ",isNotFollow);
+          suggested.push(newUser.id);
+          this.suggestedNameID.push(newUser);
+        }
+      });
+    });
+    console.log("after push not followed ", suggested, " not followed by me:  ", this.suggestedNameID)
+  }
+
+  getFollow() {
+    
+    this.userSort.getFriends(this.userID).subscribe((foll: any) => {
+      for (let i = 0; i < foll[0].follow.length; i++) {
+        const element = foll[0].follow[i];
+        this.userservice.getOne(element).subscribe((followed: any) => {
+          for (let i = 0; i < followed.length; i++) {
+            this.follo.push(followed[i]);
+          }
+        });
+      }
+      console.log("triying to get this all the time :", this.pushAllUsers)
+      this.startSorting(foll, this.pushAllUsers);
+    });
+    
+    return this.follo;
+  }
+
+  getFollowers(){
+    this.profile.getFollowers(this.userID).subscribe(
+      {
+        next: (data: any) =>{
+         this.numberOfFollowers = data[0].count;
+        }
+      }
+    )
   }
 
   get f() {
