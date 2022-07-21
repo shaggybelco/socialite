@@ -53,6 +53,7 @@ export class AuthComponent implements OnInit {
       this.auth.createUser(users.data).subscribe({
         next: data =>{
           
+          
           this.route.navigate(['/login']);
           alert("Registered in successfully");
         },
@@ -64,9 +65,9 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  register() {
-    this.createuser();
-  }
+  // register() {
+  //   this.createuser();
+  // }
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({
