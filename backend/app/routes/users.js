@@ -15,7 +15,7 @@ const { updateName } = require("../Controller/users/updateName");
 const { getUserImage } = require("../controller/image/getImages");
 const { getAll } = require('../controller/users/checkFollowers')
 const { toFollow} = require("../controller/users/toFollow");
-const { unFollow} = require("../controller/users/unFollow");
+// const { unFollow} = require("../controller/users/unFollow");
 const { suggestedUsers} = require("../controller/users/suggestedUsers");
 
 
@@ -36,7 +36,7 @@ app.delete("/deleteUser/:id", deleteUser); // delete a user
 app.get("/getimage/:id", getUserImage);
 
 app.post("/toFollow", toFollow);     //follow users
-app.post("/unFollow", unFollow);     //unfollow users
+// app.post("/unFollow", unFollow);     //unfollow users
 app.get("/suggestedUsers/:id", suggestedUsers);     //follow users
 app.get("/getall/:id", getAll);
 
