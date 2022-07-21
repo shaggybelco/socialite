@@ -46,7 +46,9 @@ export class UsersComponent implements OnInit {
       alert('Success');
     });
 
-    window.location.reload();
+    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+    this.router.onSameUrlNavigation = "reload";
+    this.router.navigate(['/users'], {relativeTo: this.route})
 
     return console.log(this.suggestedNameID[index]);
   }
@@ -71,24 +73,11 @@ export class UsersComponent implements OnInit {
     this.un.unfollow(data).subscribe((net) => {
       console.log(net);
     });
-    window.location.reload();
+    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+    this.router.onSameUrlNavigation = "reload";
+    this.router.navigate(['/users'], {relativeTo: this.route})
   }
 
-  //get users and sorting according
-  // getUsers() {
-
-  //   this.userSort.getall(this.current_id).subscribe((user) => {
-      
-  //     this.pushAllUsers = user;
-  //     console.log('this are all users got ', this.pushAllUsers);
-    
-  //       // console.log(this.pushAllUsers);
-        
-        
-  
-  //   });
-  //   // return this.pushAllUsers;
-  // }
 
   async getUsers(){
     this.userSort.getall(this.current_id).subscribe(
