@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
     return this.form.controls;
   }
 
+  hide = false;
+
   log() {
     let userlogin = {
       data: {
@@ -38,13 +40,14 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
+      this.hide = true;
       this.auth.loguser(userlogin.data).subscribe(
         (myData: any) => {
           this.user = myData.user[0].id;
           this.route.navigate(['/newsfeed']);
           console.log(this.user);
-         
-          alert("Login successfully");
+         this.auth.isLoggedIn = true;
+          // alert("Login successfully");
           localStorage.setItem('user_id', this.user);
           
           this.id = this.user;
