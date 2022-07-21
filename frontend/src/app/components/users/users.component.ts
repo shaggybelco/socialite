@@ -20,6 +20,7 @@ export class UsersComponent implements OnInit {
   follo: any = [];
   sortUserPush: any = [];
   followe: any = [];
+  suggestedNameID: any = [];
 
   dataGlobal!: any; //! to prevent problems when accepting data
   constructor(
@@ -28,20 +29,13 @@ export class UsersComponent implements OnInit {
     private userSort: SortUsersService
   ) {}
 
+  // get followers and people who following you
   followUsers(index: any) {
-    if (this.follow == false) {
-      this.follow = true;
-      this.status = 'pending';
-    }
-
-    this.users[index] = [];
 
     //array for storing data to be passed at dabase
     const follower = {
       userid: localStorage.getItem('user_id'),
-      followid: this.suggested_Users[index].id,
-      followStatus: 'pending',
-      followerStatus: 'pending',
+      followid: this.suggestedNameID[index].id,
     };
 
     //call the service to activate the follower method inside the
@@ -49,18 +43,12 @@ export class UsersComponent implements OnInit {
       alert('Success');
     });
 
-    console.log(
-      this.users[index].id,
-      'followed by ',
-      localStorage.getItem('user_id')
-    );
-
     window.location.reload();
 
-    return console.log(this.users[index]);
+    return console.log(this.suggestedNameID[index]);
   }
 
-  unfollow(num: any):void {
+  unfollow(num: any): void {
     console.log(
       'this is an id ',
       this.followe[num].id,
@@ -77,22 +65,83 @@ export class UsersComponent implements OnInit {
     //   console.log('Data to be passed', data);
     // });
 
-    this.un.unfollow(data).subscribe(
-      (net)=>{
-        console.log(net);
-      }
-    )
+    this.un.unfollow(data).subscribe((net) => {
+      console.log(net);
+    });
     window.location.reload();
   }
 
-  
+  //get users and sorting according
+  getUsers() {
 
+    this.userSort.getall(this.current_id).subscribe((user) => {
+      this.pushAllUsers = user;
+      console.log('this are all users got ', this.pushAllUsers);
+    
+        // console.log(this.pushAllUsers);
+        
+        
+  
+    });
+
+    
+
+    // return this.pushAllUsers;
+  }
+
+  getFollow() {
+    this.userSort.getFriends(this.current_id).subscribe((foll: any) => {
+      console.log('this are the people I am following ', foll);
+      for (let i = 0; i < foll[0].follow.length; i++) {
+        const element = foll[0].follow[i];
+        this.userservice.getOne(element).subscribe((followed: any) => {
+          for (let i = 0; i < followed.length; i++) {
+            this.follo.push(followed[i]);
+          }
+          console.log('this are the people I am following no 2: ', this.follo);
+        });
+      }
+      this.startSorting(foll, this.pushAllUsers);
+    });
+    
+    return this.follo;
+  }
  
 
-  ngOnInit() {
-    this.getUsers();
-    this.getFollow();
+  startSorting(pushed: any, pushUsers: any) {
+    // console.log('starting ', pushed);
+    const suggested: any = [];
+    
+    if(pushUsers.length === 0){
+      window.location.reload();
+    }
+    pushed.forEach((element: any) => {
+      console.log("from foreach ",pushed[0].follow, " all userss inside", pushUsers)
+      pushUsers.forEach((newUser: any) => {
+        const isNotFollow = pushed[0].follow.includes(newUser.id);
+        console.log("new users ", newUser.id," name ", newUser.name, isNotFollow)
+        
+        if(isNotFollow){
+          console.log("followed by me: ",isNotFollow)
+        }else{
+          console.log("Not followed ",isNotFollow);
+          suggested.push(newUser.id);
+          this.suggestedNameID.push(newUser);
+        }
+      });
+    });
+    console.log("after push not followed ", suggested, " not followed by me:  ", this.suggestedNameID)
+  }
 
+  async global() {
+    await this.getFollow();
+    await this.getUsers();
+  }
+
+  ngOnInit() {
+    this.global();
+    // this.getFollow();
+    
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {
@@ -124,44 +173,5 @@ export class UsersComponent implements OnInit {
       }
       this.dataGlobal = data;
     });
-  }
-
-  getUsers(){
-    this.userSort.getall(this.current_id).subscribe(
-      (user)=>{
-        this.pushAllUsers = user;
-        console.log("this are all users ", this.pushAllUsers)
-        this.startSorting();
-      }
-    )
-  }
-
-  getFollow(){
-    this.userSort.getFriends(this.current_id).subscribe(
-      (foll: any)=>{
-        console.log("this are the people I am following ", foll);
-      for (let i = 0; i < foll[0].follow.length; i++) {
-        const element = foll[0].follow[i];
-        this.userservice.getOne(element).subscribe((followed: any) => {
-          for (let i = 0; i < followed.length; i++) {
-            this.follo.push(followed[i]);
-          }
-          console.log('this are the people I am following no 2: ', this.follo);
-        });
-      }
-      }
-    )
-  }
-
-  startSorting(){
-    console.log("booting ",this.follo)
-    for (let i = 0; i < this.pushAllUsers.length; i++) {
-      const element = this.pushAllUsers[i];
-      console.log('starting ', element)
-      for (let j = 0; j < this.follo.length; j++) {
-        const ele = this.follo[j];
-        console.log("inside starting ", ele)
-      }
-    }
   }
 }

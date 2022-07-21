@@ -27,7 +27,7 @@ exports.suggestedUsers = (req, res) => {
 //toFollow Function
 
 exports.toFollow = async (req, res) => {
-    const { userid, followid,followStatus } = req.body;
+    const { userid, followid } = req.body;
 
     try {
         const data = await pool.query(`SELECT * FROM
@@ -42,12 +42,7 @@ exports.toFollow = async (req, res) => {
                 error: "User alraedy Following , No need to follow again.",
             });
         } else {
-            const user = {
-                userid,
-                followid,
-                followStatus
-            };
-            var flag = 1;
+           
 
             pool.query('UPDATE users SET follow = array_append(follow, $2) where id = $1',[userid,followid],(error) =>{
                 if(error){
