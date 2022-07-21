@@ -1,15 +1,11 @@
-import { NgForOf, NgForOfContext } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCard } from '@angular/material/card';
 import { ProfileService } from 'src/app/services/profile.service';
 import {
-  AbstractControl,
-  FormBuilder,
   FormControl,
   FormGroup,
 } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,9 +14,10 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class ProfileComponent implements OnInit {
   constructor(
-    private formBuilder: FormBuilder,
     private profile: ProfileService,
-    private uploadingPic: UploadService
+    private uploadingPic: UploadService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   form: FormGroup = new FormGroup({
@@ -101,16 +98,29 @@ export class ProfileComponent implements OnInit {
       alert('can not post empty text');
       return;
     } else if (postdata.data.userid != '' && postdata.data.message != '') {
-      console.log('it does nothing', postdata.data);
-      this.profile.post(postdata.data).subscribe(
-        (data: any) => {
-          alert('posted');
-          window.location.reload();
-        },
-        (err) => {
-          alert('failed to post');
-        }
-      );
+      const formdata = new FormData();
+   
+        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+        
+        formdata.append('userid', this.form.value.userid);
+        formdata.append('caption', this.form.value.message)
+        formdata.append('myfile',this.files);
+  
+       
+        console.log('it does nothing', formdata);
+  
+        this.uploadingPic.uploading(formdata).subscribe(
+          (data: any) => {
+            alert('posted');
+            console.log(data);
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/profile'], {relativeTo: this.route})
+          },
+          (err) => {
+            alert(`failed to post: ${err.message}`);
+          }
+        );
     }
   }
   files: any = {};
@@ -133,10 +143,12 @@ export class ProfileComponent implements OnInit {
         (data: any) => {
           alert('posted');
           console.log(data);
-          window.location.reload();
+          this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate(['/profile'], {relativeTo: this.route})
         },
         (err) => {
-          alert('failed to post');
+          alert(`failed to post: ${err.message}`);
         }
       );
 
