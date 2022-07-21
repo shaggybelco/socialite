@@ -20,8 +20,8 @@ exports.unfollow = (req, res) => {
       //This Will Only Work For NewsFeed
 
       pool.query(
-        `DELETE FROM follow  WHERE userid = $1, followid = $2;`,
-        [id, userid],
+        'DELETE FROM follow  WHERE userid = $1 AND followid = $2;',
+        [id,userid],
         (err) => {
             if (err) {
                 flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
@@ -31,12 +31,13 @@ exports.unfollow = (req, res) => {
                 });
             } else {
                 flag = 1;
-                res
-                    .status(200)
-                    .send({ message: `User called with ID  ${userid} has been unfollowed by user with ID ${id}` });
+               
             }
         }
     );
+
+  
+
       //End here
 
 

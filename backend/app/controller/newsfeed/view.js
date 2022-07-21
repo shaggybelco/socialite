@@ -18,7 +18,7 @@ exports.view = (req, res) => {
   //   res.status(200).json(results.rows); // the results of the sql statement
   // });
 
-  pool.query('SELECT * from users, images, follow where users.id = follow.followid and follow.userid = $1 and follow.followid = images.userid', [id], (error, results) => {
+  pool.query('SELECT * from users, images, follow where users.id = follow.followid and follow.userid = $1 and follow.followid = images.userid ORDER BY images.date DESC', [id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any
@@ -26,5 +26,5 @@ exports.view = (req, res) => {
     }
     res.status(200).json(results.rows); // the results of the sql statement
   });
-  
+
 };
