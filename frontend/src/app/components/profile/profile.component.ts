@@ -51,6 +51,7 @@ export class ProfileComponent implements OnInit {
   suggestedNameID: any = [];
   numberOfFollowing: number = 0;
   numberOfFollowers: number = 0;
+  showpost: boolean = false;
 
   ngOnInit(): void {
 
@@ -66,34 +67,15 @@ export class ProfileComponent implements OnInit {
       });
 
     this.profile
-      .viewPost(localStorage.getItem('user_id'))
-      .subscribe((prof: any) => {
-        this.posting = prof;
-        
-
-        for (let i = 0; i < prof.length; i++) {
-            this.name = prof[i].name
-            this.messages = prof[i].message
-            this.email = prof[i].email
-        }
-        
-      });
-
-    this.profile
       .getPic(localStorage.getItem('user_id'))
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
-        console.log(this.imgpost);
+      
         
-
-        for (let i = 0; i < imgstat.length; i++) {
-            this.name = imgstat[i].name
-            this.messages = imgstat[i].caption
-            this.imgurl = imgstat[i].image
-            this.imgid = imgstat[i].id
-            console.log("post from here: ",this.imgpost[i].id);
+        if(imgstat != []){
+          this.showpost = true;
         }
-
+    
       });
 
       this.getFollow();
