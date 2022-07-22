@@ -58,7 +58,7 @@ export class AuthComponent implements OnInit {
           alert("Registered in successfully");
         },
         error: err =>{
-          alert("You are already registered");
+          alert("Successfully Registered");
         }
   
       });
