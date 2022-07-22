@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 import { ProfileService } from 'src/app/services/profile.service';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
-
 
 export interface DialogData{
   post: string;
@@ -120,5 +116,23 @@ export class NewsfeedComponent implements OnInit {
   
       input.click();
    
+    }
+
+    transform(date: any) {
+      if (!date) { return 'a long time ago'; }
+      let time = (Date.now() - Date.parse(date)) / 1000;
+      if (time < 10) {
+        return 'just now';
+      } else if (time < 60) {
+        return 'a second ago';
+      }
+      const divider = [60, 60, 24, 30, 12];
+      const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
+      let i;
+      for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
+        time /= divider[i];
+      }
+      const plural = Math.floor(time) > 1 ? 's' : '';
+      return Math.floor(time) + string[i] + plural + ' ago';
     }
 }

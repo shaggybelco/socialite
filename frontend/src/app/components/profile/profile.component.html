@@ -167,7 +167,7 @@
       <div class="card-body">
         <h2 class="card-title">{{ posts.name }}</h2>
         <div class="badge badge-secondary">
-          {{ posts.date | date: "dd MMMM yyyy HH:mm:ss" }}
+          {{ transform(posts.date) }}
         </div>
         <p id="caption">{{ posts.caption }}</p>
         <div class="card-actions justify-end pb-1">

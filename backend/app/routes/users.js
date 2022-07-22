@@ -18,6 +18,7 @@ const { toFollow} = require("../controller/users/toFollow");
 // const { unFollow} = require("../controller/users/unFollow");
 const { suggestedUsers} = require("../controller/users/suggestedUsers");
 const { followers } = require('../controller/users/followers')
+const { following } = require('../controller/users/getFollowing')
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
@@ -38,6 +39,7 @@ app.post("/toFollow", toFollow);     //follow users
 app.get("/suggestedUsers/:id", suggestedUsers);     //follow users
 app.get("/getall/:id", getAll);
 app.get("/followers/:id", followers);
+app.get('/getfollow/:id', following);
 
 //delete your post
 const { deletePost} = require('../controller/image/deletePost');

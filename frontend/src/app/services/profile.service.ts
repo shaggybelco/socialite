@@ -31,6 +31,10 @@ export class ProfileService {
     return this.view.get(`${this.baseurl}/user/followers/${id}`)
   }
 
+  getFollowing(id: any){
+    return this.view.get(`${this.baseurl}/user/getfollow/${id}`, {responseType: 'json'})
+  }
+
   deletePost(postid: any, id: any){
     return this.view.delete(`${this.baseurl}/user/delete/${postid}/${id}`, {responseType: 'text'})
   }
