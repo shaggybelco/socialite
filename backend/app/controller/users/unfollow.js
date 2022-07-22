@@ -8,6 +8,19 @@ exports.toFollow = async (req, res) => {
 
     try {
         
+        const { id, userid} = req.body;
+
+    pool.query(
+      'update users set follow = array_remove(follow, $1) where id = $2;',
+      [userid, parseInt(id)],
+      (error, results) => {
+        if (error) {
+          throw error;
+        }
+        res.status(200).send(`User ${userid} modified with ID: ${id}`);
+      }
+    );
+
             //Inserting data into the database
             pool.query(
                 `DELETE FROM follow WHERE userid = $1, followid = $2, followStatus = $3`,
