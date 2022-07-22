@@ -83,12 +83,13 @@ export class ProfileComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         console.log(this.imgpost);
-        console.log("from here ",this.imgpost[0].id);
+        
 
         for (let i = 0; i < imgstat.length; i++) {
             this.name = imgstat[i].name
             this.messages = imgstat[i].caption
             this.imgurl = imgstat[i].image
+            console.log("post from here: ",this.imgpost[i].id);
         }
 
       });
