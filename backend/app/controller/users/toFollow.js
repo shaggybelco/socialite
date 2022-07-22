@@ -52,7 +52,29 @@ exports.toFollow = async (req, res) => {
                 }else{
                     res.status(200).send("Succesfully followed ")
                 }
-            })
+            });
+
+            // This Will work For newsFeeds
+            
+            pool.query(
+                `INSERT INTO follow (userid, followid) VALUES ($1,$2);`,
+                [userid, followid],
+                (err) => {
+                    if (err) {
+                        flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
+                        console.error(err);
+                        return res.status(500).json({
+                            error: "Database error",
+                        });
+                    } else {
+                        flag = 1;
+            
+                    }
+                }
+            );
+
+            //end here
+           
 
             //Inserting data into the database
             

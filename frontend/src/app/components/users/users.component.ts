@@ -10,6 +10,7 @@ import { UnfollowService } from 'src/app/services/unfollow.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+
   current_id = localStorage.getItem('user_id');
   suggested_Users!: any;
   suggested_User!: any;
@@ -44,6 +45,8 @@ export class UsersComponent implements OnInit {
     //call the service to activate the follower method inside the
     this.userservice.followUsers(follower).subscribe((data) => {
       alert('Success');
+      
+      console.table(data)
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
@@ -85,7 +88,6 @@ export class UsersComponent implements OnInit {
         next: (user: any) =>{
           this.pushAllUsers = user;
           
-          console.log('this are all users got ', this.pushAllUsers);
         },
         error: (err: any) =>{
           alert(err.message);
@@ -94,6 +96,8 @@ export class UsersComponent implements OnInit {
     )
     await this.pushAllUsers;
   }
+
+  //
 
   getFollow() {
     
@@ -106,7 +110,6 @@ export class UsersComponent implements OnInit {
           }
         });
       }
-      console.log("triying to get this all the time :", this.pushAllUsers)
       this.startSorting(foll, this.pushAllUsers);
     });
     
@@ -124,21 +127,15 @@ export class UsersComponent implements OnInit {
       this.router.navigate(['/users'], {relativeTo: this.route})
     }
     pushed.forEach((element: any) => {
-      console.log("from foreach ",pushed[0].follow, " all userss inside", pushUsers)
       pushUsers.forEach((newUser: any) => {
         const isNotFollow = pushed[0].follow.includes(newUser.id);
-        console.log("new users ", newUser.id," name ", newUser.name, isNotFollow)
-        
         if(isNotFollow){
-          console.log("followed by me: ",isNotFollow)
         }else{
-          console.log("Not followed ",isNotFollow);
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
         }
       });
     });
-    console.log("after push not followed ", suggested, " not followed by me:  ", this.suggestedNameID)
   }
 
   async global() {
@@ -153,19 +150,7 @@ export class UsersComponent implements OnInit {
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {
-        console.log('all users ', suggested);
-
         this.suggested_Users = suggested;
-
-        // for (let i = 0; i < this.suggested_Users.length; i++) {
-        //   if (this.suggested_Users[i].followstatus == 'pending') {
-        //     console.log(this.suggested_Users[i].id)
-        //   } else {
-        //     console.log("users not pending ", this.suggested_Users[i].name)
-        //     this.users.push(this.suggested_Users[i]);
-        //   }
-        // }
-        // console.log("show pushed ", this.users)
       });
     //getting following users
 
@@ -176,7 +161,6 @@ export class UsersComponent implements OnInit {
           for (let i = 0; i < followed.length; i++) {
             this.followe.push(followed[i]);
           }
-          console.log('pushed ', this.followe);
         });
       }
       this.dataGlobal = data;

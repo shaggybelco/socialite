@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import {
   FormControl,
@@ -15,6 +15,8 @@ import { SuggestedUsersService } from 'src/app/services/suggested-users.service'
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+  @Input() message = '';
+  
   constructor(
     private userservice: SuggestedUsersService,
     private profile: ProfileService,
@@ -60,8 +62,6 @@ export class ProfileComponent implements OnInit {
       .subscribe((prof: any) => {
         this.name = prof[0].name;
         this.email= prof[0].email;
-        console.log(this.name);
-        console.log(this.userID);
       });
 
     this.profile
@@ -71,11 +71,9 @@ export class ProfileComponent implements OnInit {
         console.log(this.posting);
 
         for (let i = 0; i < prof.length; i++) {
-          console.log(
-            (this.name = prof[i].name),
-            (this.messages = prof[i].message)
-            (this.email = prof[i].email)
-          );
+            this.name = prof[i].name
+            this.messages = prof[i].message
+            this.email = prof[i].email
         }
       });
 
@@ -84,14 +82,11 @@ export class ProfileComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
 
-        console.log(imgstat);
 
         for (let i = 0; i < imgstat.length; i++) {
-          console.log(
-            (this.name = imgstat[i].name),
-            (this.messages = imgstat[i].caption),
-            (this.imgurl = imgstat[i].image)
-          );
+            this.name = imgstat[i].name
+            this.messages = imgstat[i].caption
+            this.imgurl = imgstat[i].image
         }
       });
 
@@ -104,8 +99,6 @@ export class ProfileComponent implements OnInit {
       {
         next: (user: any) =>{
           this.pushAllUsers = user;
-          
-          console.log('this are all users got ', this.pushAllUsers);
         },
         error: (err: any) =>{
           alert(err.message);
@@ -116,7 +109,6 @@ export class ProfileComponent implements OnInit {
   }
 
   startSorting(pushed: any, pushUsers: any) {
-    // console.log('starting ', pushed);
     const suggested: any = [];
     
     if(pushed.length != 0 && pushUsers.length === 0){
@@ -125,23 +117,18 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/profile'], {relativeTo: this.route})
     }
     pushed.forEach((element: any) => {
-      console.log("from foreach ",pushed[0].follow, " all userss inside", pushUsers)
+
       pushUsers.forEach((newUser: any) => {
         const isNotFollow = pushed[0].follow.includes(newUser.id);
-        console.log("new users ", newUser.id," name ", newUser.name, isNotFollow)
         
         if(isNotFollow){
-          this.numberOfFollowing++;
-          console.log("followed by me: ",isNotFollow, " number: ",this.numberOfFollowing)
-          
+          this.numberOfFollowing++;          
         }else{
-          console.log("Not followed ",isNotFollow);
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
         }
       });
     });
-    console.log("after push not followed ", suggested, " not followed by me:  ", this.suggestedNameID)
   }
 
   getFollow() {
@@ -155,7 +142,6 @@ export class ProfileComponent implements OnInit {
           }
         });
       }
-      console.log("triying to get this all the time :", this.pushAllUsers)
       this.startSorting(foll, this.pushAllUsers);
     });
     
@@ -166,7 +152,7 @@ export class ProfileComponent implements OnInit {
     this.profile.getFollowers(this.userID).subscribe(
       {
         next: (data: any) =>{
-         this.numberOfFollowers = data[0].count;
+          this.numberOfFollowers = (data[0].count);
         }
       }
     )
@@ -201,8 +187,6 @@ export class ProfileComponent implements OnInit {
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            alert('posted');
-            console.log(data);
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/profile'], {relativeTo: this.route})
@@ -227,12 +211,9 @@ export class ProfileComponent implements OnInit {
       formdata.append('caption', this.form.value.message);
       formdata.append('myfile', this.files);
 
-      console.log('it does nothing', formdata);
 
       this.uploadingPic.uploading(formdata).subscribe(
         (data: any) => {
-          alert('posted');
-          console.log(data);
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";
           this.router.navigate(['/profile'], {relativeTo: this.route})
@@ -241,8 +222,6 @@ export class ProfileComponent implements OnInit {
           alert(`failed to post: ${err.message}`);
         }
       );
-
-      console.log(this.files);
     };
 
     input.click();
