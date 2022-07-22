@@ -159,7 +159,7 @@
   <div
     class="card lg:card-side bg-base-100 shadow-xl"
     id="post1"
-    *ngFor="let posts of imgpost"
+    *ngFor="let posts of imgpost; let postNum = index"
   >
     <figure>
       <img src="{{ posts.image }}" width="100%" />
@@ -174,7 +174,7 @@
         <!-- <button class="btn btn-primary">Listen</button>
        -->
         <div class="badge badge-outline">
-            <div class="swap-off">delete</div>
+            <div class="swap-off" (click)="deletePost(postNum)">delete</div>
         </div>
       </div>
     </div>
