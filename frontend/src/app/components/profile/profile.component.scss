@@ -5,7 +5,10 @@
   justify-content: center;
   
 }
-
+#caption{
+  max-height: 70px !important;
+  overflow: scroll;
+}
 #post1{
   margin: auto;
   margin-bottom: 10px;

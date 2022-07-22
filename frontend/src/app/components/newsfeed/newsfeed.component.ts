@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadService } from 'src/app/services/upload.service';
+import { ActivatedRoute,Router } from '@angular/router';
+
 
 export interface DialogData{
   post: string;
@@ -24,7 +26,9 @@ export class NewsfeedComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService,
-    private uploadingPic: UploadService
+    private uploadingPic: UploadService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   name: any = {};
@@ -37,13 +41,13 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+      const id = localStorage.getItem('user_id');
       this.profile
-      .viewPost(localStorage.getItem('user_id'))
+      .viewPost(id)
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        console.log(imgstat);
+        console.log(this.imgpost);
 
         for (let i = 0; i < imgstat.length; i++) {
           console.log( "pic posting ",
@@ -79,7 +83,9 @@ export class NewsfeedComponent implements OnInit {
           (data: any) => {
             alert('posted');
             console.log(data);
-            window.location.reload();
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
           },
           (err) => {
             alert('failed to post');
@@ -113,7 +119,9 @@ export class NewsfeedComponent implements OnInit {
           (data: any) => {
             alert('posted');
             console.log(data);
-            window.location.reload();
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
           },
           (err) => {
             alert('failed to post');
