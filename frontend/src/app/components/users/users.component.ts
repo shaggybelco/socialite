@@ -10,6 +10,7 @@ import { UnfollowService } from 'src/app/services/unfollow.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+
   current_id = localStorage.getItem('user_id');
   suggested_Users!: any;
   suggested_User!: any;
@@ -44,6 +45,8 @@ export class UsersComponent implements OnInit {
     //call the service to activate the follower method inside the
     this.userservice.followUsers(follower).subscribe((data) => {
       alert('Success');
+      
+      console.table(data)
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
@@ -93,6 +96,8 @@ export class UsersComponent implements OnInit {
     )
     await this.pushAllUsers;
   }
+
+  //
 
   getFollow() {
     
