@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   posting: any = {};
   imgurl: any = {};
   imgpost: any = {};
+  imgid: any = [];
   users: any = [];
   pushAllUsers: any = [];
   follo: any = [];
@@ -68,31 +69,54 @@ export class ProfileComponent implements OnInit {
       .viewPost(localStorage.getItem('user_id'))
       .subscribe((prof: any) => {
         this.posting = prof;
-        console.log(this.posting);
+        
 
         for (let i = 0; i < prof.length; i++) {
             this.name = prof[i].name
             this.messages = prof[i].message
             this.email = prof[i].email
         }
+        
       });
 
     this.profile
       .getPic(localStorage.getItem('user_id'))
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
-
+        console.log(this.imgpost);
+        
 
         for (let i = 0; i < imgstat.length; i++) {
             this.name = imgstat[i].name
             this.messages = imgstat[i].caption
             this.imgurl = imgstat[i].image
+            this.imgid = imgstat[i].id
+            console.log("post from here: ",this.imgpost[i].id);
         }
+
       });
 
       this.getFollow();
       this.getUsers();
       this.getFollowers();
+  }
+
+  deletePost(postNum: any){
+    console.log("this post is in number: ",this.imgpost[postNum].id)
+    const ids = {
+      postid: this.imgpost[postNum].id,
+      id: this.userID
+    }
+    this.profile.deletePost(ids.postid, ids.id).subscribe(
+      (deleted)=>{
+        alert(`you deleted Your post!!! ${deleted}`)
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
+        this.router.navigate(['/profile'], {relativeTo: this.route})
+      },(err)=>{
+        alert(`Failed to deleted this ${err.message}`)
+      }
+    )
   }
   async getUsers(){
     this.userSort.getall(this.userID).subscribe(

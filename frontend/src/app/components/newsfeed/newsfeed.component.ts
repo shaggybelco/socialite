@@ -47,13 +47,12 @@ export class NewsfeedComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        console.log(this.imgpost);
-
         for (let i = 0; i < imgstat.length; i++) {
           console.log( "pic posting ",
             (this.name = imgstat[i].name),
             (this.messages =imgstat[i].caption),
-            (this.imgurl = imgstat[i].image)
+            (this.imgurl = imgstat[i].image),
+       
           );
         }
       });

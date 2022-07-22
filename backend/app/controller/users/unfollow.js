@@ -5,7 +5,7 @@ const bodyparser = require('body-parser');
 
 exports.unfollow = (req, res) => {
     const { id, userid} = req.body;
-  
+
     pool.query(
       'update users set follow = array_remove(follow, $1) where id = $2;',
       [userid, parseInt(id)],
@@ -31,12 +31,12 @@ exports.unfollow = (req, res) => {
                 });
             } else {
                 flag = 1;
-               
+
             }
         }
     );
 
-  
+
 
       //End here
 

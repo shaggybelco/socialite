@@ -159,7 +159,7 @@
   <div
     class="card lg:card-side bg-base-100 shadow-xl"
     id="post1"
-    *ngFor="let posts of imgpost"
+    *ngFor="let posts of imgpost; let postNum = index"
   >
     <figure>
       <img src="{{ posts.image }}" width="100%" />
@@ -167,18 +167,14 @@
     <div class="card-body">
       <h2 class="card-title">{{ posts.name }}</h2>
       <div class="badge badge-secondary">
-        {{ posts.date | date: "medium" }}
+        {{ posts.date | date: 'dd MMMM yyyy HH:mm:ss' }}
       </div>
       <p id="caption">{{ posts.caption }}</p>
       <div class="card-actions justify-end pb-1">
         <!-- <button class="btn btn-primary">Listen</button>
        -->
         <div class="badge badge-outline">
-          <label class="swap">
-            <input type="checkbox" />
-            <div class="swap-off">Like</div>
-            <div class="swap-on">Unlike</div>
-          </label>
+            <div class="swap-off" (click)="deletePost(postNum)">delete</div>
         </div>
       </div>
     </div>

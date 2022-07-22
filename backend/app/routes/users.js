@@ -39,6 +39,10 @@ app.get("/suggestedUsers/:id", suggestedUsers);     //follow users
 app.get("/getall/:id", getAll);
 app.get("/followers/:id", followers);
 
+//delete your post
+const { deletePost} = require('../controller/image/deletePost');
+app.delete("/delete/:postid/:id",deletePost);
+
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
 // import multer from 'multer';
