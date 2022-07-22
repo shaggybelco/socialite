@@ -4,12 +4,11 @@ const app = express();
 const bodyparser = require('body-parser')
 
 
-//Get a single user by ID
-exports.getUserImage = (req, res) => {
+//Get all users in database
+exports.followers = (req, res) => {
   //declare function & get params
-  const id = parseInt(req.params.id); // declare a variable that will use to locate each user
-
-  pool.query('SELECT u.name,u.id, i.userid,i.image, i.caption, i.date FROM images i, users u WHERE i.userid = $1 AND u.id = i.userid ORDER BY date DESC', [id], (error, results) => {
+  const id = parseInt(req.params.id)
+  pool.query('SELECT count(id) FROM(SELECT *, generate_subscripts(follow, 1) AS s FROM users) AS foo WHERE follow[s] = $1;',[id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

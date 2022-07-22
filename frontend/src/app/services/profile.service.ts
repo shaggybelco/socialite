@@ -27,4 +27,8 @@ export class ProfileService {
 
   }
 
+  getFollowers(id: any){
+    return this.view.get(`${this.baseurl}/user/followers/${id}`)
+  }
+
 }
