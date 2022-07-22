@@ -102,7 +102,7 @@
         <button class="btn" id="btn" (click)="log()">Login</button>
 
         <p class="text">
-          Do not have an account,<a
+          Don't have an account ? ,<a
             class="link link-hover"
             routerLink="/register"
             id="txtLogin"
@@ -111,6 +111,11 @@
           >
         </p>
       </div>
+    </div>
+  </div>
+  <div class="flex justify-center items-center">
+    <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status" [hidden]="{hide}">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 </div>

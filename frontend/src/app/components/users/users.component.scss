@@ -13,7 +13,9 @@
     border-radius: 100%;
     // margin-left: 40px;
   }
-
+.alert{
+  
+}
   #row{
    // background-color: rgb(115, 42, 42);
     border-radius: 20px;
@@ -34,15 +36,15 @@
   background: linear-gradient(90deg, rgba(172,52,137,1) 6%, rgba(183,49,223,1) 82%);
 }
 
-  .uname {
+  .name {
     width: 100%;
     //text-align: left;
     // padding: 0px;
     margin-top:20px;
-   // font-size:18px;
+   font: size 19px;
     // font-weight: bold;
-    margin-left: 3%;
-    // margin-bottom: 10%;
+   // margin-left: 10%;
+    margin-bottom: 10%;
   }
 
   .mb-3 input {
@@ -77,9 +79,9 @@
 .p{
   font-size: 20;
 }
-.pp{
-  //background-color: #36cdaf;
-}
+// .pp{
+//   //background-color: #36cdaf;
+// }
 
 
 
