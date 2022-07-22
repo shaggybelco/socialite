@@ -5,9 +5,10 @@ const bodyparser = require('body-parser');
 
 //Delete a user
 exports.deletePost= (req, res) => {
-    const id = parseInt(req.params.id);
+    // const id = parseInt(req.params.id);
+    const {postid, id} = req.body
   
-    pool.query('DELETE FROM status WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM images WHERE id = $1 and userid = $2', [id], (error, results) => {
       if (error) {
         throw error;
       }

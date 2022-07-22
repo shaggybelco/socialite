@@ -11,7 +11,7 @@ export class ProfileService {
   constructor(private view: HttpClient) { }
 
   viewPost(id: any){
-    return this.view.get(`${this.baseurl}/news/getother/${id}`);
+    return this.view.get(`${this.baseurl}/news/getother/${id}`,{responseType: 'json'});
   }
 
   post(body: any){

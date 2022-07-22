@@ -11,7 +11,7 @@ const { view } = require("../controller/newsfeed/view");
 
 app.get("/getstatus", getAllPosts);
 app.post("/poststatus", createStatus);
-app.delete("/deletepost", deletePost);
+app.delete("/deletepost/:id", deletePost);
 app.put("/updatestatus/:id", updatePost);
 app.get("/getone/:id", getUserPosts);
 app.get("/getother/:id", view)

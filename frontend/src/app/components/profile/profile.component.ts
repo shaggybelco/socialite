@@ -68,26 +68,29 @@ export class ProfileComponent implements OnInit {
       .viewPost(localStorage.getItem('user_id'))
       .subscribe((prof: any) => {
         this.posting = prof;
-        console.log(this.posting);
+        
 
         for (let i = 0; i < prof.length; i++) {
             this.name = prof[i].name
             this.messages = prof[i].message
             this.email = prof[i].email
         }
+        
       });
 
     this.profile
       .getPic(localStorage.getItem('user_id'))
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
-
+        console.log(this.imgpost);
+        console.log("from here ",this.imgpost[0].id);
 
         for (let i = 0; i < imgstat.length; i++) {
             this.name = imgstat[i].name
             this.messages = imgstat[i].caption
             this.imgurl = imgstat[i].image
         }
+
       });
 
       this.getFollow();
