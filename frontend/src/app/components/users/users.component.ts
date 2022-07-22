@@ -10,7 +10,6 @@ import { UnfollowService } from 'src/app/services/unfollow.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
   current_id = localStorage.getItem('user_id');
   suggested_Users!: any;
   suggested_User!: any;
@@ -35,7 +34,6 @@ export class UsersComponent implements OnInit {
 
   // get followers and people who following you
   followUsers(index: any) {
-
     //array for storing data to be passed at dabase
     const follower = {
       userid: localStorage.getItem('user_id'),
@@ -44,26 +42,16 @@ export class UsersComponent implements OnInit {
 
     //call the service to activate the follower method inside the
     this.userservice.followUsers(follower).subscribe((data) => {
-      alert('Success');
-      
-      console.table(data)
+      console.table(data);
     });
 
-    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-    this.router.onSameUrlNavigation = "reload";
-    this.router.navigate(['/users'], {relativeTo: this.route})
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/users'], { relativeTo: this.route });
 
-    return console.log(this.suggestedNameID[index]);
   }
 
   unfollow(num: any): void {
-    console.log(
-      'this is an id ',
-      this.followe[num].id,
-      ' and this is name ',
-      this.followe[num].name
-    );
-
     const data = {
       id: this.current_id,
       userid: this.followe[num].id,
@@ -73,34 +61,27 @@ export class UsersComponent implements OnInit {
     //   console.log('Data to be passed', data);
     // });
 
-    this.un.unfollow(data).subscribe((net) => {
-      console.log(net);
-    });
-    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-    this.router.onSameUrlNavigation = "reload";
-    this.router.navigate(['/users'], {relativeTo: this.route})
+    this.un.unfollow(data).subscribe((net) => {});
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/users'], { relativeTo: this.route });
   }
 
-
-  async getUsers(){
-    this.userSort.getall(this.current_id).subscribe(
-      {
-        next: (user: any) =>{
-          this.pushAllUsers = user;
-          
-        },
-        error: (err: any) =>{
-          alert(err.message);
-        }
-      }
-    )
+  async getUsers() {
+    this.userSort.getall(this.current_id).subscribe({
+      next: (user: any) => {
+        this.pushAllUsers = user;
+      },
+      error: (err: any) => {
+        alert(err.message);
+      },
+    });
     await this.pushAllUsers;
   }
 
   //
 
   getFollow() {
-    
     this.userSort.getFriends(this.current_id).subscribe((foll: any) => {
       for (let i = 0; i < foll[0].follow.length; i++) {
         const element = foll[0].follow[i];
@@ -112,25 +93,24 @@ export class UsersComponent implements OnInit {
       }
       this.startSorting(foll, this.pushAllUsers);
     });
-    
+
     return this.follo;
   }
- 
 
   startSorting(pushed: any, pushUsers: any) {
     // console.log('starting ', pushed);
     const suggested: any = [];
-    
-    if(pushed.length != 0 && pushUsers.length === 0){
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/users'], {relativeTo: this.route})
+
+    if (pushed.length != 0 && pushUsers.length === 0) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/users'], { relativeTo: this.route });
     }
     pushed.forEach((element: any) => {
       pushUsers.forEach((newUser: any) => {
         const isNotFollow = pushed[0].follow.includes(newUser.id);
-        if(isNotFollow){
-        }else{
+        if (isNotFollow) {
+        } else {
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
         }
@@ -146,7 +126,7 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.global();
     // this.getFollow();
-    
+
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {

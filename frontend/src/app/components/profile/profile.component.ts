@@ -54,9 +54,6 @@ export class ProfileComponent implements OnInit {
   showpost: boolean = false;
 
   ngOnInit(): void {
-
-    console.log(localStorage.getItem('user_id'));
-
     this.userID = localStorage.getItem('user_id')
 
     this.profile
@@ -67,7 +64,7 @@ export class ProfileComponent implements OnInit {
       });
 
     this.profile
-      .getPic(localStorage.getItem('user_id'))
+      .getPic(this.userID)
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
       
@@ -84,14 +81,12 @@ export class ProfileComponent implements OnInit {
   }
 
   deletePost(postNum: any){
-    console.log("this post is in number: ",this.imgpost[postNum].id)
     const ids = {
       postid: this.imgpost[postNum].id,
       id: this.userID
     }
     this.profile.deletePost(ids.postid, ids.id).subscribe(
       (deleted)=>{
-        alert(`you deleted Your post!!! ${deleted}`)
         this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
         this.router.onSameUrlNavigation = "reload";
         this.router.navigate(['/profile'], {relativeTo: this.route})
