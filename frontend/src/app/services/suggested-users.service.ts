@@ -20,7 +20,7 @@ export class SuggestedUsersService {
 
   followUsers(body :any)
   {
-      return this.http.post(`${this.baseurl}/user/toFollow`,body)
+      return this.http.post(`${this.baseurl}/user/toFollow`,body,{responseType: 'text'})
   }
 
   getFriends(id: any)

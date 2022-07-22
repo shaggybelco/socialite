@@ -47,14 +47,7 @@ export class NewsfeedComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        for (let i = 0; i < imgstat.length; i++) {
-          console.log( "pic posting ",
-            (this.name = imgstat[i].name),
-            (this.messages =imgstat[i].caption),
-            (this.imgurl = imgstat[i].image),
        
-          );
-        }
       });
 
   }
@@ -76,11 +69,9 @@ export class NewsfeedComponent implements OnInit {
         formdata.append('myfile',this.files);
   
        
-        console.log('it does nothing', formdata);
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            alert('posted');
             console.log(data);
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
@@ -111,12 +102,9 @@ export class NewsfeedComponent implements OnInit {
         formdata.append('myfile',this.files);
         formdata.append('date',this.form.value.date);
   
-       
-        console.log('it does nothing', formdata);
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            alert('posted');
             console.log(data);
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
