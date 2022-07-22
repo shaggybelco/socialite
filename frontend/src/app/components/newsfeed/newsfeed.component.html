@@ -67,7 +67,7 @@
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{posts.name}}</h2>
-          <div class="badge badge-secondary">{{posts.date| date: "dd MMMM yyyy HH:mm:ss" }}</div>
+          <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
           <p id="caption">{{posts.caption}}</p>
           <div class="card-actions justify-end pb-1">
             <!-- <button class="btn btn-primary">Listen</button>

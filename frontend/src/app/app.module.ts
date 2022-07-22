@@ -21,7 +21,7 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeService } from './services/authorize.service';
 import { AuthGuard } from './gaurds/auth.guard';
-
+import {TimeAgoPipe} from 'time-ago-pipe'
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { AuthGuard } from './gaurds/auth.guard';
     NewsfeedComponent,
     ProfileComponent,
     ViewprofileComponent,
-
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatCard } from '@angular/material/card';
 import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({

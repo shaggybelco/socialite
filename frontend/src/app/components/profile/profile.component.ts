@@ -72,7 +72,6 @@ export class ProfileComponent implements OnInit {
         if(imgstat != []){
           this.showpost = true;
         }
-    
       });
 
       this.getFollow();
@@ -109,51 +108,60 @@ export class ProfileComponent implements OnInit {
     await this.pushAllUsers;
   }
 
-  startSorting(pushed: any, pushUsers: any) {
-    const suggested: any = [];
+  // startSorting(pushed: any, pushUsers: any) {
+  //   const suggested: any = [];
     
-    if(pushed.length != 0 && pushUsers.length === 0){
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/profile'], {relativeTo: this.route})
-    }
-    pushed.forEach((element: any) => {
+  //   if(pushed.length != 0 && pushUsers.length === 0){
+  //     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+  //     this.router.onSameUrlNavigation = "reload";
+  //     this.router.navigate(['/profile'], {relativeTo: this.route})
+  //   }
+  //   pushed.forEach((element: any) => {
 
-      pushUsers.forEach((newUser: any) => {
-        const isNotFollow = pushed[0].follow.includes(newUser.id);
+  //     pushUsers.forEach((newUser: any) => {
+  //       const isNotFollow = pushed[0].follow.includes(newUser.id);
         
-        if(isNotFollow){
-          this.numberOfFollowing++;          
-        }else{
-          suggested.push(newUser.id);
-          this.suggestedNameID.push(newUser);
-        }
-      });
-    });
-  }
+  //       if(isNotFollow){
+  //         this.numberOfFollowing++;          
+  //       }else{
+  //         suggested.push(newUser.id);
+  //         this.suggestedNameID.push(newUser);
+  //       }
+  //     });
+  //   });
+  // }
 
   getFollow() {
     
-    this.userSort.getFriends(this.userID).subscribe((foll: any) => {
-      for (let i = 0; i < foll[0].follow.length; i++) {
-        const element = foll[0].follow[i];
-        this.userservice.getOne(element).subscribe((followed: any) => {
-          for (let i = 0; i < followed.length; i++) {
-            this.follo.push(followed[i]);
-          }
-        });
-      }
-      this.startSorting(foll, this.pushAllUsers);
-    });
+    // this.userSort.getFriends(this.userID).subscribe((foll: any) => {
+    //   for (let i = 0; i < foll[0].follow.length; i++) {
+    //     const element = foll[0].follow[i];
+    //     this.userservice.getOne(element).subscribe((followed: any) => {
+    //       for (let i = 0; i < followed.length; i++) {
+    //         this.follo.push(followed[i]);
+    //       }
+    //     });
+    //   }
+    //   this.startSorting(foll, this.pushAllUsers);
+    // });
     
-    return this.follo;
+    // return this.follo;
+
+    this.profile.getFollowing(this.userID).subscribe(
+      {
+        next: (data: any)=>{
+          console.log(data);
+          this.numberOfFollowing = data.length;
+        }
+      }
+    )
   }
 
   getFollowers(){
     this.profile.getFollowers(this.userID).subscribe(
       {
         next: (data: any) =>{
-          this.numberOfFollowers = (data[0].count);
+          this.numberOfFollowers = data[0].count;
         }
       }
     )
@@ -226,5 +234,23 @@ export class ProfileComponent implements OnInit {
     };
 
     input.click();
+  }
+
+  transform(date: any) {
+    if (!date) { return 'a long time ago'; }
+    let time = (Date.now() - Date.parse(date)) / 1000;
+    if (time < 10) {
+      return 'just now';
+    } else if (time < 60) {
+      return 'a second ago';
+    }
+    const divider = [60, 60, 24, 30, 12];
+    const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
+    let i;
+    for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
+      time /= divider[i];
+    }
+    const plural = Math.floor(time) > 1 ? 's' : '';
+    return Math.floor(time) + string[i] + plural + ' ago';
   }
 }
