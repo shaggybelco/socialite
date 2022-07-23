@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
 <!--loader-->
-<ng-http-loader></ng-http-loader>
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
 <!-- end loader -->
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"

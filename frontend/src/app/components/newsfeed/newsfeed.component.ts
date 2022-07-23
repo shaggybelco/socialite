@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
 
 export interface DialogData{
   post: string;
@@ -18,7 +19,7 @@ export interface DialogData{
 })
 export class NewsfeedComponent implements OnInit {
 
-  
+  spinnerStyle = Spinkit;
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService,

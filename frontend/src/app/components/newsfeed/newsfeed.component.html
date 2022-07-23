@@ -2,7 +2,14 @@
 
 
 <!--loader-->
-<ng-http-loader></ng-http-loader>
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
 <!-- end loader -->
 
 <!-- THIS IS WHERE YOU WRITE A POST -->

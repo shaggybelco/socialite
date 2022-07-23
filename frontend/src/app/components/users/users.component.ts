@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { UnfollowService } from 'src/app/services/unfollow.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-users',
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit {
   followe: any = [];
   suggestedNameID: any = [];
 
+  spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
   constructor(
     private userservice: SuggestedUsersService,

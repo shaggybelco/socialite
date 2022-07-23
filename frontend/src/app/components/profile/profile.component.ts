@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,8 @@ import { SuggestedUsersService } from 'src/app/services/suggested-users.service'
 })
 export class ProfileComponent implements OnInit {
   @Input() message = '';
+  
+  spinnerStyle = Spinkit;
   
   constructor(
     private userservice: SuggestedUsersService,
