@@ -73,12 +73,12 @@
       <h1>RECENT FEEDS</h1>
       <div class="d-flex flex-column py-2"></div>
       
-      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost;">
+      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost; let id = index">
         <figure>
           <img src= '{{posts.image}}' width="100%"/>
         </figure>
         <div class="card-body">
-          <h2 class="card-title">{{posts.name}}</h2>
+          <h2 class="card-title" id="username" (click)='seeProfile(id)'>{{posts.name}}</h2>
           <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
           <p id="caption">{{posts.caption}}</p>
           <div class="card-actions justify-end pb-1">
