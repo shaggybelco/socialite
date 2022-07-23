@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
-<!---->
-
+<!--loader-->
+<ng-http-loader></ng-http-loader>
+<!-- end loader -->
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
 >
@@ -39,13 +40,15 @@
           </div>
         </div>
 
-        <div class="card-body">
+        <div class="card-body" *ngIf="name!= ''">
           <h2 class="card-title justify-center">{{ name }}</h2>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"

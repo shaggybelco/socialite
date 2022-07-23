@@ -21,7 +21,7 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeService } from './services/authorize.service';
 import { AuthGuard } from './gaurds/auth.guard';
-import {TimeAgoPipe} from 'time-ago-pipe'
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import {TimeAgoPipe} from 'time-ago-pipe'
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    NgHttpLoaderModule.forRoot()
 
   ],
   providers: [AuthorizeService, AuthGuard],
