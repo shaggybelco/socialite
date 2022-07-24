@@ -123,8 +123,12 @@
   <h1>RECENT FEEDS</h1>
   <div class="d-flex flex-column py-2"></div>
 
-  <div *ngIf="showpost == true">
+  <div fxLayout="row wrap"  fxLayoutGap="1%">
     <div
+          id="post1"
+          fxFlex="49%"
+          fxFlex.xs="100%"
+          fxFlex.sm="49%"
       class="card lg:card-side bg-base-100 shadow-xl"
       id="post1"
       *ngFor="let posts of imgpost; let postNum = index"

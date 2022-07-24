@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
 
-
 <!--loader-->
 <ng-http-loader
-[backdrop]="true"
-[backgroundColor]="'purple'"
-[debounceDelay]="100"
-[extraDuration]="300"
-[minDuration]="300"
-[spinner]="spinnerStyle.skChasingDots">
+  [backdrop]="true"
+  [backgroundColor]="'purple'"
+  [debounceDelay]="100"
+  [extraDuration]="300"
+  [minDuration]="300"
+  [spinner]="spinnerStyle.skChasingDots"
+>
 </ng-http-loader>
 <!-- end loader -->
 
@@ -16,8 +16,6 @@
 <div class="container py-5">
   <div class="inside">
     <div class="center">
-
-
       <div class="input-group" id="post" [formGroup]="form">
         <input
           type="text"
@@ -26,79 +24,87 @@
           formControlName="message"
         />
         <div>
-        <button class="btn " (click)="post()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-send"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-            <path
-              d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"
-            ></path>
-          </svg>
-        </button>
-        <button class="btn" (click)="addImage()">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-photo"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <line x1="15" y1="8" x2="15.01" y2="8"></line>
-            <rect x="4" y="4" width="16" height="16" rx="3"></rect>
-            <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
-            <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
-          </svg>
-        </button>
-      </div>
+          <button class="btn" (click)="post()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-send"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+              <path
+                d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"
+              ></path>
+            </svg>
+          </button>
+          <button class="btn" (click)="addImage()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-photo"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="15" y1="8" x2="15.01" y2="8"></line>
+              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+              <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+              <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div class="d-flex flex-column mb-4"></div>
       <h1>RECENT FEEDS</h1>
       <div class="d-flex flex-column py-2"></div>
-      
-      <div class="card lg:card-side bg-base-100 shadow-xl" id="post1" *ngFor="let posts of imgpost; let id = index">
-        <figure>
-          <img src= '{{posts.image}}' width="100%"/>
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title" id="username" (click)='seeProfile(id)'>{{posts.name}}</h2>
-          <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
-          <p id="caption">{{posts.caption}}</p>
-          <div class="card-actions justify-end pb-1">
-            <!-- <button class="btn btn-primary">Listen</button>
+
+      <div fxLayout="row wrap" fxLayoutGap="1%">
+        <div
+          id="post1"
+          fxFlex="49%"
+          fxFlex.xs="100%"
+          fxFlex.sm="49%"
+          class="card lg:card-side bg-base-100 shadow-xl"
+          id="post1"
+          *ngFor="let posts of imgpost; let id = index"
+        >
+          <figure>
+            <img src="{{ posts.image }}" width="100%" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title" id="username" (click)="seeProfile(id)">
+              {{ posts.name }}
+            </h2>
+            <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
+            <p id="caption">{{ posts.caption }}</p>
+            <div class="card-actions justify-end pb-1">
+              <!-- <button class="btn btn-primary">Listen</button>
        -->
-            <div class="badge badge-outline">
-              <label class="swap">
-                <input type="checkbox" />
-                <div class="swap-off">Like</div>
-                <div class="swap-on">Unlike</div>
-              </label>
+              <div class="badge badge-outline">
+                <label class="swap">
+                  <input type="checkbox" />
+                  <div class="swap-off">Like</div>
+                  <div class="swap-on">Unlike</div>
+                </label>
+              </div>
             </div>
-            
           </div>
         </div>
       </div>
-      <hr>
-
-      
+      <hr />
     </div>
   </div>
-
 </div>
