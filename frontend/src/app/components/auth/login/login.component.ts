@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   id: any;
   constructor(private auth: AuthorizeService, private route: Router) {}
   ngOnInit(): void {
+    localStorage.clear();
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.minLength(10), Validators.required]),
       password: new FormControl('', [

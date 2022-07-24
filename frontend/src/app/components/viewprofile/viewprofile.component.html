@@ -58,11 +58,11 @@
   >
     <div class="row">
       <div class="col-6">
-        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="unfollow()" *ngIf="follow === true;">
-          {{option}}
+        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="unfollow()" *ngIf="followBool === true;">
+        {{option}}
         </button>
-        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="followUser()" *ngIf="follow === false;">
-          {{option}}
+        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="followUser()" *ngIf="followBool === false;">
+         {{option}}
         </button>
       </div>
       <div class="col-6">

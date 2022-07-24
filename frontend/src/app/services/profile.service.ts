@@ -38,4 +38,9 @@ export class ProfileService {
   deletePost(postid: any, id: any){
     return this.view.delete(`${this.baseurl}/user/delete/${postid}/${id}`, {responseType: 'text'})
   }
+
+  checkFollow(id: any, followid: any){
+    return this.view.get(`${this.baseurl}/user/check/${id}/${followid}`, {responseType: 'json'})
+   
+  }
 }
