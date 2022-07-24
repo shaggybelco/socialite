@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
       this.hide = true;
       this.auth.loguser(userlogin.data).subscribe(
         (myData: any) => {
+          console.log(myData.token)
           this.user = myData.user[0].id;
           this.route.navigate(['/newsfeed']);
     
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
           // alert("Login successfully");
           localStorage.setItem('user_id', this.user);
           
+          localStorage.setItem('key', myData.token)
           this.id = this.user;
         },
         error => {
