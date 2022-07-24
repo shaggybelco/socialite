@@ -5,10 +5,12 @@ const bodyparser = require('body-parser')
 
 
 //Get all users in database
-exports.getAll = async (req, res) => {
+exports.checkFollow = async (req, res) => {
   //declare function & get params
-  const id = parseInt(req.params.id)
-  pool.query('SELECT follow FROM users WHERE id = $1',[id], (error, results) => {
+  const id = parseInt(req.params.id);
+  const followid = parseInt(req.params.followid);
+  
+  pool.query('SELECT * FROM follow WHERE userid = $1 and followid = $2',[id, followid], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

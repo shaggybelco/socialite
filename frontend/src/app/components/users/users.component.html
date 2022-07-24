@@ -33,7 +33,7 @@
 
       <mat-card-content>
         <div class="alert">
-          <label tabindex="0" class="btn btn-circle avatar">
+          <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileFollow(num)">
             <div class="w-15 rounded-full">
               <img src="https://placeimg.com/80/80/people" />
             </div>
@@ -54,13 +54,13 @@
       <br />
       <mat-card
         *ngFor="let user of suggestedNameID; let index = index"
-        id="row"
+        id="row" 
       >
         <mat-card-header> </mat-card-header>
         <mat-card-content>
           <div class="alert">
             <div >
-              <label tabindex="0" class="btn btn-circle avatar">
+              <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileSU(index)">
                 <div class="w-15 rounded-full">
                   <img src="https://placeimg.com/80/80/people" />
                 </div>

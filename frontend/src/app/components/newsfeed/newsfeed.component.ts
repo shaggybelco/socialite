@@ -57,6 +57,10 @@ export class NewsfeedComponent implements OnInit {
       this.router.onSameUrlNavigation = "reload";
       this.router.navigate(['/viewprofile'], {relativeTo: this.route})
       localStorage.setItem('count', this.imgpost[userId].followid);
+
+       //sending status
+       sessionStorage.setItem('status', 'true');
+       sessionStorage.setItem('option','unfollow');
     });
   }
 

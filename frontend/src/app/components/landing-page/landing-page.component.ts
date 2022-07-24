@@ -10,6 +10,7 @@ export class LandingPageComponent implements OnInit {
   spinnerStyle = Spinkit;
   constructor() { }
 
+  
   ngOnInit(): void {
   }
 

@@ -15,7 +15,6 @@ export class UsersComponent implements OnInit {
   suggested_Users!: any;
   suggested_User!: any;
   follow_body: any;
-  status: any = 'follow';
   follow: boolean = false;
   users: any = [];
   pushAllUsers: any = [];
@@ -23,6 +22,8 @@ export class UsersComponent implements OnInit {
   sortUserPush: any = [];
   followe: any = [];
   suggestedNameID: any = [];
+  followOpt: any = "follow";
+  status: any = "false"
 
   spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
@@ -33,6 +34,27 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+
+  //select the profile you want to see suggested users
+  seeProfileSU(userId: any){
+    this.userservice.getOne(this.suggestedNameID[userId].id).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.suggestedNameID[userId].id);
+    });
+  }
+
+  // see profile for the user you are following
+  seeProfileFollow(userId: any){
+    this.userservice.getOne(this.followe[userId].id).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.followe[userId].id);
+    });
+  }
 
   // follow other users
   followUsers(index: any) {
