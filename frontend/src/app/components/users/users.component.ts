@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { UnfollowService } from 'src/app/services/unfollow.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-users',
@@ -23,6 +24,7 @@ export class UsersComponent implements OnInit {
   followe: any = [];
   suggestedNameID: any = [];
 
+  spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
   constructor(
     private userservice: SuggestedUsersService,
@@ -32,7 +34,7 @@ export class UsersComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  // get followers and people who following you
+  // follow other users
   followUsers(index: any) {
     //array for storing data to be passed at dabase
     const follower = {
@@ -40,7 +42,7 @@ export class UsersComponent implements OnInit {
       followid: this.suggestedNameID[index].id,
     };
 
-    //call the service to activate the follower method inside the
+    //api to store the person you're  following
     this.userservice.followUsers(follower).subscribe((data) => {
       console.table(data);
     });
@@ -82,9 +84,11 @@ export class UsersComponent implements OnInit {
   //
 
   getFollow() {
+    //get all users first on the follow list that you follow
     this.userSort.getFriends(this.current_id).subscribe((foll: any) => {
       for (let i = 0; i < foll[0].follow.length; i++) {
         const element = foll[0].follow[i];
+        //getting the users that you are following and push them to an array
         this.userservice.getOne(element).subscribe((followed: any) => {
           for (let i = 0; i < followed.length; i++) {
             this.follo.push(followed[i]);
@@ -106,8 +110,10 @@ export class UsersComponent implements OnInit {
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate(['/users'], { relativeTo: this.route });
     }
+    //array of ppl that you are following
     pushed.forEach((element: any) => {
       pushUsers.forEach((newUser: any) => {
+        //checking all users to sort users that you are following and not following
         const isNotFollow = pushed[0].follow.includes(newUser.id);
         if (isNotFollow) {
         } else {

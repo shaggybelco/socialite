@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 import { Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  spinnerStyle = Spinkit;
   form!: FormGroup;
   user: any;
   id: any;

@@ -7,6 +7,8 @@ import {
 } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
+import { Spinkit } from 'ng-http-loader';
+import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 
 export interface DialogData{
   post: string;
@@ -18,13 +20,14 @@ export interface DialogData{
 })
 export class NewsfeedComponent implements OnInit {
 
-  
+  spinnerStyle = Spinkit;
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService,
     private uploadingPic: UploadService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userservice: SuggestedUsersService,
   ) {}
 
   name: any = {};
@@ -48,6 +51,15 @@ export class NewsfeedComponent implements OnInit {
 
   }
 
+  seeProfile(userId: any){
+    this.userservice.getOne(this.imgpost[userId].followid).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.imgpost[userId].followid);
+    });
+  }
+
   
   form: FormGroup = new FormGroup({
     userid: new FormControl(''),
@@ -68,7 +80,7 @@ export class NewsfeedComponent implements OnInit {
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            console.log(data);
+           
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/newsfeed'], {relativeTo: this.route})
