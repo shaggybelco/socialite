@@ -1,23 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http'
+import { HttpClient, HttpHeaders} from '@angular/common/http'
 import { Observable } from 'rxjs';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', Authorization: `${sessionStorage.getItem('token')}`})
+  ,responseType: 'json' as 'json',
+  withCredentials: false
+};
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   baseurl:string = "http://localhost:5050";
 
   createUser(body: any){
-    return this.http.post(`${this.baseurl}/user/register/`, body);
+    return this.http.post(`${this.baseurl}/user/register/`, body,
+    httpOptions);
 
   }
  
+  token = localStorage.getItem('token');
+  
   loguser(body: any):Observable<any>{
-    return this.http.post(`${this.baseurl}/user/login/`, body);
+    return this.http.post(`${this.baseurl}/user/login/`, body,
+    httpOptions);
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(this.baseurl + '/signout', { }, httpOptions);
   }
 
   //Gaurds

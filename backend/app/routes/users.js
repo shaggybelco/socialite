@@ -25,7 +25,7 @@ const verifyUser = require('../middleware/middleware')
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get", verifyUser ,getAllUsers); // get all existing users
+app.get("/get/:id", verifyUser ,getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user

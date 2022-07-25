@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     try{
         var decoded = jwt_decode(token);
         res.status(200).json({decoded})
+        console.log(decoded)
     }catch(error){
         res.status(401).json({message: "no token provided"});
     }
