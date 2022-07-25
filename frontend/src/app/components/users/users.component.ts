@@ -154,24 +154,35 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.global();
     // this.getFollow();
+    
 
+    //getting all users
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {
         this.suggested_Users = suggested;
+        this.suggestedNameID = suggested;
       });
+
+
     //getting following users
 
     this.userservice.getFriends(this.current_id).subscribe((data: any) => {
+
       for (let i = 0; i < data[0].follow.length; i++) {
+
         const element = data[0].follow[i];
         this.userservice.getOne(element).subscribe((followed: any) => {
+
           for (let i = 0; i < followed.length; i++) {
             this.followe.push(followed[i]);
           }
+
         });
       }
       this.dataGlobal = data;
+
+     
     });
   }
 }
