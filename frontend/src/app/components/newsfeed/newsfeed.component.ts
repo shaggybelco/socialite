@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard } from '@angular/material/card';
 import { ProfileService } from 'src/app/services/profile.service';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
-
+import { Spinkit } from 'ng-http-loader';
+import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 
 export interface DialogData{
   post: string;
@@ -22,13 +20,14 @@ export interface DialogData{
 })
 export class NewsfeedComponent implements OnInit {
 
-  
+  spinnerStyle = Spinkit;
   constructor(
     private formBuilder: FormBuilder,
     private profile: ProfileService,
     private uploadingPic: UploadService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userservice: SuggestedUsersService,
   ) {}
 
   name: any = {};
@@ -47,17 +46,22 @@ export class NewsfeedComponent implements OnInit {
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
         const j = imgstat.length;
-        console.log(this.imgpost);
-
-        for (let i = 0; i < imgstat.length; i++) {
-          console.log( "pic posting ",
-            (this.name = imgstat[i].name),
-            (this.messages =imgstat[i].caption),
-            (this.imgurl = imgstat[i].image)
-          );
-        }
+       
       });
 
+  }
+
+  seeProfile(userId: any){
+    this.userservice.getOne(this.imgpost[userId].followid).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.imgpost[userId].followid);
+
+       //sending status
+       sessionStorage.setItem('status', 'true');
+       sessionStorage.setItem('option','unfollow');
+    });
   }
 
   
@@ -77,12 +81,10 @@ export class NewsfeedComponent implements OnInit {
         formdata.append('myfile',this.files);
   
        
-        console.log('it does nothing', formdata);
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            alert('posted');
-            console.log(data);
+           
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
             this.router.navigate(['/newsfeed'], {relativeTo: this.route})
@@ -112,12 +114,9 @@ export class NewsfeedComponent implements OnInit {
         formdata.append('myfile',this.files);
         formdata.append('date',this.form.value.date);
   
-       
-        console.log('it does nothing', formdata);
   
         this.uploadingPic.uploading(formdata).subscribe(
           (data: any) => {
-            alert('posted');
             console.log(data);
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
@@ -133,5 +132,23 @@ export class NewsfeedComponent implements OnInit {
   
       input.click();
    
+    }
+
+    transform(date: any) {
+      if (!date) { return 'a long time ago'; }
+      let time = (Date.now() - Date.parse(date)) / 1000;
+      if (time < 10) {
+        return 'just now';
+      } else if (time < 60) {
+        return 'a second ago';
+      }
+      const divider = [60, 60, 24, 30, 12];
+      const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
+      let i;
+      for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
+        time /= divider[i];
+      }
+      const plural = Math.floor(time) > 1 ? 's' : '';
+      return Math.floor(time) + string[i] + plural + ' ago';
     }
 }

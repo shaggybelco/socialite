@@ -21,7 +21,7 @@ import { ViewprofileComponent } from './components/viewprofile/viewprofile.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeService } from './services/authorize.service';
 import { AuthGuard } from './gaurds/auth.guard';
-
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { AuthGuard } from './gaurds/auth.guard';
     NewsfeedComponent,
     ProfileComponent,
     ViewprofileComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -47,7 +46,8 @@ import { AuthGuard } from './gaurds/auth.guard';
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    NgHttpLoaderModule.forRoot()
 
   ],
   providers: [AuthorizeService, AuthGuard],

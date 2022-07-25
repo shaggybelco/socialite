@@ -1,103 +1,109 @@
 <app-navbar></app-navbar>
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc" data-theme="night"
+
+<!--loader-->
+<ng-http-loader
+  [backdrop]="true"
+  [backgroundColor]="'purple'"
+  [debounceDelay]="100"
+  [extraDuration]="300"
+  [minDuration]="300"
+  [spinner]="spinnerStyle.skChasingDots"
 >
-  
- 
+</ng-http-loader>
+<!-- end loader -->
 
-
-    <div class="card w-96 bg-base-100 shadow-xl" id="cards">
-      <div class="avatar justify-center" id="avatar">
-        <div class="w-24 rounded-full">
-          <img src="https://placeimg.com/192/192/people" />
-        </div>
-      </div>
-
-      <div class="card-body">
-        <h2 class="card-title justify-center">kgomotso</h2>
+<div
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
+  data-theme="night"
+>
+  <div class="card w-96 bg-base-100 shadow-xl" id="cards">
+    <div class="avatar justify-center" id="avatar">
+      <div class="w-24 rounded-full">
+        <img src="https://placeimg.com/192/192/people" />
       </div>
     </div>
+
+    <div class="card-body">
+      <h2 class="card-title justify-center">{{ name }}</h2>
+    </div>
   </div>
-
-
-
-
-
+</div>
 
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
 >
-<div
-class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
->
-
-<div class="flex justify-between ...">
-  <div>
-    <p class="follow1 col-start-3 col-end-5" id="cents">Followers <a class="number">123</a></p>
-  </div>
-  <div>
-    <p class="follow1 col-start-5 col-end-7"  id="cent">Following <a class="number">132</a></p>
-  </div>
-  <div>
-    <button type="button" class="btn" id="btn">
-      <i class="fa fa-file-pen"></i>
-    </button>
-  </div>
-</div>
-</div>
-</div>
-
- <div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center ppm">
-<!--
-  <input type="text" name="post" id="post" placeholder="Post" />
-  <i class="fa-solid fa-pen"></i>
-
-  <i class="fa-solid fa-paper-plane-top"></i>
-</div> -->
-
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
->
-  <div class="row">
-    <div class="col-6">
-      <button class="btn btn-sm col-start-3 col-end-4" id="btnpost">Follow
-      </button>
-    </div>
-    <div class="col-6">
-      <button class="btn btn-sm col-start-6  col-end-7" id="btnpost">Message
-      </button>
+  <div
+    class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
+  >
+    <div class="flex justify-between ..." id="space">
+      <div>
+        <p class="follow1 col-start-3 col-end-5" id="cent">
+          Followers <a class="number">{{ numberOfFollowers }}</a>
+        </p>
+      </div>
+      <div>
+        <p class="follow1 col-start-5 col-end-7" id="cent">
+          Following <a class="number">{{ numberOfFollowing }}</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+  class="col-auto container-sm container-md container-lg container-xl align-content-center ppm"
 >
+  <div
+    class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+  >
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="unfollow()" *ngIf="followBool === true;">
+        {{option}}
+        </button>
+        <button class="btn btn-sm col-start-3 col-end-4" id="btnpost" (click)="followUser()" *ngIf="followBool === false;">
+         {{option}}
+        </button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-sm col-start-6 col-end-7" id="btnpost">
+          Message
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <div class="content">
-    <h2 >Posts</h2>
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7,8]">
-      <mat-card>
-        <mat-card-header>
-          <div class="row">
-            <div class="col">
-             
+  <div
+    class="col-auto container-sm container-md container-lg container-xl align-content-center send"
+  >
+    <div class="content">
+      <h2 class="postHead">Posts</h2>
+      <div fxLayout="row wrap"  fxLayoutGap="1%">
+        <div
+          class="card lg:card-side bg-base-100 shadow-xl"
+          id="post1"
+          fxFlex="49%"
+          fxFlex.xs="100%"
+          fxFlex.sm="49%"
+          
+          *ngFor="let posts of imgpost; let postNum = index"
+        >
+          <figure>
+            <img src="{{ posts.image }}" width="100%" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">{{ posts.name }}</h2>
+            <div class="badge badge-secondary">
+              {{ transform(posts.date) }}
+            </div>
+            <p id="caption">{{ posts.caption }}</p>
+            <div class="card-actions justify-end pb-1">
             </div>
           </div>
-        </mat-card-header>
-        <mat-card-content>
-          <img
-          mat-card-md-image
-            class="profpost"
-            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656053803/cld-sample.jpg"
-            alt="posts"
-          />
-        </mat-card-content>
-      </mat-card>
+        </div>
+        <hr>
+      </div>
+      
     </div>
-
   </div>
 </div>
-

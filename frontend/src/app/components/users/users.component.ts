@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { UnfollowService } from 'src/app/services/unfollow.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-users',
@@ -10,12 +11,10 @@ import { UnfollowService } from 'src/app/services/unfollow.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-
   current_id = localStorage.getItem('user_id');
   suggested_Users!: any;
   suggested_User!: any;
   follow_body: any;
-  status: any = 'follow';
   follow: boolean = false;
   users: any = [];
   pushAllUsers: any = [];
@@ -23,7 +22,10 @@ export class UsersComponent implements OnInit {
   sortUserPush: any = [];
   followe: any = [];
   suggestedNameID: any = [];
+  followOpt: any = "follow";
+  status: any = "false"
 
+  spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
   constructor(
     private userservice: SuggestedUsersService,
@@ -33,37 +35,47 @@ export class UsersComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  // get followers and people who following you
-  followUsers(index: any) {
 
+  //select the profile you want to see suggested users
+  seeProfileSU(userId: any){
+    this.userservice.getOne(this.suggestedNameID[userId].id).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.suggestedNameID[userId].id);
+    });
+  }
+
+  // see profile for the user you are following
+  seeProfileFollow(userId: any){
+    this.userservice.getOne(this.followe[userId].id).subscribe((followed: any) => {
+      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.onSameUrlNavigation = "reload";
+      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      localStorage.setItem('count', this.followe[userId].id);
+    });
+  }
+
+  // follow other users
+  followUsers(index: any) {
     //array for storing data to be passed at dabase
     const follower = {
       userid: localStorage.getItem('user_id'),
       followid: this.suggestedNameID[index].id,
     };
 
-    //call the service to activate the follower method inside the
+    //api to store the person you're  following
     this.userservice.followUsers(follower).subscribe((data) => {
-      alert('Success');
-      
-      console.table(data)
+      console.table(data);
     });
 
-    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-    this.router.onSameUrlNavigation = "reload";
-    this.router.navigate(['/users'], {relativeTo: this.route})
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/users'], { relativeTo: this.route });
 
-    return console.log(this.suggestedNameID[index]);
   }
 
   unfollow(num: any): void {
-    console.log(
-      'this is an id ',
-      this.followe[num].id,
-      ' and this is name ',
-      this.followe[num].name
-    );
-
     const data = {
       id: this.current_id,
       userid: this.followe[num].id,
@@ -73,37 +85,32 @@ export class UsersComponent implements OnInit {
     //   console.log('Data to be passed', data);
     // });
 
-    this.un.unfollow(data).subscribe((net) => {
-      console.log(net);
-    });
-    this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-    this.router.onSameUrlNavigation = "reload";
-    this.router.navigate(['/users'], {relativeTo: this.route})
+    this.un.unfollow(data).subscribe((net) => {});
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/users'], { relativeTo: this.route });
   }
 
-
-  async getUsers(){
-    this.userSort.getall(this.current_id).subscribe(
-      {
-        next: (user: any) =>{
-          this.pushAllUsers = user;
-          
-        },
-        error: (err: any) =>{
-          alert(err.message);
-        }
-      }
-    )
+  async getUsers() {
+    this.userSort.getall(this.current_id).subscribe({
+      next: (user: any) => {
+        this.pushAllUsers = user;
+      },
+      error: (err: any) => {
+        alert(err.message);
+      },
+    });
     await this.pushAllUsers;
   }
 
   //
 
   getFollow() {
-    
+    //get all users first on the follow list that you follow
     this.userSort.getFriends(this.current_id).subscribe((foll: any) => {
       for (let i = 0; i < foll[0].follow.length; i++) {
         const element = foll[0].follow[i];
+        //getting the users that you are following and push them to an array
         this.userservice.getOne(element).subscribe((followed: any) => {
           for (let i = 0; i < followed.length; i++) {
             this.follo.push(followed[i]);
@@ -112,25 +119,26 @@ export class UsersComponent implements OnInit {
       }
       this.startSorting(foll, this.pushAllUsers);
     });
-    
+
     return this.follo;
   }
- 
 
   startSorting(pushed: any, pushUsers: any) {
     // console.log('starting ', pushed);
     const suggested: any = [];
-    
-    if(pushed.length != 0 && pushUsers.length === 0){
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/users'], {relativeTo: this.route})
+
+    if (pushed.length != 0 && pushUsers.length === 0) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/users'], { relativeTo: this.route });
     }
+    //array of ppl that you are following
     pushed.forEach((element: any) => {
       pushUsers.forEach((newUser: any) => {
+        //checking all users to sort users that you are following and not following
         const isNotFollow = pushed[0].follow.includes(newUser.id);
-        if(isNotFollow){
-        }else{
+        if (isNotFollow) {
+        } else {
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
         }

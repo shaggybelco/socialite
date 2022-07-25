@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,8 @@ import { SuggestedUsersService } from 'src/app/services/suggested-users.service'
 export class ProfileComponent implements OnInit {
   @Input() message = '';
   
+  spinnerStyle = Spinkit;
+
   constructor(
     private userservice: SuggestedUsersService,
     private profile: ProfileService,
@@ -42,6 +45,7 @@ export class ProfileComponent implements OnInit {
   posting: any = {};
   imgurl: any = {};
   imgpost: any = {};
+  imgid: any = [];
   users: any = [];
   pushAllUsers: any = [];
   follo: any = [];
@@ -50,11 +54,9 @@ export class ProfileComponent implements OnInit {
   suggestedNameID: any = [];
   numberOfFollowing: number = 0;
   numberOfFollowers: number = 0;
+  showpost: boolean = false;
 
   ngOnInit(): void {
-
-    console.log(localStorage.getItem('user_id'));
-
     this.userID = localStorage.getItem('user_id')
 
     this.profile
@@ -65,34 +67,35 @@ export class ProfileComponent implements OnInit {
       });
 
     this.profile
-      .viewPost(localStorage.getItem('user_id'))
-      .subscribe((prof: any) => {
-        this.posting = prof;
-        console.log(this.posting);
-
-        for (let i = 0; i < prof.length; i++) {
-            this.name = prof[i].name
-            this.messages = prof[i].message
-            this.email = prof[i].email
-        }
-      });
-
-    this.profile
-      .getPic(localStorage.getItem('user_id'))
+      .getPic(this.userID)
       .subscribe((imgstat: any) => {
         this.imgpost = imgstat;
-
-
-        for (let i = 0; i < imgstat.length; i++) {
-            this.name = imgstat[i].name
-            this.messages = imgstat[i].caption
-            this.imgurl = imgstat[i].image
+      
+        
+        if(imgstat != []){
+          this.showpost = true;
         }
       });
 
       this.getFollow();
       this.getUsers();
       this.getFollowers();
+  }
+
+  deletePost(postNum: any){
+    const ids = {
+      postid: this.imgpost[postNum].id,
+      id: this.userID
+    }
+    this.profile.deletePost(ids.postid, ids.id).subscribe(
+      (deleted)=>{
+        this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+        this.router.onSameUrlNavigation = "reload";
+        this.router.navigate(['/profile'], {relativeTo: this.route})
+      },(err)=>{
+        alert(`Failed to deleted this ${err.message}`)
+      }
+    )
   }
   async getUsers(){
     this.userSort.getall(this.userID).subscribe(
@@ -108,51 +111,22 @@ export class ProfileComponent implements OnInit {
     await this.pushAllUsers;
   }
 
-  startSorting(pushed: any, pushUsers: any) {
-    const suggested: any = [];
-    
-    if(pushed.length != 0 && pushUsers.length === 0){
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/profile'], {relativeTo: this.route})
-    }
-    pushed.forEach((element: any) => {
-
-      pushUsers.forEach((newUser: any) => {
-        const isNotFollow = pushed[0].follow.includes(newUser.id);
-        
-        if(isNotFollow){
-          this.numberOfFollowing++;          
-        }else{
-          suggested.push(newUser.id);
-          this.suggestedNameID.push(newUser);
-        }
-      });
-    });
-  }
-
+  
   getFollow() {
-    
-    this.userSort.getFriends(this.userID).subscribe((foll: any) => {
-      for (let i = 0; i < foll[0].follow.length; i++) {
-        const element = foll[0].follow[i];
-        this.userservice.getOne(element).subscribe((followed: any) => {
-          for (let i = 0; i < followed.length; i++) {
-            this.follo.push(followed[i]);
-          }
-        });
+    this.profile.getFollowing(this.userID).subscribe(
+      {
+        next: (data: any)=>{
+          this.numberOfFollowing = data.length;
+        }
       }
-      this.startSorting(foll, this.pushAllUsers);
-    });
-    
-    return this.follo;
+    )
   }
 
   getFollowers(){
     this.profile.getFollowers(this.userID).subscribe(
       {
         next: (data: any) =>{
-          this.numberOfFollowers = (data[0].count);
+          this.numberOfFollowers = data[0].count;
         }
       }
     )
@@ -225,5 +199,23 @@ export class ProfileComponent implements OnInit {
     };
 
     input.click();
+  }
+
+  transform(date: any) {
+    if (!date) { return 'a long time ago'; }
+    let time = (Date.now() - Date.parse(date)) / 1000;
+    if (time < 10) {
+      return 'just now';
+    } else if (time < 60) {
+      return 'a second ago';
+    }
+    const divider = [60, 60, 24, 30, 12];
+    const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
+    let i;
+    for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
+      time /= divider[i];
+    }
+    const plural = Math.floor(time) > 1 ? 's' : '';
+    return Math.floor(time) + string[i] + plural + ' ago';
   }
 }

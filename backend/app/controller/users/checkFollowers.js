@@ -7,7 +7,7 @@ const bodyparser = require('body-parser')
 //Get all users in database
 exports.getAll = async (req, res) => {
   //declare function & get params
-  const id = req.params.id
+  const id = parseInt(req.params.id)
   pool.query('SELECT follow FROM users WHERE id = $1',[id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
