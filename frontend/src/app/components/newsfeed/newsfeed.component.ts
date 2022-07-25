@@ -1,25 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UploadService } from 'src/app/services/upload.service';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Spinkit } from 'ng-http-loader';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 
-export interface DialogData{
+export interface DialogData {
   post: string;
 }
 @Component({
   selector: 'app-newsfeed',
   templateUrl: './newsfeed.component.html',
-  styleUrls: ['./newsfeed.component.scss']
+  styleUrls: ['./newsfeed.component.scss'],
 })
 export class NewsfeedComponent implements OnInit {
-
   spinnerStyle = Spinkit;
   constructor(
     private formBuilder: FormBuilder,
@@ -27,128 +22,118 @@ export class NewsfeedComponent implements OnInit {
     private uploadingPic: UploadService,
     private router: Router,
     private route: ActivatedRoute,
-    private userservice: SuggestedUsersService,
+    private userservice: SuggestedUsersService
   ) {}
 
   name: any = {};
   messages: any = {};
   posting: any = {};
   imgurl: any = {};
-  imgpost: any={};
-  imgdate: any={};
-
+  imgpost: any = {};
+  imgdate: any = {};
 
   ngOnInit(): void {
-
-      const id = localStorage.getItem('user_id');
-      this.profile
-      .viewPost(id)
-      .subscribe((imgstat: any) => {
-        this.imgpost = imgstat;
-        const j = imgstat.length;
-       
-      });
-
-  }
-
-  seeProfile(userId: any){
-    this.userservice.getOne(this.imgpost[userId].followid).subscribe((followed: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-      this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
-      localStorage.setItem('count', this.imgpost[userId].followid);
-
-       //sending status
-       sessionStorage.setItem('status', 'true');
-       sessionStorage.setItem('option','unfollow');
+    const id = localStorage.getItem('user_id');
+    this.profile.viewPost(id).subscribe((imgstat: any) => {
+      this.imgpost = imgstat;
+      const j = imgstat.length;
     });
   }
 
-  
+  seeProfile(userId: any) {
+    this.userservice
+      .getOne(this.imgpost[userId].followid)
+      .subscribe((followed: any) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['/viewprofile'], { relativeTo: this.route });
+        localStorage.setItem('count', this.imgpost[userId].followid);
+
+        //sending status
+        sessionStorage.setItem('status', 'true');
+        sessionStorage.setItem('option', 'unfollow');
+      });
+  }
+
   form: FormGroup = new FormGroup({
     userid: new FormControl(''),
     message: new FormControl(''),
-    date: new FormControl('')
+    date: new FormControl(''),
   });
 
   post() {
-        const formdata = new FormData();
-   
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
-        
-        formdata.append('userid', this.form.value.userid);
-        formdata.append('caption', this.form.value.message)
-        formdata.append('myfile',this.files);
-  
-       
-  
-        this.uploadingPic.uploading(formdata).subscribe(
-          (data: any) => {
-           
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
-          },
-          (err) => {
-            alert('failed to post');
-          }
-        );
+    // const formdata = new FormData();
 
-    }
-  
-    
-    
-    files: any = {};
-    addImage() {
-    
-      
-      let input = document.createElement('input');
-      const formdata = new FormData();
-      input.type = 'file';
-      input.onchange = (_) => {
-        this.files = input.files?.item(0);
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
-        
-        formdata.append('userid', this.form.value.userid);
-        formdata.append('caption', this.form.value.message)
-        formdata.append('myfile',this.files);
-        formdata.append('date',this.form.value.date);
-  
-  
-        this.uploadingPic.uploading(formdata).subscribe(
-          (data: any) => {
-            console.log(data);
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
-          },
-          (err) => {
-            alert('failed to post');
-          }
-        );
-  
-        console.log(this.files);
-      };
-  
-      input.click();
-   
-    }
+    // this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
 
-    transform(date: any) {
-      if (!date) { return 'a long time ago'; }
-      let time = (Date.now() - Date.parse(date)) / 1000;
-      if (time < 10) {
-        return 'just now';
-      } else if (time < 60) {
-        return 'a second ago';
+    // formdata.append('userid', this.form.value.userid);
+    // formdata.append('caption', this.form.value.message);
+    // formdata.append('myfile', this.files);
+
+
+    this.uploadingPic.uploading(this.formdata).subscribe(
+      (data: any) => {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['/newsfeed'], { relativeTo: this.route });
+      },
+      (err) => {
+        alert('failed to post');
       }
-      const divider = [60, 60, 24, 30, 12];
-      const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
-      let i;
-      for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
-        time /= divider[i];
+    );
+  }
+
+  addImageBefore() {
+    let input = document.createElement('input');
+    const formdata = new FormData();
+    input.type = 'file';
+    input.onchange = (_) => {
+      this.files = input.files?.item(0);
+      this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+
+      formdata.append('userid', this.form.value.userid);
+      formdata.append('caption', this.form.value.message);
+      formdata.append('myfile', this.files);
+      // formdata.append('date',this.form.value.date);
+    };
+    input.click();
+  }
+
+  formdata = new FormData();
+  files: any = {};
+  addImage() {
+    this.uploadingPic.uploading(this.formdata).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate(['/newsfeed'], { relativeTo: this.route });
+      },
+      (err) => {
+        alert('failed to post');
       }
-      const plural = Math.floor(time) > 1 ? 's' : '';
-      return Math.floor(time) + string[i] + plural + ' ago';
+    );
+
+    console.log(this.files);
+  }
+
+  transform(date: any) {
+    if (!date) {
+      return 'a long time ago';
     }
+    let time = (Date.now() - Date.parse(date)) / 1000;
+    if (time < 10) {
+      return 'just now';
+    } else if (time < 60) {
+      return 'a second ago';
+    }
+    const divider = [60, 60, 24, 30, 12];
+    const string = [' second', ' minute', ' hour', ' day', ' month', ' year'];
+    let i;
+    for (i = 0; Math.floor(time / divider[i]) > 0; i++) {
+      time /= divider[i];
+    }
+    const plural = Math.floor(time) > 1 ? 's' : '';
+    return Math.floor(time) + string[i] + plural + ' ago';
+  }
 }
