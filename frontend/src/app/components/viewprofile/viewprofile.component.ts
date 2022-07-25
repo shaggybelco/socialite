@@ -87,7 +87,7 @@ export class ViewprofileComponent implements OnInit {
 
     
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/viewprofile'], { relativeTo: this.route });
   }
@@ -109,7 +109,7 @@ export class ViewprofileComponent implements OnInit {
 
     
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/viwprofile'], { relativeTo: this.route });
   }
