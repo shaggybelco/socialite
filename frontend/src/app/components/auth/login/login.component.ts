@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           // alert("Login successfully");
           localStorage.setItem('user_id', this.user);
           
-          localStorage.setItem('key', myData.token)
+          localStorage.setItem('token', myData.token)
           this.id = this.user;
         },
         error => {
