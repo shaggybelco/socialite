@@ -73,33 +73,7 @@ exports.toFollow = async (req, res) => {
                 }
             );
 
-            //end here
-           
-
-            //Inserting data into the database
-            
-            // pool.query(
-            //     `INSERT INTO follow (userid, followid,followStatus) VALUES ($1,$2,$3);`,
-            //     [user.userid, user.followid,user.followStatus],
-            //     (err) => {
-            //         if (err) {
-            //             flag = 0; //If user is not inserted is not inserted to database assigning flag as 0/false.
-            //             console.error(err);
-            //             return res.status(500).json({
-            //                 error: "Database error",
-            //             });
-            //         } else {
-            //             flag = 1;
-            //             res
-            //                 .status(200)
-            //                 .send({ message: `User called with ID  ${followid} has been followed by user with ID ${userid}` });
-            //         }
-            //     }
-            // );
-            // if (flag) {
-            // }
-
-            
+            //end here 
         }
     }
     catch (err) {

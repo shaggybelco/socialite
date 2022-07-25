@@ -8,6 +8,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { ActivatedRoute,Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,8 @@ import { SuggestedUsersService } from 'src/app/services/suggested-users.service'
 export class ProfileComponent implements OnInit {
   @Input() message = '';
   
+  spinnerStyle = Spinkit;
+
   constructor(
     private userservice: SuggestedUsersService,
     private profile: ProfileService,
@@ -108,45 +111,8 @@ export class ProfileComponent implements OnInit {
     await this.pushAllUsers;
   }
 
-  // startSorting(pushed: any, pushUsers: any) {
-  //   const suggested: any = [];
-    
-  //   if(pushed.length != 0 && pushUsers.length === 0){
-  //     this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-  //     this.router.onSameUrlNavigation = "reload";
-  //     this.router.navigate(['/profile'], {relativeTo: this.route})
-  //   }
-  //   pushed.forEach((element: any) => {
-
-  //     pushUsers.forEach((newUser: any) => {
-  //       const isNotFollow = pushed[0].follow.includes(newUser.id);
-        
-  //       if(isNotFollow){
-  //         this.numberOfFollowing++;          
-  //       }else{
-  //         suggested.push(newUser.id);
-  //         this.suggestedNameID.push(newUser);
-  //       }
-  //     });
-  //   });
-  // }
-
+  
   getFollow() {
-    
-    // this.userSort.getFriends(this.userID).subscribe((foll: any) => {
-    //   for (let i = 0; i < foll[0].follow.length; i++) {
-    //     const element = foll[0].follow[i];
-    //     this.userservice.getOne(element).subscribe((followed: any) => {
-    //       for (let i = 0; i < followed.length; i++) {
-    //         this.follo.push(followed[i]);
-    //       }
-    //     });
-    //   }
-    //   this.startSorting(foll, this.pushAllUsers);
-    // });
-    
-    // return this.follo;
-
     this.profile.getFollowing(this.userID).subscribe(
       {
         next: (data: any)=>{
