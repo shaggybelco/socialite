@@ -150,7 +150,6 @@ export class ProfileComponent implements OnInit {
     this.profile.getFollowing(this.userID).subscribe(
       {
         next: (data: any)=>{
-          console.log(data);
           this.numberOfFollowing = data.length;
         }
       }
