@@ -62,16 +62,16 @@ export class NewsfeedComponent implements OnInit {
   });
 
   post() {
-    // const formdata = new FormData();
+    const formdata = new FormData();
 
-    // this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+    this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
 
-    // formdata.append('userid', this.form.value.userid);
-    // formdata.append('caption', this.form.value.message);
-    // formdata.append('myfile', this.files);
+    formdata.append('userid', this.form.value.userid);
+    formdata.append('caption', this.form.value.message);
+    formdata.append('myfile', this.files);
 
 
-    this.uploadingPic.uploading(this.formdata).subscribe(
+    this.uploadingPic.uploading(formdata).subscribe(
       (data: any) => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
@@ -84,6 +84,13 @@ export class NewsfeedComponent implements OnInit {
   }
 
   addImageBefore() {
+    
+    
+  }
+
+  // formdata = new FormData();
+  files: any = {};
+  addImage() {
     let input = document.createElement('input');
     const formdata = new FormData();
     input.type = 'file';
@@ -94,27 +101,21 @@ export class NewsfeedComponent implements OnInit {
       formdata.append('userid', this.form.value.userid);
       formdata.append('caption', this.form.value.message);
       formdata.append('myfile', this.files);
-      // formdata.append('date',this.form.value.date);
+
+
+      this.uploadingPic.uploading(formdata).subscribe(
+        (data: any) => {
+          this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate(['/profile'], {relativeTo: this.route})
+        },
+        (err) => {
+          alert(`failed to post: ${err.message}`);
+        }
+      );
     };
+
     input.click();
-  }
-
-  formdata = new FormData();
-  files: any = {};
-  addImage() {
-    this.uploadingPic.uploading(this.formdata).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/newsfeed'], { relativeTo: this.route });
-      },
-      (err) => {
-        alert('failed to post');
-      }
-    );
-
-    console.log(this.files);
   }
 
   transform(date: any) {
