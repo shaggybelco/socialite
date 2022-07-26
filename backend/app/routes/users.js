@@ -14,17 +14,18 @@ const { updateEmail } = require("../Controller/users/updateEmail");
 const { updateName } = require("../Controller/users/updateName");
 const { getUserImage } = require("../controller/image/getImages");
 const { getAll } = require('../controller/users/checkFollowers')
-const { toFollow} = require("../controller/users/toFollow");
+const { toFollow } = require("../controller/users/toFollow");
 // const { unFollow} = require("../controller/users/unFollow");
-const { suggestedUsers} = require("../controller/users/suggestedUsers");
+const { suggestedUsers } = require("../controller/users/suggestedUsers");
 const { followers } = require('../controller/users/followers')
 const { following } = require('../controller/users/getFollowing')
 const { checkFollow } = require('../controller/users/checkIfFollowed');
+const verifyUser = require('../middleware/middleware')
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get/:id", getAllUsers); // get all existing users
+app.get("/get/:id", verifyUser, getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user
@@ -43,9 +44,13 @@ app.get("/followers/:id", followers);
 app.get('/getfollow/:id', following);
 app.get('/check/:id/:followid', checkFollow);
 
+//get user with token
+const { getUser } = require('../controller/users/getUserWithToken');
+app.get("/getid", verifyUser, getUser);
+
 //delete your post
-const { deletePost} = require('../controller/image/deletePost');
-app.delete("/delete/:postid/:id",deletePost);
+const { deletePost } = require('../controller/image/deletePost');
+app.delete("/delete/:postid/:id", deletePost);
 
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
@@ -89,12 +94,12 @@ app.post("/upload", type, async (req, res) => {
 
   const { userid, caption } = req.body;
 
-    var date = new Date().toDateString() 
-    +' ' + new Date().getHours()
-    + ':' + new Date().getMinutes() +':' 
+  var date = new Date().toDateString()
+    + ' ' + new Date().getHours()
+    + ':' + new Date().getMinutes() + ':'
     + new Date().getSeconds();
 
-    console.log(date);
+  console.log(date);
   if (req.file) {
     const results = await cloudinary.uploader.upload(req.file.path, {
       folder: "/profile/",
@@ -112,7 +117,7 @@ app.post("/upload", type, async (req, res) => {
     ]);
 
     res.status(200).json({ success: "Picture have been uploaded" });
-  }else {
+  } else {
     pool.query("INSERT INTO images(userid, caption, date) VALUES ($1,$2,$3)", [
       userid,
       caption,
@@ -123,7 +128,7 @@ app.post("/upload", type, async (req, res) => {
   }
 
 
-  
+
 });
 
 

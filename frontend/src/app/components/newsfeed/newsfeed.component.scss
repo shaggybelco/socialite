@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+#added{
+  margin-bottom: 10px;
+}
+
 #username{
   cursor: pointer;
 }
@@ -12,6 +16,10 @@
 #caption{
   max-height: 70px !important;
   overflow: scroll;
+}
+
+#post1{
+  margin-bottom: 20px;
 }
 
 .btn

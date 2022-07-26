@@ -4,6 +4,7 @@ import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { UnfollowService } from 'src/app/services/unfollow.service';
 import { Spinkit } from 'ng-http-loader';
+import { ProfileService } from 'src/app/services/profile.service';
 
 @Component({
   selector: 'app-users',
@@ -11,7 +12,51 @@ import { Spinkit } from 'ng-http-loader';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  current_id = localStorage.getItem('user_id');
+
+  ngOnInit() {
+    this.profile.getID().subscribe((decoded: any)=>{
+      this.current_id = decoded.decoded.id
+      this.afterId();
+    })
+
+  }
+
+  afterId(){
+    this.global();
+    // this.getFollow();
+    
+    
+    //getting all users
+    this.userservice
+      .getSuggestedUsers(this.current_id)
+      .subscribe((suggested: any) => {
+        this.suggested_Users = suggested;
+        this.suggestedNameID = suggested;
+      });
+
+
+    //getting following users
+
+    this.userservice.getFriends(this.current_id).subscribe((data: any) => {
+
+      for (let i = 0; i < data[0].follow.length; i++) {
+
+        const element = data[0].follow[i];
+        this.userservice.getOne(element).subscribe((followed: any) => {
+
+          for (let i = 0; i < followed.length; i++) {
+            this.followe.push(followed[i]);
+          }
+
+        });
+      }
+      this.dataGlobal = data;
+
+     
+    });
+  }
+
+  current_id: any;
   suggested_Users!: any;
   suggested_User!: any;
   follow_body: any;
@@ -33,7 +78,8 @@ export class UsersComponent implements OnInit {
     private un: UnfollowService,
     private userSort: SortUsersService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private profile: ProfileService
   ) {}
 
 
@@ -65,7 +111,7 @@ export class UsersComponent implements OnInit {
   followUsers(index: any) {
     //array for storing data to be passed at dabase
     const follower = {
-      userid: localStorage.getItem('user_id'),
+      userid: this.current_id,
       followid: this.suggestedNameID[index].id,
     };
 

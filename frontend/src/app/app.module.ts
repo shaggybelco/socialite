@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AuthorizeService } from './services/authorize.service';
 import { AuthGuard } from './gaurds/auth.guard';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { TokenInterceptorService } from './interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     NgHttpLoaderModule.forRoot()
 
   ],
-  providers: [AuthorizeService, AuthGuard],
+  providers: [AuthorizeService, AuthGuard,{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

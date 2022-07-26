@@ -9,6 +9,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { Spinkit } from 'ng-http-loader';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -55,12 +56,34 @@ export class ProfileComponent implements OnInit {
   numberOfFollowing: number = 0;
   numberOfFollowers: number = 0;
   showpost: boolean = false;
+  profileImg: any;
+  img: boolean = false;
 
   ngOnInit(): void {
-    this.userID = localStorage.getItem('user_id')
+    this.profile.getID().subscribe((decoded: any)=>{
+      this.userID = decoded.decoded.id
+      
+      this.afterId();
+    })
+  }
 
+ afterId(){
+ 
+    this.profile.getProfileImage(this.userID).subscribe(
+      (img: any)=>{
+        console.log(img[0].image);
+        if(img[0].image == ''){
+          this.img = false;
+        }else{
+          this.img = true;
+          this.profileImg = img[0].image;
+        }
+        
+      }
+    )
+ 
     this.profile
-      .getAll(localStorage.getItem('user_id'))
+      .getAll(this.userID)
       .subscribe((prof: any) => {
         this.name = prof[0].name;
         this.email= prof[0].email;
@@ -139,7 +162,7 @@ export class ProfileComponent implements OnInit {
   post() {
     let postdata = {
       data: {
-        userid: localStorage.getItem('user_id'),
+        userid: this.userID,
         message: this.form.value.message,
       },
     };
@@ -148,18 +171,13 @@ export class ProfileComponent implements OnInit {
       alert('can not post empty text');
       return;
     } else if (postdata.data.userid != '' && postdata.data.message != '') {
-      const formdata = new FormData();
-   
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+        console.log(this.formdata)
         
-        formdata.append('userid', this.form.value.userid);
-        formdata.append('caption', this.form.value.message)
-        formdata.append('myfile',this.files);
   
        
-        console.log('it does nothing', formdata);
+        console.log('it does nothing', this.formdata);
   
-        this.uploadingPic.uploading(formdata).subscribe(
+        this.uploadingPic.uploading(this.formdata).subscribe(
           (data: any) => {
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
             this.router.onSameUrlNavigation = "reload";
@@ -171,22 +189,63 @@ export class ProfileComponent implements OnInit {
         );
     }
   }
-  files: any = {};
 
+  files: any = {};
+  formdata = new FormData();
+  added: boolean = false;
+  addBefore(){
+    let input = document.createElement('input');
+    // const formdata = new FormData();
+    console.log(this.formdata)
+    input.type = 'file';
+    input.onchange = (_) => {
+      this.files = input.files?.item(0);
+      if(input.files?.item(0) != null)
+      {
+        this.added = true;
+      }
+      this.form.get('userid')?.setValue(this.userID);
+
+      this.formdata.append('userid', this.form.value.userid);
+      this.formdata.append('caption', this.form.value.message);
+      this.formdata.append('myfile', this.files);
+    }
+    
+    input.click();
+  }
   addImage() {
+    
+
+
+      this.uploadingPic.uploading(this.formdata).subscribe(
+        (data: any) => {
+          this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate(['/profile'], {relativeTo: this.route})
+        },
+        (err) => {
+          alert(`failed to post: ${err.message}`);
+        }
+      );
+    }
+
+  
+
+ 
+
+  addProfileImage() {
     let input = document.createElement('input');
     const formdata = new FormData();
     input.type = 'file';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
-      this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+      this.form.get('userid')?.setValue(this.userID);
 
       formdata.append('userid', this.form.value.userid);
-      formdata.append('caption', this.form.value.message);
       formdata.append('myfile', this.files);
 
 
-      this.uploadingPic.uploading(formdata).subscribe(
+      this.uploadingPic.uploadingProfile(formdata).subscribe(
         (data: any) => {
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";

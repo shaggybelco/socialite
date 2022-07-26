@@ -20,11 +20,19 @@
     >
       <div class="card w-96 bg-base-100 shadow-xl" id="cards">
         <div class="avatar justify-center" id="avatar">
-          <div class="w-24 rounded-full">
-            <img src="https://placeimg.com/192/192/people" />
+          <div *ngIf="img === true" class="w-24 rounded-full">
+            <img src="{{profileImg}}" />
           </div>
-        </div>
+          <div *ngIf="img === false" class="w-24 rounded-full">
+            <img src="../../../assets/Profile.jpeg" />
+          </div>
+          <button class="btn btn-circle btn-xs" (click)="addProfileImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+              <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+            </svg>
+          </button>
 
+        </div>
         <div class="card-body" *ngIf="name!= ''">
           <h2 class="card-title justify-center">{{ name }}</h2>
         </div>
@@ -41,21 +49,22 @@
   <div
     class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
   >
-    <div class="flex justify-between ...">
+    <div class="flex justify-between">
       <div>
-        <p class="follow1 col-start-3 col-end-5" id="cents">
+        <p class="follow1 col-start-3 col-end-5" id="cent">
           Followers <a class="number">{{ numberOfFollowers }}</a>
         </p>
       </div>
+      
       <div>
         <p class="follow1 col-start-5 col-end-7" id="cent">
           Following <a class="number">{{ numberOfFollowing }}</a>
         </p>
       </div>
       <div>
-        <button type="button" class="btn" id="btn">
+        <!-- <button type="button" class="btn" id="btn">
           <i class="fa fa-file-pen"></i>
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -64,6 +73,7 @@
 <div class="container py-5">
   <div class="inside">
     <div class="center">
+      <div *ngIf="added === true" class=" flex justify-center" id="added">Image added, you can post</div>
       <div class="input-group" id="post" [formGroup]="form">
         <input
           type="text"
@@ -73,6 +83,26 @@
           id="now"
         />
         <div>
+          <button class="btn btn-rounded" (click)="addBefore()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-photo"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="15" y1="8" x2="15.01" y2="8"></line>
+              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+              <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+              <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+            </svg>
+          </button>
           <button class="btn btn-rounded" (click)="post()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,26 +123,7 @@
               ></path>
             </svg>
           </button>
-          <button class="btn btn-rounded" (click)="addImage()">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-photo"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <line x1="15" y1="8" x2="15.01" y2="8"></line>
-              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
-              <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
-              <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
-            </svg>
-          </button>
+          
         </div>
       </div>
     </div>
@@ -145,8 +156,17 @@
         <div class="card-actions justify-end pb-1">
           <!-- <button class="btn btn-primary">Listen</button>
        -->
-          <div class="badge badge-outline">
-            <div class="swap-off" (click)="deletePost(postNum)">delete</div>
+          <div>
+            <div class="swap-off" (click)="deletePost(postNum)">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <line x1="4" y1="7" x2="20" y2="7"></line>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+             </svg>
+              </div>
           </div>
         </div>
       </div>

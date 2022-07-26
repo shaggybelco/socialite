@@ -1,17 +1,35 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthorizeService } from '../services/authorize.service';
+
+const token = localStorage.getItem('token');
+
+const httpOptions = {
+  Headers: new HttpHeaders({'Content-Type': 'application/json','token': `${token}`}),
+  responseType: 'json' as 'json'
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
+  currentUser: any;
+
   baseurl:string = "http://localhost:5050";
 
-  constructor(private view: HttpClient) { }
+  constructor(private view: HttpClient, private authService: AuthorizeService) { }
 
-  viewPost(id: any){
-    return this.view.get(`${this.baseurl}/news/getother/${id}`,{responseType: 'json'});
+  getID(){
+    return this.view.get(`${this.baseurl}/user/getid`, httpOptions);
+  }
+
+  viewPosts(id: any){
+    return this.view.get(`${this.baseurl}/news/getothers/${id}`);
+  }
+
+  getProfileImage(id: any){
+    return this.view.get(`${this.baseurl}/news/getprofileImage/${id}`, {responseType: 'json'});
   }
 
   post(body: any){
