@@ -10,6 +10,8 @@ export class SuggestedUsersService {
 
   baseurl:string = "http://localhost:5050";
 
+  // localhost:5050/user/getfollow/30
+
   constructor(private http:HttpClient) { }
 
   getSuggestedUsers(id: any)
@@ -30,4 +32,12 @@ export class SuggestedUsersService {
   getOne(id: any){
     return this.http.get(`${this.baseurl}/user/getone/${id}`);
   }
+
+
+  getAllFollowedUsers(id:any)
+  {
+    return this.http.get(`${this.baseurl}/user/getfollow/${id}`);
+  }
+
+
 }

@@ -57,19 +57,15 @@ export class AuthComponent implements OnInit {
           
           
           this.route.navigate(['/login']);
-          alert("Registered in successfully");
+          alert("Successfully Registered");
         },
         error: err =>{
-          alert("Successfully Registered");
+          alert("Registration error");
         }
   
       });
     }
   }
-
-  // register() {
-  //   this.createuser();
-  // }
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({

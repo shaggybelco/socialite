@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
   suggestedNameID: any = [];
   followOpt: any = "follow";
   status: any = "false"
+  userFollowing : any;
 
   spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
@@ -56,6 +57,10 @@ export class UsersComponent implements OnInit {
     });
   }
 
+
+
+  
+
   // follow other users
   followUsers(index: any) {
     //array for storing data to be passed at dabase
@@ -66,7 +71,7 @@ export class UsersComponent implements OnInit {
 
     //api to store the person you're  following
     this.userservice.followUsers(follower).subscribe((data) => {
-      console.table(data);
+     
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -114,6 +119,9 @@ export class UsersComponent implements OnInit {
         this.userservice.getOne(element).subscribe((followed: any) => {
           for (let i = 0; i < followed.length; i++) {
             this.follo.push(followed[i]);
+
+            console.table(this.follo)
+
           }
         });
       }
@@ -156,12 +164,34 @@ export class UsersComponent implements OnInit {
     // this.getFollow();
     
 
+    //getting all users that i am following
+    this.userservice.getAllFollowedUsers(this.current_id).subscribe((users)=>{
+
+      console.log("This is my id ",this.current_id)
+        console.log("Users that i am following are ",users);
+
+
+      this.userFollowing = users;
+       
+    })
+
+
     //getting all users
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {
         this.suggested_Users = suggested;
-        this.suggestedNameID = suggested;
+
+        
+        if(this.userFollowing=="")
+        {
+           this.suggestedNameID = suggested;
+        }
+        
+
+
+        console.log("All users ",this.suggestedNameID)
+
       });
 
 
@@ -173,6 +203,7 @@ export class UsersComponent implements OnInit {
 
         const element = data[0].follow[i];
         this.userservice.getOne(element).subscribe((followed: any) => {
+          
 
           for (let i = 0; i < followed.length; i++) {
             this.followe.push(followed[i]);
@@ -181,8 +212,6 @@ export class UsersComponent implements OnInit {
         });
       }
       this.dataGlobal = data;
-
-     
     });
   }
 }
