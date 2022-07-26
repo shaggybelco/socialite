@@ -86,7 +86,7 @@ export class NewsfeedComponent implements OnInit {
   addBefore() {
     let input = document.createElement('input');
     // const formdata = new FormData();
-    console.log(this.formdata);
+    // console.log(this.formdata);
     input.type = 'file';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
