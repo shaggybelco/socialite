@@ -31,6 +31,7 @@ export class ViewprofileComponent implements OnInit {
   followBool: boolean = false;
   unfollowB: boolean = true;
   option: any;
+  img: any;
 
   ngDoCheck() {
    
@@ -48,6 +49,7 @@ export class ViewprofileComponent implements OnInit {
      
     this.userservice.getOne(this.userID).subscribe((followed: any) => {
       this.name = followed[0].name;
+      this.img = followed[0].image;
     });
 
     this.profile.getPic(this.userID).subscribe((imgstat: any) => {

@@ -18,8 +18,11 @@
 >
   <div class="card w-96 bg-base-100 shadow-xl" id="cards">
     <div class="avatar justify-center" id="avatar">
-      <div class="w-24 rounded-full">
-        <img src="https://placeimg.com/192/192/people" />
+      <div *ngIf="img != null" class="w-24 rounded-full">
+        <img src="{{img}}" />
+      </div>
+      <div *ngIf="img == null" class="w-24 rounded-full">
+        <img src="../../../assets/Profile.jpeg" />
       </div>
     </div>
 

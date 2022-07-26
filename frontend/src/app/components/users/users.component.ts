@@ -37,9 +37,9 @@ export class UsersComponent implements OnInit {
     
     this.userservice.getAllFollowedUsers(this.current_id).subscribe(
       (all: any)=>{
-        console.table(all)
+        // console.table(all)
         if(all == ''){
-            console.log('it works ', this.pushAllUsers)
+            // console.log('it works ', this.pushAllUsers)
             this.following = false;
             this.suggestedNameID = this.pushAllUsers;
         }else{
@@ -222,7 +222,7 @@ export class UsersComponent implements OnInit {
         } else {
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
-          console.log(this.suggestedNameID)
+          // console.log(this.suggestedNameID)
         }
       });
     });
