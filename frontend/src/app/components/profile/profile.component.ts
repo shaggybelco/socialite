@@ -57,10 +57,16 @@ export class ProfileComponent implements OnInit {
   showpost: boolean = false;
 
   ngOnInit(): void {
-    this.userID = localStorage.getItem('user_id')
+    this.profile.getID().subscribe((decoded: any)=>{
+      this.userID = decoded.decoded.id
+      
+      this.afterId();
+    })
+  }
 
+ afterId(){
     this.profile
-      .getAll(localStorage.getItem('user_id'))
+      .getAll(this.userID)
       .subscribe((prof: any) => {
         this.name = prof[0].name;
         this.email= prof[0].email;
@@ -139,7 +145,7 @@ export class ProfileComponent implements OnInit {
   post() {
     let postdata = {
       data: {
-        userid: localStorage.getItem('user_id'),
+        userid: this.userID,
         message: this.form.value.message,
       },
     };
@@ -150,7 +156,7 @@ export class ProfileComponent implements OnInit {
     } else if (postdata.data.userid != '' && postdata.data.message != '') {
       const formdata = new FormData();
    
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+        this.form.get('userid')?.setValue(this.userID);
         
         formdata.append('userid', this.form.value.userid);
         formdata.append('caption', this.form.value.message)
@@ -179,7 +185,7 @@ export class ProfileComponent implements OnInit {
     input.type = 'file';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
-      this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+      this.form.get('userid')?.setValue(this.userID);
 
       formdata.append('userid', this.form.value.userid);
       formdata.append('caption', this.form.value.message);

@@ -20,11 +20,12 @@ const { suggestedUsers} = require("../controller/users/suggestedUsers");
 const { followers } = require('../controller/users/followers')
 const { following } = require('../controller/users/getFollowing')
 const { checkFollow } = require('../controller/users/checkIfFollowed');
+const verifyUser = require('../middleware/middleware')
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get/:id", getAllUsers); // get all existing users
+app.get("/get/:id", verifyUser ,getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user
@@ -42,6 +43,10 @@ app.get("/getall/:id", getAll);
 app.get("/followers/:id", followers);
 app.get('/getfollow/:id', following);
 app.get('/check/:id/:followid', checkFollow);
+
+//get user with token
+const { getUser } = require('../controller/users/getUserWithToken');
+app.get("/getid", verifyUser, getUser);
 
 //delete your post
 const { deletePost} = require('../controller/image/deletePost');

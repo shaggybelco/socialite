@@ -29,15 +29,23 @@ export class NewsfeedComponent implements OnInit {
   messages: any = {};
   posting: any = {};
   imgurl: any = {};
-  imgpost: any = {};
-  imgdate: any = {};
+  imgpost: any={};
+  imgdate: any={};
+  userId: any;
 
   ngOnInit(): void {
-    const id = localStorage.getItem('user_id');
-    this.profile.viewPost(id).subscribe((imgstat: any) => {
-      this.imgpost = imgstat;
-      const j = imgstat.length;
-    });
+
+      // const id = localStorage.getItem('user_id');
+      this.profile
+      .getID()
+      .subscribe((decoded: any) => {
+        this.userId = decoded.decoded.id;
+        console.log(decoded.decoded.id)
+        this.profile.viewPosts(decoded.decoded.id).subscribe((imgstat: any) =>{
+          this.imgpost = imgstat;
+        })
+      });
+
   }
 
   seeProfile(userId: any) {
@@ -62,7 +70,27 @@ export class NewsfeedComponent implements OnInit {
   });
 
   post() {
-    const formdata = new FormData();
+        const formdata = new FormData();
+   
+        this.form.get('userid')?.setValue(this.userId);
+        
+        formdata.append('userid', this.form.value.userid);
+        formdata.append('caption', this.form.value.message)
+        formdata.append('myfile',this.files);
+  
+       
+  
+        this.uploadingPic.uploading(formdata).subscribe(
+          (data: any) => {
+           
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
+          },
+          (err) => {
+            alert('failed to post');
+          }
+        );
 
     this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
 
@@ -86,7 +114,38 @@ export class NewsfeedComponent implements OnInit {
   addImageBefore() {
     
     
-  }
+      
+      let input = document.createElement('input');
+      const formdata = new FormData();
+      input.type = 'file';
+      input.onchange = (_) => {
+        this.files = input.files?.item(0);
+        this.form.get('userid')?.setValue(this.userId);
+        
+        formdata.append('userid', this.form.value.userid);
+        formdata.append('caption', this.form.value.message)
+        formdata.append('myfile',this.files);
+        formdata.append('date',this.form.value.date);
+  
+  
+        this.uploadingPic.uploading(formdata).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
+          },
+          (err) => {
+            alert('failed to post');
+          }
+        );
+  
+        console.log(this.files);
+      };
+  
+      input.click();
+   
+    }
 
   // formdata = new FormData();
   files: any = {};
