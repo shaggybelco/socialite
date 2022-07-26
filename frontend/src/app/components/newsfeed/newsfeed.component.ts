@@ -37,7 +37,7 @@ export class NewsfeedComponent implements OnInit {
     // const id = localStorage.getItem('user_id');
     this.profile.getID().subscribe((decoded: any) => {
       this.userId = decoded.decoded.id;
-      console.log(decoded.decoded.id);
+      // console.log(decoded.decoded.id);
       this.profile.viewPosts(decoded.decoded.id).subscribe((imgstat: any) => {
         this.imgpost = imgstat;
       });
