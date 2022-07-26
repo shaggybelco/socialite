@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyparser = require("body-parser");
+const verifyUser = require('../middleware/middleware');
 
 const { getAllPosts } = require("../controller/newsfeed/get");
 const { getUserPosts } = require("../controller/newsfeed/getone");
@@ -14,6 +15,6 @@ app.post("/poststatus", createStatus);
 app.delete("/deletepost/:id", deletePost);
 app.put("/updatestatus/:id", updatePost);
 app.get("/getone/:id", getUserPosts);
-app.get("/getother/:id", view)
+app.get("/getother/:id", verifyUser ,view)
 
 module.exports = app;

@@ -1,5 +1,19 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+const token = localStorage.getItem('token');
+const httpOptions = {
+  
+  headers: new HttpHeaders(
+    {
+      'Access-Control-Allow-Methods': 'GET',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token,
+      'Accept': '*/*',
+    }),
+  responseType: 'text' as 'json'
+};
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +25,7 @@ export class ProfileService {
   constructor(private view: HttpClient) { }
 
   viewPost(id: any){
-    return this.view.get(`${this.baseurl}/news/getother/${id}`,{responseType: 'json'});
+    return this.view.get(`${this.baseurl}/news/getother/${id}`,httpOptions);
   }
 
   post(body: any){
