@@ -12,6 +12,8 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  profileImg: any;
+  img: boolean = false;
 
   ngOnInit() {
     this.profile.getID().subscribe((decoded: any)=>{
@@ -22,6 +24,19 @@ export class UsersComponent implements OnInit {
   }
 
   afterId(){
+
+    this.profile.getProfileImage(this.current_id).subscribe(
+      (img: any)=>{
+        // console.log(img[0].image);
+        if(img[0].image == ''){
+          this.img = false;
+        }else{
+          this.img = true;
+          this.profileImg = img[0].image;
+        }
+        
+      }
+    )
     this.global();
     // this.getFollow();
     
@@ -166,7 +181,7 @@ export class UsersComponent implements OnInit {
           for (let i = 0; i < followed.length; i++) {
             this.follo.push(followed[i]);
 
-            console.table(this.follo)
+            // console.table(this.follo)
 
           }
         });
