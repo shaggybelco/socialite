@@ -72,7 +72,7 @@ export class ProfileComponent implements OnInit {
     this.profile.getProfileImage(this.userID).subscribe(
       (img: any)=>{
         console.log(img[0].image);
-        if(img[0].image == ''){
+        if(img[0].image == null){
           this.img = false;
         }else{
           this.img = true;

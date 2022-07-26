@@ -34,8 +34,11 @@
       <mat-card-content>
         <div class="alert">
           <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileFollow(num)">
-            <div class="w-15 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+            <div *ngIf="Friends.image != null" class="w-15 rounded-full">
+              <img src="{{Friends.image}}" />
+            </div>
+            <div *ngIf="Friends.image == null" class="w-15 rounded-full">
+              <img src="../../../assets/Profile.jpeg" />
             </div>
           </label>
           <div class="uname">
@@ -61,8 +64,11 @@
           <div class="alert">
             <div >
               <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileSU(index)">
-                <div class="w-15 rounded-full">
-                  <img src="https://placeimg.com/80/80/people" />
+                <div *ngIf="user.image != null" class="w-15 rounded-full">
+                  <img src="{{user.image}}" />
+                </div>
+                <div *ngIf="user.image == null" class="w-15 rounded-full">
+                  <img src="../../../assets/Profile.jpeg" />
                 </div>
               </label>
             </div>

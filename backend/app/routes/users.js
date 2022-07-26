@@ -25,7 +25,7 @@ const verifyUser = require('../middleware/middleware')
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get/:id", verifyUser, getAllUsers); // get all existing users
+app.get("/get/:id", getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user
@@ -126,8 +126,34 @@ app.post("/upload", type, async (req, res) => {
 
     res.status(200).json({ success: "Text have been uploaded" });
   }
+});
+
+  //profile
+  var profile = multer({ dest: "upload/" });
+
+var file = profile.single("myfile");
+
+app.put("/profile", file, async (req, res) => {
+
+  const { userid } = req.body;
 
 
+  if (req.file) {
+    const results = await cloudinary.uploader.upload(req.file.path, {
+      folder: "/profilePicture/",
+    });
+    const image = results.url;
+    console.log(results);
+
+    console.log(req.file);
+
+    pool.query("UPDATE users SET image = $1 WHERE id = $2", [
+      image,
+      userid,
+    ]);
+
+    res.status(200).json({ success: "Picture have been uploaded" });
+  }
 
 });
 

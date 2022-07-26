@@ -15,6 +15,6 @@ export class UploadService {
   }
 
   uploadingProfile(body: any){
-    return this.upload.post(`${this.baseurl}/user/profile`,body);
+    return this.upload.put(`${this.baseurl}/user/profile`,body);
   }
 }

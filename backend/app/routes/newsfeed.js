@@ -9,7 +9,8 @@ const { createStatus } = require("../controller/newsfeed/post");
 const { deletePost } = require("../controller/newsfeed/delete");
 const { updatePost } = require("../controller/newsfeed/update");
 const { view } = require("../controller/newsfeed/view");
-const { viewPost } = require('../controller/newsfeed/viewPost')
+const { viewPost } = require('../controller/newsfeed/viewPost');
+const {getProfileImage} = require('../controller/users/getprofileImage');
 
 app.get("/getstatus", getAllPosts);
 app.post("/poststatus", createStatus);
@@ -18,5 +19,6 @@ app.put("/updatestatus/:id", updatePost);
 app.get("/getone/:id", getUserPosts);
 app.get("/getother/:id", verifyUser ,view)
 app.get("/getOthers/:id", view);
+app.get("/getprofileImage/:id", getProfileImage);
 
 module.exports = app;
