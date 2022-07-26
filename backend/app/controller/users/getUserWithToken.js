@@ -4,12 +4,12 @@ const app = express();
 const bodyparser = require("body-parser");
 
 //Get all users in database
-exports.getAllUsers = async (req, res, next) => {
+exports.getUser = async (req, res, next) => {
   //declare function & get params
   const id = parseInt(req.params.id);
   try {
     await pool.query(
-      "SELECT * FROM users WHERE id <> $1 ORDER BY id ASC",
+      "SELECT * FROM users",
       [id],
       (error, results) => {
         // sequiliaze to get all userrs from the table

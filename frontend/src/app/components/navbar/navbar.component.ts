@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { AuthorizeService } from 'src/app/services/authorize.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { Route, Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private authorize: AuthorizeService) { }
 
   ngOnInit(): void {
   }
@@ -16,5 +17,6 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.route.navigate(['/login']);
     localStorage.removeItem('user_id');
+    localStorage.removeItem('token');
   }
 }

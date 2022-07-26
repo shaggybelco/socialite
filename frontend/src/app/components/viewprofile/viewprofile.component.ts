@@ -22,7 +22,7 @@ export class ViewprofileComponent implements OnInit {
   ) {}
 
   userID: any = localStorage.getItem('count');
-  loggedInUser: any = localStorage.getItem('user_id');
+  loggedInUser: any;
   name: any;
   numberOfFollowing: any;
   numberOfFollowers: any;
@@ -37,10 +37,14 @@ export class ViewprofileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //recieving the options
-    // this.follow = localStorage.getItem('status');
-    // console.log(this.option, " ", this.follow)
-    this.checkFollow()
+    //geting id from the token
+    this.profile.getID().subscribe((decoded: any)=>{
+      this.loggedInUser = decoded.decoded.id;
+      this.afterId();
+    })
+  }
+  afterId(){
+    
      
     this.userservice.getOne(this.userID).subscribe((followed: any) => {
       this.name = followed[0].name;
@@ -50,6 +54,7 @@ export class ViewprofileComponent implements OnInit {
       this.imgpost = imgstat;
     });
 
+    this.checkFollow();
     this.getFollowers();
     this.getFollow();
   }
