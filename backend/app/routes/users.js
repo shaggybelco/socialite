@@ -44,6 +44,10 @@ app.get("/followers/:id", followers);
 app.get('/getfollow/:id', following);
 app.get('/check/:id/:followid', checkFollow);
 
+//get user with token
+const { getUser } = require('../controller/users/getUserWithToken');
+app.get("/getid", verifyUser, getUser);
+
 //delete your post
 const { deletePost} = require('../controller/image/deletePost');
 app.delete("/delete/:postid/:id",deletePost);

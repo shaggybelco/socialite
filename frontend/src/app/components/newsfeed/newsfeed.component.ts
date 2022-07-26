@@ -36,17 +36,19 @@ export class NewsfeedComponent implements OnInit {
   imgurl: any = {};
   imgpost: any={};
   imgdate: any={};
-
+  userId: any;
 
   ngOnInit(): void {
 
-      const id = localStorage.getItem('user_id');
+      // const id = localStorage.getItem('user_id');
       this.profile
-      .viewPost(id)
-      .subscribe((imgstat: any) => {
-        this.imgpost = imgstat;
-        const j = imgstat.length;
-       
+      .getID()
+      .subscribe((decoded: any) => {
+        this.userId = decoded.decoded.id;
+        console.log(decoded.decoded.id)
+        this.profile.viewPosts(decoded.decoded.id).subscribe((imgstat: any) =>{
+          this.imgpost = imgstat;
+        })
       });
 
   }
@@ -74,7 +76,7 @@ export class NewsfeedComponent implements OnInit {
   post() {
         const formdata = new FormData();
    
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+        this.form.get('userid')?.setValue(this.userId);
         
         formdata.append('userid', this.form.value.userid);
         formdata.append('caption', this.form.value.message)
@@ -107,7 +109,7 @@ export class NewsfeedComponent implements OnInit {
       input.type = 'file';
       input.onchange = (_) => {
         this.files = input.files?.item(0);
-        this.form.get('userid')?.setValue(localStorage.getItem('user_id'));
+        this.form.get('userid')?.setValue(this.userId);
         
         formdata.append('userid', this.form.value.userid);
         formdata.append('caption', this.form.value.message)
