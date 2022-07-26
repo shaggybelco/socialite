@@ -54,13 +54,10 @@ export class AuthComponent implements OnInit {
     }else {
       this.auth.createUser(users.data).subscribe({
         next: data =>{
-          
-          
           this.route.navigate(['/login']);
-          alert("Registered in successfully");
         },
         error: err =>{
-          alert("Successfully Registered");
+          alert("failed to Registered");
         }
   
       });

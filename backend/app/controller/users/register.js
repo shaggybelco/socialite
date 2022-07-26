@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 //Register Function
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password} = req.body;
   try {
     const data = await pool.query(`SELECT * FROM users WHERE email= $1;`, [
       email,
