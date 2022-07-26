@@ -14,39 +14,62 @@ import { ProfileService } from 'src/app/services/profile.service';
 export class UsersComponent implements OnInit {
   profileImg: any;
   img: boolean = false;
+  following: boolean = false;
 
   ngOnInit() {
-    this.profile.getID().subscribe((decoded: any)=>{
+    this.profile.getID().subscribe((decoded: any) => {
       this.current_id = decoded.decoded.id
       this.afterId();
     })
 
   }
 
-  afterId(){
+  afterId() {
+    // 
+    this.userSort.getall(this.current_id).subscribe(
+     (user: any) => {
+        this.pushAllUsers = user;
+      },
+    (err: any) => {
+        alert(err.message);
+      },
+    );
+    
+    this.userservice.getAllFollowedUsers(this.current_id).subscribe(
+      (all: any)=>{
+        console.table(all)
+        if(all == ''){
+            console.log('it works ', this.pushAllUsers)
+            this.following = false;
+            this.suggestedNameID = this.pushAllUsers;
+        }else{
+          this.following = true;
+        }
+      }
+    )
 
     this.profile.getProfileImage(this.current_id).subscribe(
-      (img: any)=>{
+      (img: any) => {
         // console.log(img[0].image);
-        if(img[0].image == ''){
+        if (img[0].image == '') {
           this.img = false;
-        }else{
+        } else {
           this.img = true;
           this.profileImg = img[0].image;
         }
-        
+
       }
     )
     this.global();
     // this.getFollow();
-    
-    
+
+
     //getting all users
     this.userservice
       .getSuggestedUsers(this.current_id)
       .subscribe((suggested: any) => {
         this.suggested_Users = suggested;
-        this.suggestedNameID = suggested;
+        // this.suggestedNameID = suggested;
       });
 
 
@@ -65,9 +88,10 @@ export class UsersComponent implements OnInit {
 
         });
       }
+      console.log(this.followe)
       this.dataGlobal = data;
 
-     
+
     });
   }
 
@@ -84,7 +108,7 @@ export class UsersComponent implements OnInit {
   suggestedNameID: any = [];
   followOpt: any = "follow";
   status: any = "false"
-  userFollowing : any;
+  userFollowing: any;
 
   spinnerStyle = Spinkit;
   dataGlobal!: any; //! to prevent problems when accepting data
@@ -95,32 +119,32 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private profile: ProfileService
-  ) {}
+  ) { }
 
 
   //select the profile you want to see suggested users
-  seeProfileSU(userId: any){
+  seeProfileSU(userId: any) {
     this.userservice.getOne(this.suggestedNameID[userId].id).subscribe((followed: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      this.router.navigate(['/viewprofile'], { relativeTo: this.route })
       localStorage.setItem('count', this.suggestedNameID[userId].id);
     });
   }
 
   // see profile for the user you are following
-  seeProfileFollow(userId: any){
+  seeProfileFollow(userId: any) {
     this.userservice.getOne(this.followe[userId].id).subscribe((followed: any) => {
-      this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = "reload";
-      this.router.navigate(['/viewprofile'], {relativeTo: this.route})
+      this.router.navigate(['/viewprofile'], { relativeTo: this.route })
       localStorage.setItem('count', this.followe[userId].id);
     });
   }
 
 
 
-  
+
 
   // follow other users
   followUsers(index: any) {
@@ -132,7 +156,7 @@ export class UsersComponent implements OnInit {
 
     //api to store the person you're  following
     this.userservice.followUsers(follower).subscribe((data) => {
-     
+
     });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -151,31 +175,19 @@ export class UsersComponent implements OnInit {
     //   console.log('Data to be passed', data);
     // });
 
-    this.un.unfollow(data).subscribe((net) => {});
+    this.un.unfollow(data).subscribe((net) => { });
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/users'], { relativeTo: this.route });
   }
 
-  async getUsers() {
-    this.userSort.getall(this.current_id).subscribe({
-      next: (user: any) => {
-        this.pushAllUsers = user;
-      },
-      error: (err: any) => {
-        alert(err.message);
-      },
-    });
-    await this.pushAllUsers;
-  }
-
-  //
-
   getFollow() {
+
     //get all users first on the follow list that you follow
     this.userSort.getFriends(this.current_id).subscribe((foll: any) => {
       for (let i = 0; i < foll[0].follow.length; i++) {
         const element = foll[0].follow[i];
+        
         //getting the users that you are following and push them to an array
         this.userservice.getOne(element).subscribe((followed: any) => {
           for (let i = 0; i < followed.length; i++) {
@@ -210,6 +222,7 @@ export class UsersComponent implements OnInit {
         } else {
           suggested.push(newUser.id);
           this.suggestedNameID.push(newUser);
+          console.log(this.suggestedNameID)
         }
       });
     });
@@ -217,7 +230,6 @@ export class UsersComponent implements OnInit {
 
   async global() {
     await this.getFollow();
-    await this.getUsers();
   }
 
 }
