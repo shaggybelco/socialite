@@ -55,6 +55,8 @@ export class ProfileComponent implements OnInit {
   numberOfFollowing: number = 0;
   numberOfFollowers: number = 0;
   showpost: boolean = false;
+  profileImg: any;
+  img: boolean = false;
 
   ngOnInit(): void {
     this.profile.getID().subscribe((decoded: any)=>{
@@ -65,6 +67,20 @@ export class ProfileComponent implements OnInit {
   }
 
  afterId(){
+ 
+    this.profile.getProfileImage(this.userID).subscribe(
+      (img: any)=>{
+        console.log(img[0].image);
+        if(img[0].image == ''){
+          this.img = false;
+        }else{
+          this.img = true;
+          this.profileImg = img[0].image;
+        }
+        
+      }
+    )
+ 
     this.profile
       .getAll(this.userID)
       .subscribe((prof: any) => {
@@ -193,6 +209,35 @@ export class ProfileComponent implements OnInit {
 
 
       this.uploadingPic.uploading(formdata).subscribe(
+        (data: any) => {
+          this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate(['/profile'], {relativeTo: this.route})
+        },
+        (err) => {
+          alert(`failed to post: ${err.message}`);
+        }
+      );
+    };
+
+    input.click();
+  }
+
+ 
+
+  addProfileImage() {
+    let input = document.createElement('input');
+    const formdata = new FormData();
+    input.type = 'file';
+    input.onchange = (_) => {
+      this.files = input.files?.item(0);
+      this.form.get('userid')?.setValue(this.userID);
+
+      formdata.append('userid', this.form.value.userid);
+      formdata.append('myfile', this.files);
+
+
+      this.uploadingPic.uploadingProfile(formdata).subscribe(
         (data: any) => {
           this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
           this.router.onSameUrlNavigation = "reload";

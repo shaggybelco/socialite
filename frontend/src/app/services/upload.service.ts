@@ -6,11 +6,15 @@ import { Injectable } from '@angular/core';
 })
 export class UploadService {
 
-  baseurl:string = "http://localhost:5050/user";
+  baseurl:string = "http://localhost:5050";
 
   constructor(private upload: HttpClient) { }
 
   uploading(body: any){
-    return this.upload.post(`${this.baseurl}/upload`,body);
+    return this.upload.post(`${this.baseurl}/user/upload`,body);
+  }
+
+  uploadingProfile(body: any){
+    return this.upload.post(`${this.baseurl}/user/profile`,body);
   }
 }

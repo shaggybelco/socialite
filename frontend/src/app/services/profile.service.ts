@@ -28,6 +28,10 @@ export class ProfileService {
     return this.view.get(`${this.baseurl}/news/getothers/${id}`);
   }
 
+  getProfileImage(id: any){
+    return this.view.get(`${this.baseurl}/news/getprofileImage/${id}`, {responseType: 'json'});
+  }
+
   post(body: any){
     return this.view.post(`${this.baseurl}/news/poststatus`, body);
   }
