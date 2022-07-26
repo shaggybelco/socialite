@@ -64,10 +64,6 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  // register() {
-  //   this.createuser();
-  // }
-
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       name: ['',[Validators.required, Validators.minLength(3)]],
