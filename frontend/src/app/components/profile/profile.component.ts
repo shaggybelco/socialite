@@ -183,7 +183,11 @@ export class ProfileComponent implements OnInit {
         console.log(this.formdata)
         
   
-       
+        this.form.get('userid')?.setValue(this.userID);
+
+        this.formdata.append('userid', this.form.value.userid);
+        this.formdata.append('caption', this.form.value.message);
+        this.formdata.append('myfile', this.files);
         // console.log('it does nothing', this.formdata);
   
         this.uploadingPic.uploading(this.formdata).subscribe(

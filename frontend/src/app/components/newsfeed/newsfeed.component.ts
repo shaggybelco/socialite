@@ -71,17 +71,40 @@ export class NewsfeedComponent implements OnInit {
   });
 
   post() {
-    this.uploadingPic.uploading(this.formdata).subscribe(
-      (data: any) => {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/newsfeed'], { relativeTo: this.route });
+    let postdata = {
+      data: {
+        userid: this.userId,
+        message: this.form.value.message,
       },
-      (err) => {
-        alert('failed to post');
-      }
-    );
+    };
+
+    if (this.form.invalid) {
+      alert('can not post empty text');
+      return;
+    } else if (postdata.data.userid != '' && postdata.data.message != '') {
+        console.log(this.formdata)
+        
+  
+        this.form.get('userid')?.setValue(this.userId);
+
+        this.formdata.append('userid', this.form.value.userid);
+        this.formdata.append('caption', this.form.value.message);
+        this.formdata.append('myfile', this.files);
+        // console.log('it does nothing', this.formdata);
+  
+        this.uploadingPic.uploading(this.formdata).subscribe(
+          (data: any) => {
+            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
+            this.router.onSameUrlNavigation = "reload";
+            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
+          },
+          (err) => {
+            alert(`failed to post: ${err.message}`);
+          }
+        );
+    }
   }
+
 
   // formdata = new FormData();
   files: any = {};
