@@ -62,9 +62,9 @@
         </p>
       </div>
       <div>
-        <button type="button" class="btn" id="btn">
+        <!-- <button type="button" class="btn" id="btn">
           <i class="fa fa-file-pen"></i>
-        </button>
+        </button> -->
       </div>
     </div>
   </div>
@@ -131,7 +131,7 @@
 
 
   <div class="d-flex flex-column mb-4"></div>
-  <h1>RECENT FEEDS</h1>
+  <h1>My Posts</h1>
   <div class="d-flex flex-column py-2"></div>
 
   <div fxLayout="row wrap"  fxLayoutGap="1%">
@@ -140,7 +140,7 @@
           fxFlex="49%"
           fxFlex.xs="100%"
           fxFlex.sm="49%"
-      class="card lg:card-side bg-base-100 shadow-xl card-bordered border-white"
+      class="card lg:card-side bg-base-100 shadow-xl outline"
       id="post1"
       *ngFor="let posts of imgpost; let postNum = index"
     >
