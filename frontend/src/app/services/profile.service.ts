@@ -24,8 +24,8 @@ export class ProfileService {
     return this.view.get(`${this.baseurl}/user/getid`, httpOptions);
   }
 
-  viewPosts(id: any){
-    return this.view.get(`${this.baseurl}/news/getothers/${id}`);
+  viewPosts(){
+    return this.view.get(`${this.baseurl}/news/getothers`);
   }
 
   getProfileImage(id: any){
@@ -33,7 +33,7 @@ export class ProfileService {
   }
 
   post(body: any){
-    return this.view.post(`${this.baseurl}/news/poststatus`, body);
+    return this.view.post(`${this.baseurl}/news/poststatus`, body, {responseType: 'json'});
   }
 
   getPic(id: any){

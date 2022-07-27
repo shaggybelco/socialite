@@ -18,7 +18,7 @@ app.delete("/deletepost/:id", deletePost);
 app.put("/updatestatus/:id", updatePost);
 app.get("/getone/:id", getUserPosts);
 app.get("/getother/:id", verifyUser ,view)
-app.get("/getOthers/:id",view);
+app.get("/getOthers",view);
 app.get("/getprofileImage/:id", getProfileImage);
 
 module.exports = app;

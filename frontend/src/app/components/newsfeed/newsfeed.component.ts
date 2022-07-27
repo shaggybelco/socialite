@@ -38,7 +38,7 @@ export class NewsfeedComponent implements OnInit {
     this.profile.getID().subscribe((decoded: any) => {
       this.userId = decoded.decoded.id;
       // console.log(decoded.decoded.id);
-      this.profile.viewPosts(decoded.decoded.id).subscribe((imgstat: any) => {
+      this.profile.viewPosts().subscribe((imgstat: any) => {
         this.imgpost = imgstat;
       });
     });
@@ -81,17 +81,7 @@ export class NewsfeedComponent implements OnInit {
     if (this.form.invalid) {
       alert('can not post empty text');
       return;
-    } else if (postdata.data.userid != '' && postdata.data.message != '') {
-        console.log(this.formdata)
-        
-  
-        this.form.get('userid')?.setValue(this.userId);
-
-        this.formdata.append('userid', this.form.value.userid);
-        this.formdata.append('caption', this.form.value.message);
-        this.formdata.append('myfile', this.files);
-        // console.log('it does nothing', this.formdata);
-  
+    } else if (postdata.data.userid != '') {
         this.uploadingPic.uploading(this.formdata).subscribe(
           (data: any) => {
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
