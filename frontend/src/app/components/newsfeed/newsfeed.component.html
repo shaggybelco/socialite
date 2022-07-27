@@ -88,7 +88,7 @@
           </figure>
           <div class="card-body">
             <h2 class="card-title" id="username" (click)="seeProfile(id)">
-              {{ posts.name }}
+              {{ titleCaseWord(posts.name) }}
             </h2>
             <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
             <p id="caption">{{ posts.caption }}</p>

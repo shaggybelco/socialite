@@ -181,6 +181,11 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/users'], { relativeTo: this.route });
   }
 
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }
+
   getFollow() {
 
     //get all users first on the follow list that you follow

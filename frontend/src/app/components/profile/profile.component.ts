@@ -64,9 +64,12 @@ export class ProfileComponent implements OnInit {
       
       this.afterId();
     })
+
+    
   }
 
  afterId(){
+   
  
     this.profile.getProfileImage(this.userID).subscribe(
       (img: any)=>{
@@ -143,6 +146,13 @@ export class ProfileComponent implements OnInit {
       }
     )
   }
+
+  titleCaseWord(word: string) {
+    if (!word) return word;
+    return word[0].toUpperCase() + word.substr(1).toLowerCase();
+  }
+
+
 
   getFollowers(){
     this.profile.getFollowers(this.userID).subscribe(
