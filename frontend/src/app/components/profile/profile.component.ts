@@ -9,7 +9,6 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { SortUsersService } from 'src/app/services/sort-users.service';
 import { SuggestedUsersService } from 'src/app/services/suggested-users.service';
 import { Spinkit } from 'ng-http-loader';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -71,7 +70,7 @@ export class ProfileComponent implements OnInit {
  
     this.profile.getProfileImage(this.userID).subscribe(
       (img: any)=>{
-        console.log(img[0].image);
+        // console.log(img[0].image);
         if(img[0].image == null){
           this.img = false;
         }else{
@@ -175,7 +174,7 @@ export class ProfileComponent implements OnInit {
         
   
        
-        console.log('it does nothing', this.formdata);
+        // console.log('it does nothing', this.formdata);
   
         this.uploadingPic.uploading(this.formdata).subscribe(
           (data: any) => {
