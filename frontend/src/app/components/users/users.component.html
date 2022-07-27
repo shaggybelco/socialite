@@ -32,7 +32,7 @@
       <mat-card-header></mat-card-header>
 
       <mat-card-content>
-        <div class="alert">
+        <div class="alert outline">
           <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileFollow(num)">
             <div *ngIf="Friends.image != null" class="w-15 rounded-full">
               <img src="{{Friends.image}}" />
@@ -61,7 +61,7 @@
       >
         <mat-card-header> </mat-card-header>
         <mat-card-content>
-          <div class="alert">
+          <div class="alert outline">
             <div >
               <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileSU(index)">
                 <div *ngIf="user.image != null" class="w-15 rounded-full">
