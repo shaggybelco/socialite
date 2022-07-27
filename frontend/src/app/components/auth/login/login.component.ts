@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.auth.loguser(userlogin.data).subscribe(
         (myData: any) => {
-          console.log(myData)
+          // console.log(myData)
           this.user = myData.user[0].id;
           this.route.navigate(['/newsfeed']);
     

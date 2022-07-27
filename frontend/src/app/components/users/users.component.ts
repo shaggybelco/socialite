@@ -88,7 +88,7 @@ export class UsersComponent implements OnInit {
 
         });
       }
-      console.log(this.followe)
+      // console.log(this.followe)
       this.dataGlobal = data;
 
 
