@@ -108,14 +108,15 @@
       </div>
       <hr />
 
-      <div class="flex justify-center">
-        <h1 id="wel">Welcome To Socialite</h1>
-      </div>
+      
 
-      <div fxLayout="row wrap" fxLayoutGap="1%" *ngIf="imgpost == ''">
+      <div fxLayoutGap="1%" *ngIf="imgpost == ''">
+        <div class="flex justify-center" >
+          <h1 id="wel">Welcome To Socialite</h1>
+        </div>
           <div class="flex justify-center">
             <h2 id="mess">
-              We saw that there are no posts on the your newsfeed, <a id="click" routerLink="/users">click here</a>  to see the
+              We saw that there are no posts on the your newsfeed, <b><a id="click" routerLink="/users">click here</a></b>  to see the
               people you can socialize with!
             </h2>
           </div>
