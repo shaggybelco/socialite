@@ -112,6 +112,7 @@ export class NewsfeedComponent implements OnInit {
     // const formdata = new FormData();
     // console.log(this.formdata);
     input.type = 'file';
+    input.name = 'myfile';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
       if (input.files?.item(0) != null) {
