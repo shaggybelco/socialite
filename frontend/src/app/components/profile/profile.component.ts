@@ -181,14 +181,18 @@ export class ProfileComponent implements OnInit {
   files: any = {};
   formdata = new FormData();
   added: boolean = false;
+
   addBefore() {
     let input = document.createElement('input');
     // const formdata = new FormData();
-    console.log(this.formdata);
+
     input.type = 'file';
-    input.name = 'myfile';
+ 
+    // input.name = 'myfile';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
+      console.log(input.files?.item(0));
+
       if (input.files?.item(0) != null) {
         this.added = true;
       }
@@ -199,7 +203,9 @@ export class ProfileComponent implements OnInit {
       this.formdata.append('myfile', this.files);
     };
 
+    
     input.click();
+ 
   }
 
   addProfileImage() {
