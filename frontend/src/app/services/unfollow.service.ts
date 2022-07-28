@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class UnfollowService {
 
   constructor(private http: HttpClient) { }
-  baseurl:string = "http://localhost:5050";
-
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
+  
   unfollow(ids: any){
     return this.http.put(`${this.baseurl}/users/unfollow`, ids, {responseType: 'text'});
   } 

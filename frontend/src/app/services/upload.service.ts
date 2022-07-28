@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class UploadService {
 
-  baseurl:string = "http://localhost:5050";
-
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
+  
   constructor(private upload: HttpClient) { }
 
   uploading(body: any){

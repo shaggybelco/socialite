@@ -17,7 +17,7 @@ const httpOptions = {
 export class AuthorizeService {
   constructor(private http: HttpClient) {}
 
-  baseurl: string = 'http://localhost:5050';
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
 
   createUser(body: any) {
     return this.http.post(`${this.baseurl}/user/register/`, body, httpOptions);

@@ -7,8 +7,7 @@ import { Injectable } from '@angular/core';
 export class SortUsersService {
   constructor(private http: HttpClient) {}
 
-  baseurl: string = 'http://localhost:5050';
-
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
   getall(id: any) {
     return this.http.get(`${this.baseurl}/user/get/${id}`);
   }

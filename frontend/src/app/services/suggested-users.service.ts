@@ -8,8 +8,7 @@ export class SuggestedUsersService {
 
   
 
-  baseurl:string = "http://localhost:5050";
-
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
   // localhost:5050/user/getfollow/30
 
   constructor(private http:HttpClient) { }

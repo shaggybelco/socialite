@@ -16,7 +16,7 @@ export class ProfileService {
 
   currentUser: any;
 
-  baseurl:string = "http://localhost:5050";
+  baseurl: string = 'https://socialitesapp.herokuapp.com';
 
   constructor(private view: HttpClient, private authService: AuthorizeService) { }
 
