@@ -1,27 +1,47 @@
 <app-navbar></app-navbar>
+<!--loader-->
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
+<!-- end loader -->
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
 >
   <h2 class="hea">My Profile</h2>
+
   <div class="profile">
     <div
       class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
     >
-      <div class="row">
-        <div class="col-4">
-          <img
-            class="pp2"
-            src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-            alt="none"
-          />
+      <div class="card w-96 bg-base-100 shadow-xl" id="cards">
+        <div class="avatar justify-center" id="avatar">
+          <div *ngIf="img === true" class="w-24 rounded-full">
+            <img src="{{profileImg}}" />
+          </div>
+          <div *ngIf="img === false" class="w-24 rounded-full">
+            <img src="../../../assets/Profile.jpeg" />
+          </div>
+          <button class="btn btn-circle btn-xs" (click)="addProfileImage()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+              <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+            </svg>
+          </button>
+
         </div>
-        <div class="col-4">
-          <p class="uname">{{ name }}</p>
+        <div class="card-body" *ngIf="name!= ''">
+          <h2 class="card-title justify-center">{{ name | uppercase}}</h2>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <div
   class="col-auto container-sm container-md container-lg container-xl align-content-center ppc"
@@ -29,114 +49,128 @@
   <div
     class="ontainer-sm container-md container-lg container-xl align-content-center ppp"
   >
-    <div class="follow">
-      <p class="follow1">Followers <a class="number">123</a></p>
-    </div>
-    <div class="follow">
-      <p class="follow1">Following <a class="number">132</a></p>
-    </div>
-    <div class="follow2">
-      <button type="button" class="btn" id="btn">
-        <i class="fa fa-file-pen"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center ppm"
->
-  <form [formGroup]="form">
-    <input
-      type="text"
-      name="post"
-      id="post"
-      placeholder="Post"
-      formControlName="message"
-    />
-    <i class="fa-solid fa-pen"></i>
-  </form>
-
-  <!-- 
-  <i class="fa-solid fa-paper-plane-top"></i> -->
-</div>
-
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
->
-  <div class="row">
-    <div class="col-6">
-      <button class="btn" id="btnpost" (click)="post()">
-        <i class="fa-solid fa-location-arrow fa-2x"></i>
-      </button>
-    </div>
-    <div class="col-6">
-      <button class="btn" id="btnpost" (click)="addImage()">
-        <i class="fa-solid fa-image fa-2x"></i>
-      </button>
-    </div>
-  </div>
-</div>
-
-<div
-  class="col-auto container-sm container-md container-lg container-xl align-content-center send"
->
-<h2>Pictures status</h2>
-
-<div fxLayout="row wrap" fxLayoutGap="16px grid">
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let posts of imgpost">
-    <mat-card
-      class="mat-elevation-z4"
-     
-      id="cardpost"
-    >
-      <mat-card-header>
-        <mat-card-title>
-          {{ posts.name }}
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{ posts.date }}
-          <hr />
-          
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-      {{ posts.caption }}
-        
-        <img class="profpost" src="{{ posts.image }}" alt="pictures" />
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-        <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-      </mat-card-actions>
-    </mat-card>
-    <hr />
-  </div>
-</div>
-
-  <h2>Text status</h2>
-  <!-- POST CARD -->
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="100%" *ngFor="let posts of posting">
-    <mat-card
-      class="mat-elevation-z4"
+    <div class="flex justify-between">
+      <div>
+        <p class="follow1 col-start-3 col-end-5" id="cent">
+          Followers <a class="number">{{ numberOfFollowers }}</a>
+        </p>
+      </div>
       
-      id="cardpost"
+      <div>
+        <p class="follow1 col-start-5 col-end-7" id="cent">
+          Following <a class="number">{{ numberOfFollowing }}</a>
+        </p>
+      </div>
+      <div>
+        <!-- <button type="button" class="btn" id="btn">
+          <i class="fa fa-file-pen"></i>
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
+  <div class="inside">
+    <div class="center">
+      <div *ngIf="added === true" class=" flex justify-center" id="added">Image added, you can post</div>
+      <div class="input-group" id="post" [formGroup]="form">
+        <input
+          type="text"
+          placeholder="Say what is on your mind"
+          class="input input-bordered"
+          formControlName="message"
+          id="now"
+        />
+        <div>
+          <button class="btn btn-rounded" (click)="addBefore()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-photo"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="15" y1="8" x2="15.01" y2="8"></line>
+              <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+              <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+              <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+            </svg>
+          </button>
+          <button class="btn btn-rounded" (click)="post()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-send"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+              <path
+                d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5"
+              ></path>
+            </svg>
+          </button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex flex-column mb-4"></div>
+  <h1>My Posts</h1>
+  <div class="d-flex flex-column py-2"></div>
+
+  <div fxLayout="row wrap"  fxLayoutGap="1%">
+    <div
+          
+          fxFlex="49%"
+          fxFlex.xs="100%"
+          fxFlex.sm="49%"
+      class="card lg:card-side bg-base-100 shadow-xl outline"
+      id="post1"
+      *ngFor="let posts of imgpost; let postNum = index"
     >
-      <mat-card-header>
-        <mat-card-title>
-          <h3 class="uname">{{ posts.name }}</h3>
-        </mat-card-title>
-        <mat-card-subtitle>{{ posts.date }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="stat">
-        {{ posts.message }}
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button class="b"><i class="fa-regular fa-heart"></i></button>
-        <button mat-button class="b"><i class="fa-regular fa-message"></i></button>
-      </mat-card-actions>
-    </mat-card>
+      <figure>
+        <img src="{{ posts.image }}" width="100%" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">{{titleCaseWord(posts.name) }}</h2>
+        <div class="badge badge-secondary">
+          {{ transform(posts.date) }}
+        </div>
+        <p id="caption">{{ posts.caption }}</p>
+        <div class="card-actions justify-end pb-1">
+          <!-- <button class="btn btn-primary">Listen</button>
+       -->
+          <div>
+            <div class="swap-off" (click)="deletePost(postNum)">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <line x1="4" y1="7" x2="20" y2="7"></line>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+             </svg>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <hr />
   </div>
 </div>

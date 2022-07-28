@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthorizeService } from 'src/app/services/authorize.service';
 import { UsersComponent } from '../users/users.component';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +19,7 @@ import { UsersComponent } from '../users/users.component';
 export class AuthComponent implements OnInit {
   constructor(private auth: AuthorizeService, private route: Router, private formbuilder: FormBuilder) {}
 
+  spinnerStyle = Spinkit;
   id: any;
 
   form: FormGroup = new FormGroup({
@@ -52,20 +54,14 @@ export class AuthComponent implements OnInit {
     }else {
       this.auth.createUser(users.data).subscribe({
         next: data =>{
-          
           this.route.navigate(['/login']);
-          alert("Registered in successfully");
         },
         error: err =>{
-          alert("You are already registered");
+          alert("failed to Registered");
         }
   
       });
     }
-  }
-
-  register() {
-    this.createuser();
   }
 
   ngOnInit(): void {

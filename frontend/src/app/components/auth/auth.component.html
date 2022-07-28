@@ -1,3 +1,14 @@
+<!--loader-->
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
+<!-- end loader -->
+
 <div class="hero min-h-screen bg-base-200">
   <div class="hero-content flex-col lg:flex-row-reverse">
     <div class="text-center lg:text-left">
@@ -25,6 +36,11 @@
           </div>
           <div *ngIf="f['name'].errors && f['name'].errors['name']">
             Please, enter valid name.
+          </div>
+        </div>
+        <div class="flex justify-center items-center">
+          <div class="spinner-border animate-spin inline-block w-10 h-10 border-6 rounded-full visually-hidden" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
         </div>
 
@@ -104,7 +120,7 @@
 
 
     
-        <button class="btn btn-primary" id="btn" (click)="createuser()">
+        <button class="btn" id="btn" (click)="createuser()">
           Register
         </button>
 
@@ -120,4 +136,8 @@
       </div>
     </div>
   </div>
+  
 </div>
+
+
+

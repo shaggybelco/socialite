@@ -9,7 +9,7 @@ exports.getOneUser = (req, res) => {
   //declare function & get params
   const id = parseInt(req.params.id); // declare a variable that will use to locate each user
 
-  pool.query('SELECT name FROM users WHERE id = $1', [id], (error, results) => {
+  pool.query('SELECT id, name, image FROM users WHERE id = $1', [id], (error, results) => {
     // sequiliaze to get all userrs from the table
     if (error) {
       // if statement to catch errors if there's any

@@ -1,7 +1,4 @@
-.navbar 
-{
-  background-color:white
-}
+
 h3{
   text-align: center;
 }
@@ -11,17 +8,28 @@ h3{
   font-family: monospace;
 }
 
-#lite{
-  font-family:'Courier New', Courier, monospace;
+.lite{
+  color:rgba(183,49,223,1);
+    font-family: monospace;
 }
+
 
 #txtLogin{
   color: #67c1c4;
   text-decoration: none;
 }
-
+#lite{
+  font-family:'Courier New', Courier, monospace;
+  text-align: center;
+  color: rgb(250, 25, 182);
+}
 #btn{
   margin-top: 40px;
   margin-bottom: 30px;
   background: rgba(46, 43, 69, 0.2);
+}
+.img
+{
+  width: 15vw;
+  height: 15vh;
 }

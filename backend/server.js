@@ -6,7 +6,8 @@ require("./app/config/dotevn"); //Import your environmental configs
 
 const user = require("./app/routes/users");
 const news = require("./app/routes/newsfeed");
-
+const friends = require("./app/routes/friendsfollowedR");
+const unfollow = require("./app/routes/unfollow");
 const client = require("./app/config/database");
 
 
@@ -32,6 +33,8 @@ app.get("/", (request, response) =>{
 
 app.use("/user", user); // User endpoint API
 app.use('/news', news);
+app.use("/friends", friends);
+app.use("/users", unfollow);
 
 app.listen(port, process.env.baseURL , () =>{  
    console.log(`Here we go, All Engines started at ${port}.`) 

@@ -1,33 +1,32 @@
-<!-- <div class="container-fluid">
-    <img
-      class="imag"
-      src="https://res.cloudinary.com/dadevelopers/image/upload/v1656314804/profile/rc2ubumybq3fwyxwuv34.png"
-      alt="..."
-    />
-<button type="button" class="btn" [routerLink]="['/register']" >
-    GETTING STARTED
-  </button>
+<!--loader-->
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
+<!-- end loader -->
 
-</div>
- -->
-
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <img
-      src="https://placeimg.com/260/400/arch"
-      class="max-w-sm rounded-lg shadow-2xl"
-    />
-    <div>
-      <h1 class="text-5xl font-bold" id="lite">
+ <div class="hero min-h-screen bg-base-200 ss">
+  <video id="vid" width="100%" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="../../../assets/videon.mp4" type="video/mp4">
+  </video>
+  <div class="hero-content flex lg:flex-row-reverse">
+    
+    <div id="landingtxt">
+      <h1 class="text-6xl font-bold ll" id="lite">
+        
         Socia<a class="lite">lite</a>
       </h1>
-      <p class="py-9">
-        Hellow there, want to get in touch with friends and family, <a routerLink="/register" id="txtLogin"> register</a> and
-        be intouch with them, invite them if they are not registered.
-      </p>
+      <div class="py-9" id="textt">
+        Hello there, want to get in touch with friends and family , <a routerLink="/register" id="txtLogin"> register</a> and
+        be in touch with them, invite them if they are not registered.
+      </div>
 
      
-      <button class="btn btn-primary" routerLink="/register" id="btn">Get Started</button>
+      <button class="btn" routerLink="/login" id="btn">Get Started</button>
     </div>
   </div>
 </div>

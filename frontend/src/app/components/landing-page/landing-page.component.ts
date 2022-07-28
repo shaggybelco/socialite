@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Spinkit } from 'ng-http-loader';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-
+  spinnerStyle = Spinkit;
   constructor() { }
 
+  
   ngOnInit(): void {
   }
 

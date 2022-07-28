@@ -1,134 +1,90 @@
 <app-navbar></app-navbar>
 
+<!--loader-->
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
+<!-- end loader -->
+
 <!-- THIS IS WHERE STORIES WOULD GO -->
 <div
   class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
 >
   <!-- <div class="card-header">Header</div> -->
   <div class="card-body">
-    <h1 class="card-title">Users</h1>
+    <h1 style="text-align: center;" class="head">USERS</h1>
     <p class="card-text"></p>
   </div>
 
-  <!-- 
-<div class="userprofilecard">
-
-    <div class="card text-center">
-
-        <mat-card class="card-body" id="cardbodyd">
-            <div class="profilepicture">
-                      <img class="displaypic" src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg" width="100px" height="100px">
-            </div>
-            
-          
-          <div class="userdetail">
-            <h5 class="card-title">User Name</h5>
-            <p class="card-text">User@gmail.com</p>
-            <button type="button" class="followbtn">follow</button>
-          </div>
-            
-        </mat-card>
-        
-      </div>
-</div>
-
-
-  </div>
-</div> -->
+ 
 
   <div
     class="align-content-center container-sm container-md container-lg container-xl align-content-center pp"
   >
-    <h2>Friends</h2> <div class="d-flex flex-column mb-4"></div>
-    <mat-card id="row">
-      <mat-card-header> </mat-card-header>
+    <h2 class="sug">Friends</h2>
+    <mat-card *ngFor="let Friends of followe; let num = index" id="row">
+      <br />
+      <mat-card-header></mat-card-header>
+
       <mat-card-content>
-        <div class="row justify-content-center">
-          <div class="col">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
+        <div class="alert outline">
+          <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileFollow(num)">
+            <div *ngIf="Friends.image != null" class="w-15 rounded-full">
+              <img src="{{Friends.image}}" />
+            </div>
+            <div *ngIf="Friends.image == null" class="w-15 rounded-full">
+              <img src="../../../assets/Profile.jpeg" />
+            </div>
+          </label>
+          <div class="uname">
+            <p>{{ titleCaseWord(Friends.name)}}</p>
           </div>
 
-          <div class="col-9 b">
-            <p class="uname">Belco Sambo</p>
-          </div>
-
-          <div class="col">
-            <button class="btn" id="btn">Following</button>
+          <div class="flex-none">
+            <button class="btn" (click)="unfollow(num)">unfollow</button>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
-    <mat-card id="row">
-      <mat-card-header> </mat-card-header>
-      <mat-card-content>
-        <div class="row justify-content-center">
-          <div class="col">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
-          </div>
 
-          <div class="col-9 b">
-            <p class="uname">Belco Sambo</p>
-          </div>
+    <h2 class="sug">Suggested users</h2>
+    <div>
+      <br />
+      <mat-card
+        *ngFor="let user of suggestedNameID; let index = index"
+        id="row" 
+      >
+        <mat-card-header> </mat-card-header>
+        <mat-card-content>
+          <div class="alert outline">
+            <div >
+              <label tabindex="0" class="btn btn-circle avatar" (click)="seeProfileSU(index)">
+                <div *ngIf="user.image != null" class="w-15 rounded-full">
+                  <img src="{{user.image}}" />
+                </div>
+                <div *ngIf="user.image == null" class="w-15 rounded-full">
+                  <img src="../../../assets/Profile.jpeg" />
+                </div>
+              </label>
+            </div>
 
-          <div class="col">
-            <button class="btn" id="btn">Following</button>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <mat-card id="row">
-      <mat-card-header> </mat-card-header>
-      <mat-card-content>
-        <div class="row justify-content-center">
-          <div class="col">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
-          </div>
+            <div>
+              <p class="uname">{{titleCaseWord(user.name) }}</p>
+            </div>
 
-          <div class="col-9 b">
-            <p class="uname">Belco Sambo</p>
+            <div class="flex-none" >
+              <button class="btn" (click)="followUsers(index)">
+                Follow
+              </button>
+            </div>
           </div>
-
-          <div class="col">
-            <button class="btn" id="btn">Following</button>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <h2 class="sug">Suggestions for you</h2>
-    <div class="d-flex flex-column mb-4"></div>
-    <mat-card id="row">
-      <mat-card-header> </mat-card-header>
-      <mat-card-content>
-        <div class="row justify-content-center">
-          <div class="col">
-            <img
-              class="pp2"
-              src="https://res.cloudinary.com/dadevelopers/image/upload/v1656276676/profile/hd7so6ee6c2yahhjx63s.jpg"
-              alt="none"
-            />
-          </div>
-
-          <div class="col-9">
-            <p class="uname">Oratile Minie</p>
-          </div>
-
-          <div class="col">
-            <button class="btn" id="btn">Follow</button>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

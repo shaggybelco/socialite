@@ -1,56 +1,13 @@
-<!-- <div class="container-fluid row-auto col-auto container-sm container-md container-lg container-xl align-content-center">
-    <div class="logo">
-      <img class="logo2"
-        src="https://res.cloudinary.com/dadevelopers/image/upload/v1656314804/profile/rc2ubumybq3fwyxwuv34.png"
-        alt=""
-      />
-    </div>
-    <div class="center">
-      <form class="form-group" [formGroup]="form">
-        <h6>Let's Log You In</h6>
-  
-        <div class="mb-3">
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputText1"
-            placeholder="Email"
-            formControlName="email"
-            required
-          />
-          <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
-
-          <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger">
-            <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
-            <div *ngIf="f['email'].errors && f['email'].errors['email']">Please, enter valid email address.</div>
-        </div>
-  
-        </div>
-  
-        <div class="mb-3">
-          <input
-            type="password"
-            class="form-control"
-            id="exampleInputText1"
-            placeholder="Password"
-            formControlName="password"
-            required
-          />
-          <i class="fa fa-lock fa-lg" aria-hidden="true"></i>
-
-          <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger">
-            <div *ngIf="f['password'].errors && f['password'].errors['required']">password is required.</div>
-            <div *ngIf="f['password'].errors && f['password'].errors['password']">Please, enter valid password.</div>
-    
-            <div *ngIf="f['password'].dirty && f['password'].errors">Please, password should be 8 characters and more.</div>
-        </div>
-    
-        </div>
-      </form>
-      <button type="submit" class="btn" (click)="log()">LOGIN</button>
-  
-    <p class="pr">Don't have an account? <a [routerLink]="['/register']"  class="goLogin">Register</a></p>
-  </div> -->
+<!--loader-->
+<ng-http-loader
+[backdrop]="true"
+[backgroundColor]="'purple'"
+[debounceDelay]="100"
+[extraDuration]="300"
+[minDuration]="300"
+[spinner]="spinnerStyle.skChasingDots">
+</ng-http-loader>
+<!-- end loader -->
 
 <div class="hero min-h-screen bg-base-200">
   <div class="hero-content flex-col lg:flex-row-reverse">
@@ -99,10 +56,10 @@
           >
         </label>
 
-        <button class="btn btn-primary" id="btn" (click)="log()">Login</button>
+        <button class="btn" id="btn" (click)="log()">Login</button>
 
         <p class="text">
-          Do not have an account,<a
+          Don't have an account ? <a
             class="link link-hover"
             routerLink="/register"
             id="txtLogin"
@@ -111,6 +68,11 @@
           >
         </p>
       </div>
+    </div>
+  </div>
+  <div class="flex justify-center items-center">
+    <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status" [hidden]="{hide}">
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 </div>

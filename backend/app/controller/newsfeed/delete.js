@@ -2,12 +2,14 @@ const pool = require("../../config/database");
 const express = require("express");
 const app = express();
 const bodyparser = require('body-parser');
+const { post } = require("../../routes/newsfeed");
 
 //Delete a user
 exports.deletePost= (req, res) => {
-    const id = parseInt(req.params.id);
+    // const id = parseInt(req.params.id);
+    const {postid, id} = req.body
   
-    pool.query('DELETE FROM status WHERE id = $1', [id], (error, results) => {
+    pool.query('DELETE FROM images WHERE id = $1 and userid = $2', [postid, id], (error, results) => {
       if (error) {
         throw error;
       }

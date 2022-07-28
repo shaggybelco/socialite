@@ -12,12 +12,20 @@ const { updatePassword } = require("../Controller/users/updatePassword");
 const { deleteUser } = require("../Controller/users/deleteUser");
 const { updateEmail } = require("../Controller/users/updateEmail");
 const { updateName } = require("../Controller/users/updateName");
-const { getUserImage} = require("../controller/image/getImages")
+const { getUserImage } = require("../controller/image/getImages");
+const { getAll } = require('../controller/users/checkFollowers')
+const { toFollow } = require("../controller/users/toFollow");
+// const { unFollow} = require("../controller/users/unFollow");
+const { suggestedUsers } = require("../controller/users/suggestedUsers");
+const { followers } = require('../controller/users/followers')
+const { following } = require('../controller/users/getFollowing')
+const { checkFollow } = require('../controller/users/checkIfFollowed');
+const verifyUser = require('../middleware/middleware')
 
 app.post("/register", register); // Post request to register the users
 app.post("/login", login); //Post to login users
 
-app.get("/get", getAllUsers); // get all existing users
+app.get("/get/:id", getAllUsers); // get all existing users
 app.get("/getone/:id", getOneUser); //get single user
 
 app.put("/updateUser/:id", updateUser); // update all details of user
@@ -27,6 +35,22 @@ app.put("/updateEmail/:id", updateEmail); // update user email for login
 
 app.delete("/deleteUser/:id", deleteUser); // delete a user
 app.get("/getimage/:id", getUserImage);
+
+app.post("/toFollow", toFollow);     //follow users
+// app.post("/unFollow", unFollow);     //unfollow users
+app.get("/suggestedUsers/:id", suggestedUsers);     //follow users
+app.get("/getall/:id", getAll);
+app.get("/followers/:id", followers);
+app.get('/getfollow/:id', following);
+app.get('/check/:id/:followid', checkFollow);
+
+//get user with token
+const { getUser } = require('../controller/users/getUserWithToken');
+app.get("/getid", verifyUser, getUser);
+
+//delete your post
+const { deletePost } = require('../controller/image/deletePost');
+app.delete("/delete/:postid/:id", deletePost);
 
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
@@ -62,25 +86,76 @@ app.use(bodyparser.json());
 // }
 /****************************************** */
 
-
 var upload = multer({ dest: "upload/" });
 
 var type = upload.single("myfile");
 
 app.post("/upload", type, async (req, res) => {
-  const results = await cloudinary.uploader.upload(req.file.path,{folder:"/profile/"});
-
-  console.log(req.file);
-  res.status(200).json({ success: "Picture have been uploaded" });
 
   const { userid, caption } = req.body;
-  const image = results.url;
 
-  console.log(results);
+  var date = new Date().toDateString()
+    + ' ' + new Date().getHours()
+    + ':' + new Date().getMinutes() + ':'
+    + new Date().getSeconds();
 
-  pool.query(
-    "INSERT INTO images(userid, image, caption) VALUES ($1,$2,$3)",
-    [userid, image, caption]);
-  });
+  console.log(date);
+  if (req.file) {
+    const results = await cloudinary.uploader.upload(req.file.path, {
+      folder: "/profile/",
+    });
+    const image = results.url;
+    console.log(results);
+
+    console.log(req.file);
+
+    pool.query("INSERT INTO images(userid, image, caption, date) VALUES ($1,$2,$3,$4)", [
+      userid,
+      image,
+      caption,
+      date
+    ]);
+
+    res.status(200).json({ success: "Picture have been uploaded" });
+  } else {
+    pool.query("INSERT INTO images(userid, caption, date) VALUES ($1,$2,$3)", [
+      userid,
+      caption,
+      date
+    ]);
+
+    res.status(200).json({ success: "Text have been uploaded" });
+  }
+});
+
+  //profile
+  var profile = multer({ dest: "upload/" });
+
+var file = profile.single("myfile");
+
+app.put("/profile", file, async (req, res) => {
+
+  const { userid } = req.body;
+
+
+  if (req.file) {
+    const results = await cloudinary.uploader.upload(req.file.path, {
+      folder: "/profilePicture/",
+    });
+    const image = results.url;
+    console.log(results);
+
+    console.log(req.file);
+
+    pool.query("UPDATE users SET image = $1 WHERE id = $2", [
+      image,
+      userid,
+    ]);
+
+    res.status(200).json({ success: "Picture have been uploaded" });
+  }
+
+});
+
 
 module.exports = app;
