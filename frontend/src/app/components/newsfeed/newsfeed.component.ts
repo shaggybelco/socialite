@@ -82,6 +82,12 @@ export class NewsfeedComponent implements OnInit {
       alert('can not post empty text');
       return;
     } else if (postdata.data.userid != '') {
+      this.form.get('userid')?.setValue(this.userId);
+
+      this.formdata.append('userid', this.form.value.userid);
+      this.formdata.append('caption', this.form.value.message);
+      this.formdata.append('myfile', this.files);
+
         this.uploadingPic.uploading(this.formdata).subscribe(
           (data: any) => {
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;

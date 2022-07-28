@@ -25,7 +25,7 @@ export class ProfileService {
   }
 
   viewPosts(){
-    return this.view.get(`${this.baseurl}/news/getothers`);
+    return this.view.get(`${this.baseurl}/news/getothers`, {responseType: 'json'});
   }
 
   getProfileImage(id: any){
