@@ -82,6 +82,12 @@ export class NewsfeedComponent implements OnInit {
       alert('can not post empty text');
       return;
     } else if (postdata.data.userid != '') {
+      this.form.get('userid')?.setValue(this.userId);
+
+      this.formdata.append('userid', this.form.value.userid);
+      this.formdata.append('caption', this.form.value.message);
+      this.formdata.append('myfile', this.files);
+
         this.uploadingPic.uploading(this.formdata).subscribe(
           (data: any) => {
             this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
@@ -106,6 +112,7 @@ export class NewsfeedComponent implements OnInit {
     // const formdata = new FormData();
     // console.log(this.formdata);
     input.type = 'file';
+    input.name = 'myfile';
     input.onchange = (_) => {
       this.files = input.files?.item(0);
       if (input.files?.item(0) != null) {

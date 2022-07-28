@@ -144,8 +144,8 @@
       id="post1"
       *ngFor="let posts of imgpost; let postNum = index"
     >
-      <figure>
-        <img src="{{ posts.image }}" width="100%" />
+      <figure *ngIf="posts.image != null">
+        <img  src="{{ posts.image }}"/>
       </figure>
       <div class="card-body">
         <h2 class="card-title">{{titleCaseWord(posts.name) }}</h2>
