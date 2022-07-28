@@ -86,7 +86,8 @@ app.use(bodyparser.json());
 // }
 /****************************************** */
 
-var upload = multer({ dest: "upload/" });
+try {
+  var upload = multer({ dest: "upload/" });
 
 var type = upload.single("myfile");
 
@@ -128,7 +129,13 @@ app.post("/upload", type, async (req, res) => {
   }
 });
 
+} catch (error) {
+  console.log(error.message)
+}
+
   //profile
+
+try{
   var profile = multer({ dest: "upload/" });
 
 var file = profile.single("myfile");
@@ -156,6 +163,9 @@ app.put("/profile", file, async (req, res) => {
   }
 
 });
+}catch(error){
+  console.log(error.message)
+}
 
 
 module.exports = app;
