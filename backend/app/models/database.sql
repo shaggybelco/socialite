@@ -6,7 +6,7 @@ create table users(
     email varchar(255) not null,
     password varchar(255) not null,
     follow integer[]
-)
+);
 
 create table images(
     id SERIAL PRIMARY KEY,
@@ -14,10 +14,16 @@ create table images(
     image varchar(255),
     caption text,
     date varchar(255)
-)
+);
 
 create table follow(
     id SERIAL PRIMARY KEY,
     userid integer,
     followid integer
-)
+);
+
+create table profile(
+    id SERIAL PRIMARY KEY,
+    userid integer,
+    image varchar(255)
+);
