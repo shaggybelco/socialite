@@ -145,10 +145,10 @@
       id="post1"
       *ngFor="let posts of imgpost; let postNum = index"
     >
-      <figure *ngIf="posts.image != null">
+      <figure *ngIf="posts.image != null" id="imgPost">
         <img  src="{{ posts.image }}"/>
       </figure>
-      <div class="card-body">
+      <div class="card-body" id="this">
         <h2 class="card-title">{{titleCaseWord(posts.name) }}</h2>
         <div class="badge badge-secondary">
           {{ transform(posts.date) }}

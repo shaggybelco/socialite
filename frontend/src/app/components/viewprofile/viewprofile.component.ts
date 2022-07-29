@@ -41,19 +41,22 @@ export class ViewprofileComponent implements OnInit {
     //geting id from the token
     this.profile.getID().subscribe((decoded: any)=>{
       this.loggedInUser = decoded.decoded.id;
-      this.afterId();
-    })
+      
+    });
+    this.afterId();
   }
   afterId(){
     
      
     this.userservice.getOne(this.userID).subscribe((followed: any) => {
+      console.log(followed);
       this.name = followed[0].name;
       this.img = followed[0].image;
     });
 
     this.profile.getPic(this.userID).subscribe((imgstat: any) => {
       this.imgpost = imgstat;
+      console.log(this.imgpost)
     });
 
     this.checkFollow();

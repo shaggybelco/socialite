@@ -94,7 +94,7 @@
           <figure *ngIf="posts.image != null">
             <img src="{{ posts.image }}" width="100%" />
           </figure>
-          <div class="card-body">
+          <div class="card-body" id="this">
             <h2 class="card-title">{{titleCaseWord(posts.name) }}</h2>
             <div class="badge badge-secondary">
               {{ transform(posts.date) }}

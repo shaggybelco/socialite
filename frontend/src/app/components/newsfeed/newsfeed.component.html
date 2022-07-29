@@ -86,10 +86,22 @@
           <figure *ngIf="posts.image != null">
             <img src="{{ posts.image }}" width="100%" />
           </figure>
-          <div class="card-body">
+          <div id="profileName">
+            <div class="avatar" id="avatar" *ngIf="posts.img != null">
+              <div class="w-24 rounded-full">
+                <img src="{{posts.img}}" />
+              </div>
+            </div>
+            <div class="avatar" id="avatar" *ngIf="posts.img == null">
+              <div class="w-24 rounded-full">
+                <img src="../../../assets/Profile.jpeg" />
+              </div>
+            </div>
             <h2 class="card-title" id="username" (click)="seeProfile(id)">
               {{ titleCaseWord(posts.name) }}
             </h2>
+          </div>
+          <div class="card-body">
             <div class="badge badge-secondary">{{ transform(posts.date) }}</div>
             <p id="caption">{{ posts.caption }}</p>
             <div class="card-actions justify-end pb-1">
@@ -108,19 +120,17 @@
       </div>
       <hr />
 
-      
-
       <div fxLayoutGap="1%" *ngIf="imgpost == ''">
-        <div class="flex justify-center" >
+        <div class="flex justify-center">
           <h1 id="wel">Welcome To Socialite</h1>
         </div>
-          <div class="flex justify-center">
-            <h2 id="mess">
-              We saw that there are no posts on the your newsfeed, <b><a id="click" routerLink="/users">click here</a></b>  to see the
-              people you can socialize with!
-            </h2>
-          </div>
-          
+        <div class="flex justify-center">
+          <h2 id="mess">
+            We saw that there are no posts on the your newsfeed,
+            <b><a id="click" routerLink="/users">click here</a></b> to see the
+            people you can socialize with!
+          </h2>
+        </div>
       </div>
     </div>
   </div>

@@ -40,6 +40,7 @@ export class NewsfeedComponent implements OnInit {
       // console.log(decoded.decoded.id);
       this.profile.viewPosts().subscribe((imgstat: any) => {
         this.imgpost = imgstat;
+        console.log(imgstat)
       });
     });
   }
@@ -48,19 +49,24 @@ export class NewsfeedComponent implements OnInit {
     return word[0].toUpperCase() + word.substr(1).toLowerCase();
   }
 
-
   seeProfile(userId: any) {
+    console.log(this.imgpost[userId].uid);
     this.userservice
-      .getOne(this.imgpost[userId].followid)
+      .getOne(this.imgpost[userId].uid)
       .subscribe((followed: any) => {
+        console.log(followed[0]);
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
-        this.router.navigate(['/viewprofile'], { relativeTo: this.route });
-        localStorage.setItem('count', this.imgpost[userId].followid);
+        if (this.imgpost[userId].userid === this.userId) {
+          this.router.navigate(['/viewprofile'], { relativeTo: this.route });
+        }else if(this.imgpost[userId].userid != this.userId){
+          this.router.navigate(['/profile'], { relativeTo: this.route });
+          localStorage.setItem('count', followed[0].uid);
+        }
 
-        //sending status
-        sessionStorage.setItem('status', 'true');
-        sessionStorage.setItem('option', 'unfollow');
+        // //sending status
+        // sessionStorage.setItem('status', 'true');
+        // sessionStorage.setItem('option', 'unfollow');
       });
   }
 
@@ -88,19 +94,18 @@ export class NewsfeedComponent implements OnInit {
       this.formdata.append('caption', this.form.value.message);
       this.formdata.append('myfile', this.files);
 
-        this.uploadingPic.uploading(this.formdata).subscribe(
-          (data: any) => {
-            this.router.routeReuseStrategy.shouldReuseRoute = ()=> false;
-            this.router.onSameUrlNavigation = "reload";
-            this.router.navigate(['/newsfeed'], {relativeTo: this.route})
-          },
-          (err) => {
-            alert(`failed to post: ${err.message}`);
-          }
-        );
+      this.uploadingPic.uploading(this.formdata).subscribe(
+        (data: any) => {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['/newsfeed'], { relativeTo: this.route });
+        },
+        (err) => {
+          alert(`failed to post: ${err.message}`);
+        }
+      );
     }
   }
-
 
   // formdata = new FormData();
   files: any = {};
@@ -118,7 +123,6 @@ export class NewsfeedComponent implements OnInit {
       if (input.files?.item(0) != null) {
         this.added = true;
       }
-      
     };
 
     input.click();
