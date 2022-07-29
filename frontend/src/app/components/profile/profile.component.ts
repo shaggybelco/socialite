@@ -196,11 +196,7 @@ export class ProfileComponent implements OnInit {
       if (input.files?.item(0) != null) {
         this.added = true;
       }
-      this.form.get('userid')?.setValue(this.userID);
-
-      this.formdata.append('userid', this.form.value.userid);
-      this.formdata.append('caption', this.form.value.message);
-      this.formdata.append('myfile', this.files);
+      
     };
 
     

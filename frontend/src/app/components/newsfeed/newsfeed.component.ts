@@ -118,11 +118,7 @@ export class NewsfeedComponent implements OnInit {
       if (input.files?.item(0) != null) {
         this.added = true;
       }
-      this.form.get('userid')?.setValue(this.userId);
-
-      this.formdata.append('userid', this.form.value.userid);
-      this.formdata.append('caption', this.form.value.message);
-      this.formdata.append('myfile', this.files);
+      
     };
 
     input.click();
